@@ -4,13 +4,31 @@
 
 #include "board.h"
 #include "app_scheduler.h"
-#include "Tasks.h"    
+#include "Tasks.h" 
+#include "fpu.h"   
 #include <stdbool.h>
 #include <stdio.h>
 
 /*----------------------------------------------------------------------------
  *        Local definitions
  *----------------------------------------------------------------------------*/
+ 
+ /*----------------------------------------------------------------------------
+ *        Global variables
+ *----------------------------------------------------------------------------*/
+ 
+float       spf_result;
+float       spf_result1;
+float       spf_result2;
+float       spf_int1 = 256;
+float       spf_int2 = 10;
+uint32_t    u32_result;
+uint32_t    u32_int1;
+uint32_t    u32_int2;
+int32_t     s32_result;
+int32_t     s32_int1;
+int32_t     s32_int2;
+
 
 TaskType Tasks[]={
 /*  TaskPriority    TaskId   TaskFunctionPointer   */
@@ -59,7 +77,9 @@ extern int main( void )
 	/* Enable I and D cache */
 	SCB_EnableICache();
     SCB_EnableDCache();
-
+    /* Enable Floating Point Unit */
+    vfnFpu_enable();
+	
 	printf( "Configure LED PIOs.\n\r" ) ;
 	_ConfigureLeds() ;
   
@@ -71,6 +91,31 @@ extern int main( void )
 	/*-- Loop through all the periodic tasks from Task Scheduler --*/
 	for(;;)
 	{
+        __asm ( "nop" );
+        /* Float operations */
+        spf_result = spf_int1 - spf_int2;
+        spf_result1 = spf_int1 + spf_int2;
+        spf_result2  =   spf_result  * spf_result1;
+        spf_result = spf_int1 * spf_int2;
+        spf_result = spf_int1 / spf_int2;
+        /* Float to int conversion operations */
+        u32_int1 = spf_int1;
+		u32_int2 = spf_int2;
+		
+		s32_int1 = spf_int1;
+		s32_int2 = spf_int2;
+        /* Int to Float conversion operations */
+        spf_result = u32_result;
+        spf_result = s32_result;
+		/* Integer operations */
+		u32_result = u32_int1 - u32_int2;
+		u32_result = u32_int1 + u32_int2;
+		u32_result = u32_int1 * u32_int2;
+		u32_result = u32_int1 / u32_int2;
+		s32_result = s32_int1 - s32_int2;
+		s32_result = s32_int1 + s32_int2;
+		s32_result = s32_int1 * s32_int2;
+		s32_result = s32_int1 / s32_int2;
 		/* Perform all scheduled tasks */
 		vfnTask_Scheduler();
 	}
