@@ -42,6 +42,9 @@ C:\Users\DIMMU\Source\Repos\BaseSystemSE_final\workspace\Debug\tc.o
 C:\Users\DIMMU\Source\Repos\BaseSystemSE_final\workspace\Debug\xdma_hardware_interface.o 
 C:\Users\DIMMU\Source\Repos\BaseSystemSE_final\workspace\Debug\xdmac.o 
 C:\Users\DIMMU\Source\Repos\BaseSystemSE_final\workspace\Debug\xdmad.o 
+C:\Users\DIMMU\Source\Repos\BaseSystemSE_final\workspace\Debug\afe_dma.o 
+C:\Users\DIMMU\Source\Repos\BaseSystemSE_final\workspace\Debug\afec.o 
+C:\Users\DIMMU\Source\Repos\BaseSystemSE_final\workspace\Debug\pwmc.o 
 C:\Users\DIMMU\Source\Repos\BaseSystemSE_final\workspace\Debug\syscalls.o 
 C:\Users\DIMMU\Source\Repos\BaseSystemSE_final\workspace\Debug\system_sam.o 
 C:\Users\DIMMU\Source\Repos\BaseSystemSE_final\workspace\Debug\timetick.o 

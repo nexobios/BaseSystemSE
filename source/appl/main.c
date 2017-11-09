@@ -5,6 +5,8 @@
 #include "board.h"
 #include "app_scheduler.h"
 #include "Tasks.h"    
+#include "afe_dma.h"
+#include "afec.h"
 #include <stdbool.h>
 #include <stdio.h>
 
