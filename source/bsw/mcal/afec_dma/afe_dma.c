@@ -55,6 +55,7 @@
 #include <stdint.h>
 #include <assert.h>
 #include "afe_dma.h"
+#include "afec.h"
 
 /*  DMA driver instance */
 static uint32_t afeDmaRxChannel;
