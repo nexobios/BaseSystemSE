@@ -17,19 +17,19 @@
  *        Global variables
  *----------------------------------------------------------------------------*/
  
-float       spf_result;
-float       spf_result1;
-float       spf_result2;
-float       spf_int1 = 256;
-float       spf_int2 = 10;
-uint32_t    u32_result;
-uint32_t    u32_int1;
-uint32_t    u32_int2;
-int32_t     s32_result;
-int32_t     s32_int1;
-int32_t     s32_int2;
+volatile float spf_result;
+volatile float spf_result1;
+volatile float spf_result2;
+volatile float spf_int1 = 256;
+volatile float spf_int2 = 10;
+volatile uint32_t u32_result;
+volatile uint32_t u32_int1;
+volatile uint32_t u32_int2;
+volatile int32_t s32_result;
+volatile int32_t s32_int1;
+volatile int32_t s32_int2;
 
-#define C_Code 1
+#define C_CODE
 
 TaskType Tasks[]={
 /*  TaskPriority    TaskId   TaskFunctionPointer   */
@@ -91,10 +91,8 @@ extern int main( void )
 
 	/*-- Loop through all the periodic tasks from Task Scheduler --*/
 	for(;;)
-	{    
-    
-    
-  #ifdef  C_Code
+	{     
+  #ifdef C_CODE
         spf_result = spf_int1 - spf_int2;
         spf_result1 = spf_int1 + spf_int2;
         spf_result2  =   spf_result  * spf_result1;
@@ -113,152 +111,91 @@ extern int main( void )
         s32_result = s32_int1 * s32_int2;
         s32_result = s32_int1 / s32_int2;
   #else
-        //spf_result = spf_int1 - spf_int2;
+        //Load registers with the input values
         __asm__( "ldr       r3, =spf_int1" ); 
         __asm__( "vldr.32   s14,[r3]      ");    
         __asm__( "ldr       r3, =spf_int2" ); 
-        __asm__( "vldr.32   s15,[r3]      ");    
-        __asm__( "ldr       r3, =spf_result" ); 
-        __asm__( "vsub.F32  s15,s14,s15   " );    
-        __asm__( "vstr.32   s15,[r3]      " );    
+        __asm__( "vldr.32   s15,[r3]      ");        
         
-        //spf_result1 = spf_int1 + spf_int2;
-        __asm__( "ldr       r3, =spf_int1" ); 
-        __asm__( "vldr.32   s14,[r3]      ");    
-        __asm__( "ldr       r3, =spf_int2" ); 
-        __asm__( "vldr.32   s15,[r3]      ");    
-        __asm__( "ldr       r3, =spf_result1 " ); 
-        __asm__( "vadd.F32  s15,s14,s15   " );    
-        __asm__( "vstr.32   s15,[r3]      " );    
+        //spf_result = spf_int1 - spf_int2; 
+        __asm__( "vsub.F32  s16,s14,s15   " );        
+        
+        //spf_result1 = spf_int1 + spf_int2; 
+        __asm__( "vadd.F32  s17,s14,s15   " );    
         
         //spf_result2  =   spf_result  * spf_result1;
-        __asm__( "ldr       r3, =spf_result  " ); 
-        __asm__( "vldr.32   s14,[r3]      ");    
-        __asm__( "ldr       r3, =spf_result1" ); 
-        __asm__( "vldr.32   s15,[r3]      ");    
-        __asm__( "ldr       r3, =spf_result2" ); 
-        __asm__( "vmul.F32  s15,s14,s15   " );    
-        __asm__( "vstr.32   s15,[r3]      " );    
+        __asm__( "vmul.F32  s18,s16,s17   " );        
         
-        //spf_result = spf_int1 * spf_int2;
-        __asm__( "ldr       r3, =spf_int1" ); 
-        __asm__( "vldr.32   s14,[r3]      ");    
-        __asm__( "ldr       r3, =spf_int2" ); 
-        __asm__( "vldr.32   s15,[r3]      ");    
-        __asm__( "ldr       r3, =spf_result" ); 
-        __asm__( "vmul.F32  s15,s14,s15   " );    
-        __asm__( "vstr.32   s15,[r3]      " );    
+        //spf_result = spf_int1 * spf_int2; 
+        __asm__( "vmul.F32  s16,s14,s15   " );    
         
         //spf_result = spf_int1 / spf_int2;
-        __asm__( "ldr       r3, =spf_int1" ); 
-        __asm__( "vldr.32   s14,[r3]      ");    
-        __asm__( "ldr       r3, =spf_int2" ); 
-        __asm__( "vldr.32   s15,[r3]      ");    
-        __asm__( "ldr       r3, =spf_result" ); 
-        __asm__( "vdiv.F32  s15,s14,s15   " );    
-        __asm__( "vstr.32   s15,[r3]      " );    
+        __asm__( "vdiv.F32  s16,s14,s15   " );    
                       
         /* Float to int conversion operations */
         //u32_int1 = spf_int1;
-		    __asm__( "ldr             r3, =spf_int1" ); 
-        __asm__( "vldr.32         s15,[r3]      ");    
-        __asm__( "vcvt.U32.F32  s15, s15" );
-        __asm__( "vmov            r2,s15      ");    
-        __asm__( "ldr             r3, =u32_int1 " ); 
-        __asm__( "str             r2, [r3]" );    
-        
+        __asm__( "vcvt.U32.F32  s14, s14" ); 
+        __asm__( "vmov          r2,  s14 ");
         
         //u32_int2 = spf_int2;
-		    __asm__( "ldr             r3, =spf_int2" ); 
-        __asm__( "vldr.32         s15,[r3]      ");    
-        __asm__( "vcvt.U32.F32  s15, s15" );
-        __asm__( "vmov            r2,s15      ");    
-        __asm__( "ldr             r3, =u32_int2 " ); 
-        __asm__( "str             r2, [r3]" ); 
-        
-        /* Int to Float conversion operations */
-        //spf_result = u32_result;
-        __asm__( "ldr             r3, =u32_result" ); 
-        __asm__( "vldr.32         s15,[r3]      ");    
-        __asm__( "vcvt.F32.U32    s15, s15" );
-        __asm__( "vmov            r2,s15      ");    
-        __asm__( "ldr             r3, =spf_result " ); 
-        __asm__( "str             r2, [r3]" );    
-        
-        //spf_result = s32_result;
-        __asm__( "ldr             r3, =s32_result" ); 
-        __asm__( "vldr.32         s15,[r3]      ");    
-        __asm__( "vcvt.F32.S32    s15, s15" );
-        __asm__( "vmov            r2,s15      ");    
-        __asm__( "ldr             r3, =spf_result " ); 
-        __asm__( "str             r2, [r3]" );    
-        
+        __asm__( "vcvt.U32.F32    s15, s15" );
+        __asm__( "vmov            r3,  s15 ");    
+
 		/* Integer operations */
-		//u32_result = u32_int1 - u32_int2;
-		    __asm__( "ldr             r3, =u32_int1" ); 
-        __asm__( "ldr             r2, [r3]" ); 
-        __asm__( "ldr             r3, =u32_int2" ); 
-        __asm__( "ldr             r3, [r3]" ); 
-        __asm__( "sub             r3, r2,r3" ); 
-        __asm__( "ldr             r2, =u32_result" ); 
-        __asm__( "str             r3, [r2]" );    
+		//u32_result = u32_int1 - u32_int2; 
+        __asm__( "sub             r4, r2, r3" ); 
         
-    //u32_result = u32_int1 + u32_int2;
-        __asm__( "ldr             r3, =u32_int1" ); 
-        __asm__( "ldr             r2, [r3]" ); 
-        __asm__( "ldr             r3, =u32_int2" ); 
-        __asm__( "ldr             r3, [r3]" ); 
-        __asm__( "add             r3, r2,r3" ); 
-        __asm__( "ldr             r2, =u32_result" ); 
-        __asm__( "str             r3, [r2]" );    
-		//u32_result = u32_int1 * u32_int2;
-        __asm__( "ldr             r3, =u32_int1" ); 
-        __asm__( "ldr             r2, [r3]" ); 
-        __asm__( "ldr             r3, =u32_int2" ); 
-        __asm__( "ldr             r3, [r3]" ); 
-        __asm__( "mul             r3, r2,r3" ); 
-        __asm__( "ldr             r2, =u32_result" ); 
-        __asm__( "str             r3, [r2]" );    
-		//u32_result = u32_int1 / u32_int2;
-        __asm__( "ldr             r3, =u32_int1" ); 
-        __asm__( "ldr             r2, [r3]" ); 
-        __asm__( "ldr             r3, =u32_int2" ); 
-        __asm__( "ldr             r3, [r3]" ); 
-        __asm__( "udiv             r3, r2,r3" ); 
-        __asm__( "ldr             r2, =u32_result" ); 
-        __asm__( "str             r3, [r2]" );    
+    //u32_result = u32_int1 + u32_int2; 
+        __asm__( "add             r4, r2, r3" ); 
+
+		//u32_result = u32_int1 * u32_int2; 
+        __asm__( "mul             r4, r2, r3" ); 
+        
+		//u32_result = u32_int1 / u32_int2; 
+        __asm__( "udiv            r4, r2, r3" ); 
+    
+    // Signed Operations
 		//s32_result = s32_int1 - s32_int2;
-        __asm__( "ldr             r3, =u32_int1" ); 
-        __asm__( "ldr             r2, [r3]" ); 
-        __asm__( "ldr             r3, =u32_int2" ); 
-        __asm__( "ldr             r3, [r3]" ); 
-        __asm__( "sub             r3, r2,r3" ); 
-        __asm__( "ldr             r2, =u32_result" ); 
-        __asm__( "str             r3, [r2]" );    
+        __asm__( "sub             r5, r2, r3" ); 
+
 		//s32_result = s32_int1 + s32_int2;
-        __asm__( "ldr             r3, =u32_int1" ); 
-        __asm__( "ldr             r2, [r3]" ); 
-        __asm__( "ldr             r3, =u32_int2" ); 
-        __asm__( "ldr             r3, [r3]" ); 
-        __asm__( "add             r3, r2,r3" ); 
-        __asm__( "ldr             r2, =u32_result" ); 
-        __asm__( "str             r3, [r2]" );    
+        __asm__( "add             r5, r2, r3" ); 
+        
 		//s32_result = s32_int1 * s32_int2;
-        __asm__( "ldr             r3, =u32_int1" ); 
-        __asm__( "ldr             r2, [r3]" ); 
-        __asm__( "ldr             r3, =u32_int2" ); 
-        __asm__( "ldr             r3, [r3]" ); 
-        __asm__( "mul             r3, r2,r3" ); 
-        __asm__( "ldr             r2, =u32_result" ); 
-        __asm__( "str             r3, [r2]" );    
+        __asm__( "mul            r5, r2, r3" ); 
+        
 		//s32_result = s32_int1 / s32_int2;
-        __asm__( "ldr             r3, =u32_int1" ); 
-        __asm__( "ldr             r2, [r3]" ); 
-        __asm__( "ldr             r3, =u32_int2" ); 
-        __asm__( "ldr             r3, [r3]" ); 
-        __asm__( "sdiv             r3, r2,r3" ); 
-        __asm__( "ldr             r2, =u32_result" ); 
-        __asm__( "str             r3, [r2]" );    
+        __asm__( "sdiv            r5, r2, r3" );
+        
+        
+    /* Int to Float conversion operations */
+    //spf_result = u32_result; 
+        __asm__( "vmov            s16, r4  ");    
+        __asm__( "vcvt.F32.U32    s16, s16 "); 
+        
+    //spf_result = s32_result;
+        __asm__( "vmov            s16, r5  ");    
+        __asm__( "vcvt.F32.U32    s16, s16 ");
+    
+    // Store the values to their corresponding addresses
+        __asm__( "ldr       r6, =spf_result" ); 
+        __asm__( "vstr.32   s16,[r6]      " );
+        __asm__( "ldr       r6, =spf_result1" ); 
+        __asm__( "vstr.32   s17,[r6]      " );
+        __asm__( "ldr       r6, =spf_result2" ); 
+        __asm__( "vstr.32   s18,[r6]      " );
+        __asm__( "ldr       r6, =u32_int1" ); 
+        __asm__( "str       r2, [r6]" );
+        __asm__( "ldr       r6, =u32_int2" ); 
+        __asm__( "str       r3, [r6]" );
+        __asm__( "ldr       r6, =u32_result" ); 
+        __asm__( "str       r4, [r6]" );
+        __asm__( "ldr       r6, =s32_int1" ); 
+        __asm__( "str       r2, [r6]" );
+        __asm__( "ldr       r6, =s32_int2" ); 
+        __asm__( "str       r3, [r6]" );
+        __asm__( "ldr       r6, =s32_result" ); 
+        __asm__( "str       r5, [r6]" );
         
     #endif
 		/* Perform all scheduled tasks */
