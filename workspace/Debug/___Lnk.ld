@@ -27,32 +27,32 @@
 /* EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.                           */
 /* ---------------------------------------------------------------------------- */
 
-INPUT (D:\ITESO\SE\Git\BaseSystemSE\workspace\Debug\dbg_console.o 
-D:\ITESO\SE\Git\BaseSystemSE\workspace\Debug\board_lowlevel.o 
-D:\ITESO\SE\Git\BaseSystemSE\workspace\Debug\board_memories.o 
-D:\ITESO\SE\Git\BaseSystemSE\workspace\Debug\exceptions.o 
-D:\ITESO\SE\Git\BaseSystemSE\workspace\Debug\pio.o 
-D:\ITESO\SE\Git\BaseSystemSE\workspace\Debug\mpu.o 
-D:\ITESO\SE\Git\BaseSystemSE\workspace\Debug\pmc.o 
-D:\ITESO\SE\Git\BaseSystemSE\workspace\Debug\uart.o 
-D:\ITESO\SE\Git\BaseSystemSE\workspace\Debug\wdt.o 
-D:\ITESO\SE\Git\BaseSystemSE\workspace\Debug\pio_it.o 
-D:\ITESO\SE\Git\BaseSystemSE\workspace\Debug\supc.o 
-D:\ITESO\SE\Git\BaseSystemSE\workspace\Debug\tc.o 
-D:\ITESO\SE\Git\BaseSystemSE\workspace\Debug\xdma_hardware_interface.o 
-D:\ITESO\SE\Git\BaseSystemSE\workspace\Debug\xdmac.o 
-D:\ITESO\SE\Git\BaseSystemSE\workspace\Debug\xdmad.o 
-D:\ITESO\SE\Git\BaseSystemSE\workspace\Debug\afec.o 
-D:\ITESO\SE\Git\BaseSystemSE\workspace\Debug\afe_dma.o 
-D:\ITESO\SE\Git\BaseSystemSE\workspace\Debug\pwmc.o 
-D:\ITESO\SE\Git\BaseSystemSE\workspace\Debug\syscalls.o 
-D:\ITESO\SE\Git\BaseSystemSE\workspace\Debug\system_sam.o 
-D:\ITESO\SE\Git\BaseSystemSE\workspace\Debug\timetick.o 
-D:\ITESO\SE\Git\BaseSystemSE\workspace\Debug\app_scheduler.o 
-D:\ITESO\SE\Git\BaseSystemSE\workspace\Debug\Tasks.o 
-D:\ITESO\SE\Git\BaseSystemSE\workspace\Debug\led.o 
-D:\ITESO\SE\Git\BaseSystemSE\workspace\Debug\main.o 
-D:\ITESO\SE\Git\BaseSystemSE\workspace\Debug\startup_sam.o)
+INPUT (C:\Users\DIMMU\Documents\REPOS\ITESO\workspace\Debug\dbg_console.o 
+C:\Users\DIMMU\Documents\REPOS\ITESO\workspace\Debug\board_lowlevel.o 
+C:\Users\DIMMU\Documents\REPOS\ITESO\workspace\Debug\board_memories.o 
+C:\Users\DIMMU\Documents\REPOS\ITESO\workspace\Debug\exceptions.o 
+C:\Users\DIMMU\Documents\REPOS\ITESO\workspace\Debug\pio.o 
+C:\Users\DIMMU\Documents\REPOS\ITESO\workspace\Debug\mpu.o 
+C:\Users\DIMMU\Documents\REPOS\ITESO\workspace\Debug\pmc.o 
+C:\Users\DIMMU\Documents\REPOS\ITESO\workspace\Debug\uart.o 
+C:\Users\DIMMU\Documents\REPOS\ITESO\workspace\Debug\wdt.o 
+C:\Users\DIMMU\Documents\REPOS\ITESO\workspace\Debug\pio_it.o 
+C:\Users\DIMMU\Documents\REPOS\ITESO\workspace\Debug\supc.o 
+C:\Users\DIMMU\Documents\REPOS\ITESO\workspace\Debug\tc.o 
+C:\Users\DIMMU\Documents\REPOS\ITESO\workspace\Debug\xdma_hardware_interface.o 
+C:\Users\DIMMU\Documents\REPOS\ITESO\workspace\Debug\xdmac.o 
+C:\Users\DIMMU\Documents\REPOS\ITESO\workspace\Debug\xdmad.o 
+C:\Users\DIMMU\Documents\REPOS\ITESO\workspace\Debug\afec.o 
+C:\Users\DIMMU\Documents\REPOS\ITESO\workspace\Debug\afe_dma.o 
+C:\Users\DIMMU\Documents\REPOS\ITESO\workspace\Debug\pwmc.o 
+C:\Users\DIMMU\Documents\REPOS\ITESO\workspace\Debug\syscalls.o 
+C:\Users\DIMMU\Documents\REPOS\ITESO\workspace\Debug\system_sam.o 
+C:\Users\DIMMU\Documents\REPOS\ITESO\workspace\Debug\timetick.o 
+C:\Users\DIMMU\Documents\REPOS\ITESO\workspace\Debug\app_scheduler.o 
+C:\Users\DIMMU\Documents\REPOS\ITESO\workspace\Debug\Tasks.o 
+C:\Users\DIMMU\Documents\REPOS\ITESO\workspace\Debug\led.o 
+C:\Users\DIMMU\Documents\REPOS\ITESO\workspace\Debug\main.o 
+C:\Users\DIMMU\Documents\REPOS\ITESO\workspace\Debug\startup_sam.o)
 
 /*------------------------------------------------------------------------------
  *      Linker script for running in internal FLASH on the ATSAMV71Q21

@@ -6,10 +6,19 @@
  */ 
 
 #include "Tasks.h"
-#include "led.h"
+#include "led.h"       
 
 uint8_t u8100ms_Ctr=0;
 uint8_t u8100ms_Ctr2=0;
+
+void PWM0_Handler()
+{}
+
+volatile uint8_t var=0;
+void AFEC0_Handler()
+{
+  var++;
+}
 
 
 void vfnTsk_1ms(void)
@@ -30,7 +39,11 @@ void vfnTsk_2msB(void)
 void vfnTsk_10ms(void)
 {
 	static uint8_t u8500ms_Ctr=0;
-	
+  AFEC_StartConversion(AFEC0);
+  
+  uint16_t value= AFEC_GetConvertedData( AFEC0,AFEC_CHER_CH0);
+  
+  //printf("\nValue &d",&pAfe_ADC0.AFEC_LCDR);
 	u8500ms_Ctr++;
 	
 	if (25 <= u8500ms_Ctr)
@@ -42,7 +55,6 @@ void vfnTsk_10ms(void)
 
 void vfnTsk_50ms(void)
 {
-
 }
 
 void vfnTsk_100ms(void)

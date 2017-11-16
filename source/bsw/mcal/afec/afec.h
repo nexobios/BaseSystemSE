@@ -170,6 +170,7 @@ extern void AFEC_SetSequenceMode( Afec* pAFEC, uint8_t bEnDis );
 extern void AFEC_SetSequence( Afec* pAFEC, uint32_t dwSEQ1, uint32_t dwSEQ2 );
 extern void AFEC_SetSequenceByList( Afec* pAFEC, uint8_t ucChList[], uint8_t ucNumCh );
 extern void AFEC_SetTagEnable( Afec* pAFEC, uint8_t bEnDis );
+extern void AFEC_SetNumberOfBits( Afec* pAFE, uint32_t dwChannel );
 extern void AFEC_SetCompareChannel( Afec* pAFEC, uint32_t dwChannel ) ;
 extern void AFEC_SetCompareMode( Afec* pAFEC, uint32_t dwMode ) ;
 extern void AFEC_SetComparisonWindow( Afec* pAFEC, uint32_t dwHi_Lo ) ;

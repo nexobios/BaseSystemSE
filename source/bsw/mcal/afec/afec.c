@@ -152,6 +152,7 @@ extern void AFEC_SetTiming( Afec* pAFE, uint32_t dwStartup, uint32_t dwTracking,
 	 *     Tracking Time = (TRACKTIM + 1) / AFEClock
 	 *     Settling Time = settling value / AFEClock
 	 */
+  dwMr |= 0x02u << AFEC_MR_TRANSFER_Pos;
 	dwMr |= dwStartup | dwTracking | dwSettling;
 	pAFE->AFEC_MR |= dwMr;
 }
@@ -291,6 +292,12 @@ extern void AFEC_SetTagEnable( Afec *pAFE, uint8_t bEnDis )
 		pAFE->AFEC_EMR &= ~AFEC_EMR_TAG;
 	}
 }
+ 
+extern void AFEC_SetNumberOfBits( Afec* pAFE, uint32_t dwChannel )//AFEC_EMR_RES_OSR256
+{                                                   
+  pAFE->AFEC_EMR = AFEC_EMR_RES(dwChannel );    //AFEC_EMR_RES_OSR256
+}
+
 
 /**
  * \brief Set compare channel.

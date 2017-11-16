@@ -10,6 +10,20 @@
 #define __APP_TASKS
 
 /*-- Includes ----------------------------------------------------------------*/
+#include "afe_dma.h"
+#include "afec.h"
+
+/*@Yisus Adc struct*/
+#define BOARD_MCK    150000000 
+//Afec pAfe_ADC0;
+//Pwm pPwm_0;                
+AfeDma pAfed;     
+sXdmad pXdmad;
+AfeCmd pAfeCmd;
+//#define AfeId   35
+static const Pin pinsAFECs[] = {AFEC_PIN_CFG};
+/*@Yisus Adc struct*/
+
 
 /*-- Variables -------------------------------------------------------*/
 

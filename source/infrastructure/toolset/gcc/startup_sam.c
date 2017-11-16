@@ -103,8 +103,8 @@ void Dummy_Handler(void);
 #ifdef _SAMV71_TC1_INSTANCE_
 #pragma weak TC5_Handler=Dummy_Handler
 #endif /* _SAM_TC1_INSTANCE_ */
-#pragma weak AFEC0_Handler=Dummy_Handler
-#ifdef _SAMV71_DACC_INSTANCE_
+#pragma weak AFEC0_Handler=Dummy_Handler  
+#ifdef _SAMV71_DACC_INSTANCE_                             
 #pragma weak DACC_Handler=Dummy_Handler
 #endif /* _SAM_DACC_INSTANCE_ */
 #pragma weak PWM0_Handler=Dummy_Handler
