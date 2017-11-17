@@ -166,6 +166,7 @@ void PWMC_ConfigureChannel(
 	pPwm->PWM_CH_NUM[channel].PWM_CMR = prescaler | alignment | polarity;
 }
 
+                                      
 /**
  * \brief Configures PWM a channel with the given parameters, extend configure 
  * function.

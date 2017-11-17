@@ -54,6 +54,16 @@ void NMI_Handler( void )
 {
 	while ( 1 ) ;
 }
+                       
+void PWM0_Handler(void)
+{                      
+  while ( 1 ) ;
+}
+                       
+void AFEC0_Handler(void)
+{
+  while ( 1 ) ;
+}
 
 /**
  * \brief This function back trace the stack to give exact address where fault 

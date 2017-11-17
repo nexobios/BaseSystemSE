@@ -16,28 +16,28 @@
        <Combo>
         <ID.0>
          <Data.0>
-          <__>AFEC_MR_SET</__>
+          <__>PWM_CMPV</__>
          </Data.0>
          <Data.1>
-          <__>INPUT</__>
+          <__>CMPV</__>
          </Data.1>
          <Data.2>
-          <__>afec</__>
+          <__>CMP</__>
          </Data.2>
          <Data.3>
-          <__>MISO</__>
+          <__>CHID0</__>
          </Data.3>
          <Data.4>
-          <__>miso</__>
+          <__>PWM_SR</__>
          </Data.4>
          <Data.5>
-          <__>adc</__>
+          <__>CPRD</__>
          </Data.5>
          <Data.6>
-          <__>ITM_TCR_ITMENA_Msk</__>
+          <__>PWM_IER2</__>
          </Data.6>
          <Data.7>
-          <__>Entry Handler</__>
+          <__>interr</__>
          </Data.7>
         </ID.0>
         <ID.1>
@@ -49,318 +49,318 @@
       </History>
       <PI.0>
        <Bookmarks_num_>0</Bookmarks_num_>
-       <C>3</C>
-       <L>150</L>
-       <P>..\source\appl\main.c</P>
-       <VL>130</VL>
+       <L>93</L>
+       <P>..\source\infrastructure\derivative\libchip_samv7\include\samv7\instance\instance_pwm1.h</P>
+       <VL>93</VL>
       </PI.0>
       <PI.1>
        <Bookmarks_num_>0</Bookmarks_num_>
-       <L>353</L>
-       <P>..\source\infrastructure\derivative\libchip_samv7\include\cmsis\CMSIS\Include\core_cmInstr.h</P>
-       <VL>338</VL>
+       <L>4274</L>
+       <P>Debug\BaseProject.map</P>
+       <VL>4274</VL>
       </PI.1>
       <PI.10>
        <Bookmarks_num_>0</Bookmarks_num_>
-       <C>29</C>
-       <L>36</L>
-       <P>..\source\infrastructure\derivative\libchip_samv7\include\samv7\component\component_afec.h</P>
-       <VL>36</VL>
+       <C>19</C>
+       <L>298</L>
+       <P>..\source\infrastructure\bsp\libboard_samv7-ek\source\ili9488_spi_dma.c</P>
+       <VL>291</VL>
       </PI.10>
       <PI.11>
        <Bookmarks_num_>0</Bookmarks_num_>
-       <L>84</L>
-       <P>..\source\infrastructure\derivative\libchip_samv7\chip.h</P>
-       <VL>70</VL>
+       <L>91</L>
+       <P>..\source\infrastructure\bsp\libboard_samv7-ek\source\ili9488_spi.c</P>
+       <VL>78</VL>
       </PI.11>
       <PI.12>
        <Bookmarks_num_>0</Bookmarks_num_>
-       <L>87</L>
-       <P>..\source\infrastructure\bsp\libboard_samv7-ek\source\lcdd.c</P>
-       <VL>72</VL>
+       <C>18</C>
+       <L>570</L>
+       <P>..\source\infrastructure\bsp\libboard_samv7-ek\board.h</P>
+       <VL>563</VL>
       </PI.12>
       <PI.13>
        <Bookmarks_num_>0</Bookmarks_num_>
-       <C>43</C>
-       <L>87</L>
-       <P>..\source\infrastructure\bsp\libboard_samv7-ek\source\ili9488_spi.c</P>
-       <VL>70</VL>
+       <L>66</L>
+       <P>..\source\bsw\services\system\timetick\timetick.c</P>
+       <VL>66</VL>
       </PI.13>
       <PI.14>
        <Bookmarks_num_>0</Bookmarks_num_>
-       <C>43</C>
-       <L>307</L>
-       <P>..\source\infrastructure\bsp\libboard_samv7-ek\board.h</P>
-       <VL>291</VL>
+       <C>19</C>
+       <L>41</L>
+       <P>..\source\bsw\services\system\scheduler\Tasks.h</P>
+       <VL>10</VL>
       </PI.14>
       <PI.15>
        <Bookmarks_num_>0</Bookmarks_num_>
-       <L>113</L>
-       <P>..\source\bsw\services\system\timetick\timetick.c</P>
-       <VL>100</VL>
+       <L>89</L>
+       <P>..\source\bsw\services\system\scheduler\Tasks.c</P>
+       <VL>87</VL>
       </PI.15>
       <PI.16>
-       <Bookmarks_num_>0</Bookmarks_num_>
-       <L>20</L>
-       <P>..\source\bsw\services\system\scheduler\Tasks.h</P>
-      </PI.16>
-      <PI.17>
-       <Bookmarks_num_>0</Bookmarks_num_>
-       <L>46</L>
-       <P>..\source\bsw\services\system\scheduler\Tasks.c</P>
-       <VL>25</VL>
-      </PI.17>
-      <PI.18>
        <Bookmarks_num_>0</Bookmarks_num_>
        <L>224</L>
        <P>..\source\bsw\services\system\scheduler\app_scheduler.c</P>
        <VL>6</VL>
-      </PI.18>
-      <PI.19>
+      </PI.16>
+      <PI.17>
        <Bookmarks_num_>0</Bookmarks_num_>
        <C>12</C>
        <L>231</L>
        <P>..\source\bsw\mcal\xdma\xdmad.h</P>
        <VL>217</VL>
-      </PI.19>
-      <PI.2>
-       <Bookmarks_num_>0</Bookmarks_num_>
-       <C>23</C>
-       <L>197</L>
-       <P>..\source\infrastructure\bsp\libboard_samv7-ek\source\ili9488_ebi_dma.c</P>
-      </PI.2>
-      <PI.20>
+      </PI.17>
+      <PI.18>
        <Bookmarks_num_>0</Bookmarks_num_>
        <C>11</C>
        <L>168</L>
        <P>..\source\bsw\mcal\xdma\xdmad.c</P>
        <VL>139</VL>
-      </PI.20>
-      <PI.21>
+      </PI.18>
+      <PI.19>
        <Bookmarks_num_>0</Bookmarks_num_>
        <C>44</C>
        <L>182</L>
        <P>..\source\bsw\mcal\xdma\xdmac.c</P>
        <VL>152</VL>
+      </PI.19>
+      <PI.2>
+       <Bookmarks_num_>0</Bookmarks_num_>
+       <C>15</C>
+       <L>334</L>
+       <P>..\source\infrastructure\toolset\gcc\startup_sam.c</P>
+       <VL>327</VL>
+      </PI.2>
+      <PI.20>
+       <Bookmarks_num_>0</Bookmarks_num_>
+       <C>12</C>
+       <L>45</L>
+       <P>..\source\bsw\mcal\pwm\pwmc.h</P>
+       <VL>45</VL>
+      </PI.20>
+      <PI.21>
+       <Bookmarks_num_>0</Bookmarks_num_>
+       <L>559</L>
+       <P>..\source\bsw\mcal\pwm\pwmc.c</P>
+       <VL>559</VL>
       </PI.21>
       <PI.22>
        <Bookmarks_num_>0</Bookmarks_num_>
-       <C>5</C>
-       <L>278</L>
-       <P>..\source\bsw\mcal\pwm\pwmc.c</P>
-       <VL>263</VL>
+       <L>173</L>
+       <P>..\source\bsw\mcal\pmc\pmc.c</P>
+       <VL>166</VL>
       </PI.22>
       <PI.23>
        <Bookmarks_num_>0</Bookmarks_num_>
-       <C>25</C>
-       <L>153</L>
-       <P>..\source\bsw\mcal\pmc\pmc.c</P>
-       <VL>128</VL>
+       <L>86</L>
+       <P>..\source\bsw\mcal\pio\pio_it.c</P>
+       <VL>79</VL>
       </PI.23>
       <PI.24>
        <Bookmarks_num_>0</Bookmarks_num_>
-       <L>218</L>
-       <P>..\source\bsw\mcal\pio\pio.h</P>
-       <VL>188</VL>
+       <C>25</C>
+       <L>49</L>
+       <P>..\source\bsw\mcal\exceptions\exceptions.h</P>
+       <VL>41</VL>
       </PI.24>
       <PI.25>
        <Bookmarks_num_>0</Bookmarks_num_>
-       <C>25</C>
-       <L>217</L>
-       <P>..\source\bsw\mcal\pio\pio.c</P>
-       <VL>197</VL>
+       <L>220</L>
+       <P>..\source\bsw\mcal\exceptions\exceptions.c</P>
+       <VL>206</VL>
       </PI.25>
       <PI.26>
-       <Bookmarks_num_>0</Bookmarks_num_>
-       <L>190</L>
-       <P>..\source\bsw\mcal\exceptions\exceptions.c</P>
-       <VL>174</VL>
-      </PI.26>
-      <PI.27>
        <Bookmarks_num_>0</Bookmarks_num_>
        <C>21</C>
        <L>77</L>
        <P>..\source\bsw\mcal\afec_dma\afe_dma.h</P>
        <VL>68</VL>
-      </PI.27>
-      <PI.28>
+      </PI.26>
+      <PI.27>
        <Bookmarks_num_>0</Bookmarks_num_>
        <C>25</C>
        <L>229</L>
        <P>..\source\bsw\mcal\afec_dma\afe_dma.c</P>
        <VL>216</VL>
+      </PI.27>
+      <PI.28>
+       <Bookmarks_num_>0</Bookmarks_num_>
+       <C>7</C>
+       <L>103</L>
+       <P>..\source\bsw\mcal\afec\afec.c</P>
+       <VL>92</VL>
       </PI.28>
       <PI.29>
-       <Bookmarks_num_>0</Bookmarks_num_>
-       <C>50</C>
-       <L>123</L>
-       <P>..\source\bsw\mcal\afec\afec.h</P>
-       <VL>123</VL>
-      </PI.29>
-      <PI.3>
-       <Bookmarks_num_>0</Bookmarks_num_>
-       <L>306</L>
-       <P>..\source\infrastructure\bsp\libboard_samv7-ek\source\ili9488_spi_dma.c</P>
-       <VL>291</VL>
-      </PI.3>
-      <PI.30>
-       <Bookmarks_num_>0</Bookmarks_num_>
-       <C>14</C>
-       <L>126</L>
-       <P>..\source\bsw\mcal\afec\afec.c</P>
-       <VL>116</VL>
-      </PI.30>
-      <PI.31>
        <Bookmarks_num_>0</Bookmarks_num_>
        <C>15</C>
        <L>79</L>
        <P>..\source\bsw\ecual\led.c</P>
        <VL>50</VL>
+      </PI.29>
+      <PI.3>
+       <Bookmarks_num_>0</Bookmarks_num_>
+       <L>147</L>
+       <P>..\source\infrastructure\derivative\libchip_samv7\include\samv7\pio\pio_samv71q21.h</P>
+       <VL>147</VL>
+      </PI.3>
+      <PI.30>
+       <Bookmarks_num_>0</Bookmarks_num_>
+       <L>162</L>
+       <P>..\source\appl\main.c</P>
+       <VL>155</VL>
+      </PI.30>
+      <PI.31>
+       <Bookmarks_num_>0</Bookmarks_num_>
+       <L>218</L>
+       <P>..\source\bsw\mcal\pio\pio.h</P>
+       <VL>188</VL>
       </PI.31>
       <PI.32>
+       <Bookmarks_num_>0</Bookmarks_num_>
+       <C>25</C>
+       <L>217</L>
+       <P>..\source\bsw\mcal\pio\pio.c</P>
+       <VL>197</VL>
+      </PI.32>
+      <PI.33>
+       <Bookmarks_num_>0</Bookmarks_num_>
+       <L>331</L>
+       <P>..\source\infrastructure\derivative\libchip_samv7\include\samv7\samv71q21.h</P>
+       <VL>316</VL>
+      </PI.33>
+      <PI.34>
+       <Bookmarks_num_>0</Bookmarks_num_>
+       <C>50</C>
+       <L>123</L>
+       <P>..\source\bsw\mcal\afec\afec.h</P>
+       <VL>123</VL>
+      </PI.34>
+      <PI.35>
+       <Bookmarks_num_>0</Bookmarks_num_>
+       <C>23</C>
+       <L>197</L>
+       <P>..\source\infrastructure\bsp\libboard_samv7-ek\source\ili9488_ebi_dma.c</P>
+      </PI.35>
+      <PI.36>
+       <Bookmarks_num_>0</Bookmarks_num_>
+       <L>353</L>
+       <P>..\source\infrastructure\derivative\libchip_samv7\include\cmsis\CMSIS\Include\core_cmInstr.h</P>
+       <VL>338</VL>
+      </PI.36>
+      <PI.37>
        <Bookmarks_num_>0</Bookmarks_num_>
        <C>101</C>
        <L>31</L>
        <P>..\source\infrastructure\bsp\libboard_samv7-ek\resources\system_sam.c</P>
        <VL>31</VL>
-      </PI.32>
-      <PI.33>
+      </PI.37>
+      <PI.38>
        <Bookmarks_num_>0</Bookmarks_num_>
        <C>21</C>
        <P>..\source\bsw\services\system\memalloc\MemAlloc.c</P>
-      </PI.33>
-      <PI.34>
+      </PI.38>
+      <PI.39>
        <Bookmarks_num_>0</Bookmarks_num_>
        <C>29</C>
        <L>3</L>
        <P>..\source\bsw\services\system\memalloc\MemAlloc.h</P>
-      </PI.34>
-      <PI.35>
+      </PI.39>
+      <PI.4>
+       <Bookmarks_num_>0</Bookmarks_num_>
+       <L>189</L>
+       <P>..\source\infrastructure\derivative\libchip_samv7\include\samv7\instance\instance_pwm0.h</P>
+       <VL>182</VL>
+      </PI.4>
+      <PI.40>
        <Bookmarks_num_>0</Bookmarks_num_>
        <C>17</C>
        <L>3</L>
        <P>..\source\bsw\services\system\memalloc\MemAlloc_Types.h</P>
-      </PI.35>
-      <PI.36>
+      </PI.40>
+      <PI.41>
        <Bookmarks_num_>0</Bookmarks_num_>
        <L>135</L>
        <P>..\source\infrastructure\toolset\gcc\sam_flash.ld</P>
        <VL>117</VL>
-      </PI.36>
-      <PI.37>
+      </PI.41>
+      <PI.42>
        <Bookmarks_num_>0</Bookmarks_num_>
        <L>128</L>
        <P>..\source\infrastructure\toolset\gcc\sam_sram.ld</P>
        <VL>114</VL>
-      </PI.37>
-      <PI.38>
+      </PI.42>
+      <PI.43>
        <Bookmarks_num_>0</Bookmarks_num_>
        <C>18</C>
        <L>43</L>
        <P>..\source\infrastructure\toolset\gcc\samv71q21_flash.ld</P>
        <VL>35</VL>
-      </PI.38>
-      <PI.39>
+      </PI.43>
+      <PI.44>
        <Bookmarks_num_>0</Bookmarks_num_>
        <P>..\source\infrastructure\toolset\gcc\sam_sdram.ld</P>
-      </PI.39>
-      <PI.4>
-       <Bookmarks_num_>0</Bookmarks_num_>
-       <C>75</C>
-       <L>56</L>
-       <P>..\source\bsw\mcal\pwm\pwmc.h</P>
-       <VL>30</VL>
-      </PI.4>
-      <PI.40>
-       <Bookmarks_num_>0</Bookmarks_num_>
-       <C>18</C>
-       <L>57</L>
-       <P>..\source\infrastructure\bsp\libboard_samv7-ek\source\syscalls.c</P>
-       <VL>120</VL>
-      </PI.40>
-      <PI.41>
+      </PI.44>
+      <PI.45>
        <Bookmarks_num_>0</Bookmarks_num_>
        <C>18</C>
        <L>49</L>
        <P>..\source\bsw\mcal\xdma\xdma_hardware_interface.c</P>
        <VL>35</VL>
-      </PI.41>
-      <PI.42>
+      </PI.45>
+      <PI.46>
        <Bookmarks_num_>0</Bookmarks_num_>
        <P>..\source\infrastructure\bsp\libboard_samv7-ek\resources\gcc\samv71q21_sram.ld</P>
-      </PI.42>
-      <PI.43>
+      </PI.46>
+      <PI.47>
        <Bookmarks_num_>0</Bookmarks_num_>
        <C>24</C>
        <L>343</L>
        <P>..\..\..\toolset\gcc\startup_sam.c</P>
-      </PI.43>
-      <PI.44>
+      </PI.47>
+      <PI.48>
        <Bookmarks_num_>0</Bookmarks_num_>
        <P>..\..\..\toolset\gcc\sam_flash.ld</P>
        <VL>15</VL>
-      </PI.44>
-      <PI.45>
+      </PI.48>
+      <PI.49>
        <Bookmarks_num_>0</Bookmarks_num_>
        <L>161</L>
        <P>..\..\..\hal\libchip_samv7\source\timetick.c</P>
        <VL>130</VL>
-      </PI.45>
-      <PI.46>
-       <Bookmarks_num_>0</Bookmarks_num_>
-       <L>118</L>
-       <P>..\..\..\bsp\libboard_samv7-ek\source\syscalls.c</P>
-       <VL>107</VL>
-      </PI.46>
-      <PI.47>
-       <Bookmarks_num_>0</Bookmarks_num_>
-       <C>40</C>
-       <L>194</L>
-       <P>..\..\..\bsp\libboard_samv7-ek\source\dbg_console.c</P>
-       <VL>276</VL>
-      </PI.47>
-      <PI.48>
-       <Bookmarks_num_>0</Bookmarks_num_>
-       <C>37</C>
-       <L>141</L>
-       <P>..\src\main.c</P>
-      </PI.48>
-      <PI.49>
-       <Bookmarks_num_>0</Bookmarks_num_>
-       <C>15</C>
-       <L>6</L>
-       <P>..\readme.txt</P>
       </PI.49>
       <PI.5>
        <Bookmarks_num_>0</Bookmarks_num_>
-       <L>4274</L>
-       <P>Debug\BaseProject.map</P>
-       <VL>4274</VL>
+       <C>32</C>
+       <L>493</L>
+       <P>..\source\infrastructure\derivative\libchip_samv7\include\samv7\component\component_pwm.h</P>
+       <VL>484</VL>
       </PI.5>
       <PI.6>
        <Bookmarks_num_>0</Bookmarks_num_>
-       <L>334</L>
-       <P>..\source\infrastructure\toolset\gcc\startup_sam.c</P>
-       <VL>315</VL>
+       <C>130</C>
+       <L>92</L>
+       <P>..\source\infrastructure\derivative\libchip_samv7\include\samv7\component\component_afec.h</P>
+       <VL>85</VL>
+       <VP>440</VP>
       </PI.6>
       <PI.7>
        <Bookmarks_num_>0</Bookmarks_num_>
-       <L>331</L>
-       <P>..\source\infrastructure\derivative\libchip_samv7\include\samv7\samv71q21.h</P>
-       <VL>316</VL>
+       <L>84</L>
+       <P>..\source\infrastructure\derivative\libchip_samv7\chip.h</P>
+       <VL>70</VL>
       </PI.7>
       <PI.8>
        <Bookmarks_num_>0</Bookmarks_num_>
-       <L>147</L>
-       <P>..\source\infrastructure\derivative\libchip_samv7\include\samv7\pio\pio_samv71q21.h</P>
-       <VL>147</VL>
+       <L>132</L>
+       <P>..\source\infrastructure\bsp\libboard_samv7-ek\source\syscalls.c</P>
+       <VL>120</VL>
       </PI.8>
       <PI.9>
        <Bookmarks_num_>0</Bookmarks_num_>
-       <C>22</C>
-       <L>252</L>
-       <P>..\source\infrastructure\derivative\libchip_samv7\include\samv7\component\component_pwm.h</P>
-       <VL>245</VL>
+       <L>87</L>
+       <P>..\source\infrastructure\bsp\libboard_samv7-ek\source\lcdd.c</P>
+       <VL>80</VL>
       </PI.9>
      </REG_ROOT>
     </EditorOptions>
@@ -828,10 +828,10 @@
      <Documents.0>
       <ActiveDocument>
        <Maximized>True</Maximized>
-       <RelativeFileName>..\source\appl\main.c</RelativeFileName>
+       <RelativeFileName>..\source\bsw\services\system\scheduler\Tasks.c</RelativeFileName>
       </ActiveDocument>
       <Editor.0>
-       <FileBarIndex>0</FileBarIndex>
+       <FileBarIndex>2</FileBarIndex>
        <RectPosBottom>594</RectPosBottom>
        <RectPosLeft>160</RectPosLeft>
        <RectPosRight>898</RectPosRight>
@@ -839,95 +839,95 @@
        <RelativeFileName>..\source\appl\main.c</RelativeFileName>
       </Editor.0>
       <Editor.1>
-       <FileBarIndex>10</FileBarIndex>
-       <RectPosBottom>466</RectPosBottom>
+       <FileBarIndex>8</FileBarIndex>
+       <RectPosBottom>254</RectPosBottom>
        <RectPosLeft>32</RectPosLeft>
-       <RectPosRight>819</RectPosRight>
+       <RectPosRight>866</RectPosRight>
        <RectPosTop>32</RectPosTop>
        <RelativeFileName>..\source\bsw\ecual\led.c</RelativeFileName>
       </Editor.1>
       <Editor.10>
-       <FileBarIndex>6</FileBarIndex>
-       <RectPosBottom>594</RectPosBottom>
-       <RectPosLeft>160</RectPosLeft>
-       <RectPosRight>780</RectPosRight>
-       <RectPosTop>160</RectPosTop>
-       <RelativeFileName>..\source\bsw\mcal\pwm\pwmc.c</RelativeFileName>
-      </Editor.10>
-      <Editor.11>
-       <FileBarIndex>4</FileBarIndex>
+       <FileBarIndex>16</FileBarIndex>
        <RectPosBottom>434</RectPosBottom>
        <RectPosLeft>0</RectPosLeft>
        <RectPosRight>882</RectPosRight>
        <RectPosTop>0</RectPosTop>
        <RelativeFileName>..\source\bsw\mcal\pwm\pwmc.h</RelativeFileName>
-      </Editor.11>
-      <Editor.12>
-       <FileBarIndex>22</FileBarIndex>
+      </Editor.10>
+      <Editor.11>
+       <FileBarIndex>17</FileBarIndex>
        <RectPosBottom>626</RectPosBottom>
        <RectPosLeft>192</RectPosLeft>
        <RectPosRight>979</RectPosRight>
        <RectPosTop>192</RectPosTop>
        <RelativeFileName>..\source\bsw\mcal\xdma\xdmac.c</RelativeFileName>
-      </Editor.12>
-      <Editor.13>
-       <FileBarIndex>23</FileBarIndex>
+      </Editor.11>
+      <Editor.12>
+       <FileBarIndex>19</FileBarIndex>
        <RectPosBottom>491</RectPosBottom>
        <RectPosLeft>64</RectPosLeft>
        <RectPosRight>423</RectPosRight>
        <RectPosTop>64</RectPosTop>
        <RelativeFileName>..\source\bsw\mcal\xdma\xdmad.c</RelativeFileName>
-      </Editor.13>
-      <Editor.14>
-       <FileBarIndex>24</FileBarIndex>
+      </Editor.12>
+      <Editor.13>
+       <FileBarIndex>20</FileBarIndex>
        <RectPosBottom>459</RectPosBottom>
        <RectPosLeft>32</RectPosLeft>
        <RectPosRight>198</RectPosRight>
        <RectPosTop>32</RectPosTop>
        <RelativeFileName>..\source\bsw\mcal\xdma\xdmad.h</RelativeFileName>
-      </Editor.14>
-      <Editor.15>
-       <FileBarIndex>26</FileBarIndex>
+      </Editor.13>
+      <Editor.14>
+       <FileBarIndex>21</FileBarIndex>
        <RectPosBottom>562</RectPosBottom>
        <RectPosLeft>128</RectPosLeft>
        <RectPosRight>634</RectPosRight>
        <RectPosTop>128</RectPosTop>
        <RelativeFileName>..\source\bsw\services\system\scheduler\app_scheduler.c</RelativeFileName>
-      </Editor.15>
-      <Editor.16>
-       <FileBarIndex>27</FileBarIndex>
+      </Editor.14>
+      <Editor.15>
+       <FileBarIndex>23</FileBarIndex>
        <RectPosBottom>562</RectPosBottom>
        <RectPosLeft>128</RectPosLeft>
        <RectPosRight>915</RectPosRight>
        <RectPosTop>128</RectPosTop>
        <RelativeFileName>..\source\bsw\services\system\scheduler\Tasks.c</RelativeFileName>
-      </Editor.16>
-      <Editor.17>
+      </Editor.15>
+      <Editor.16>
        <FileBarIndex>25</FileBarIndex>
        <RectPosBottom>594</RectPosBottom>
        <RectPosLeft>160</RectPosLeft>
        <RectPosRight>947</RectPosRight>
        <RectPosTop>160</RectPosTop>
        <RelativeFileName>..\source\bsw\services\system\scheduler\Tasks.h</RelativeFileName>
-      </Editor.17>
-      <Editor.18>
-       <FileBarIndex>28</FileBarIndex>
+      </Editor.16>
+      <Editor.17>
+       <FileBarIndex>26</FileBarIndex>
        <RectPosBottom>626</RectPosBottom>
        <RectPosLeft>192</RectPosLeft>
        <RectPosRight>979</RectPosRight>
        <RectPosTop>192</RectPosTop>
        <RelativeFileName>..\source\bsw\services\system\timetick\timetick.c</RelativeFileName>
-      </Editor.18>
-      <Editor.19>
-       <FileBarIndex>29</FileBarIndex>
+      </Editor.17>
+      <Editor.18>
+       <FileBarIndex>27</FileBarIndex>
        <RectPosBottom>434</RectPosBottom>
        <RectPosLeft>0</RectPosLeft>
        <RectPosRight>787</RectPosRight>
        <RectPosTop>0</RectPosTop>
        <RelativeFileName>..\source\infrastructure\bsp\libboard_samv7-ek\board.h</RelativeFileName>
+      </Editor.18>
+      <Editor.19>
+       <FileBarIndex>28</FileBarIndex>
+       <RectPosBottom>562</RectPosBottom>
+       <RectPosLeft>128</RectPosLeft>
+       <RectPosRight>748</RectPosRight>
+       <RectPosTop>128</RectPosTop>
+       <RelativeFileName>..\source\infrastructure\bsp\libboard_samv7-ek\source\ili9488_spi.c</RelativeFileName>
       </Editor.19>
       <Editor.2>
-       <FileBarIndex>11</FileBarIndex>
+       <FileBarIndex>9</FileBarIndex>
        <RectPosBottom>523</RectPosBottom>
        <RectPosLeft>96</RectPosLeft>
        <RectPosRight>288</RectPosRight>
@@ -935,71 +935,71 @@
        <RelativeFileName>..\source\bsw\mcal\afec\afec.c</RelativeFileName>
       </Editor.2>
       <Editor.20>
-       <FileBarIndex>2</FileBarIndex>
-       <RectPosBottom>498</RectPosBottom>
-       <RectPosLeft>64</RectPosLeft>
-       <RectPosRight>946</RectPosRight>
-       <RectPosTop>64</RectPosTop>
-       <RelativeFileName>..\source\infrastructure\bsp\libboard_samv7-ek\source\ili9488_ebi_dma.c</RelativeFileName>
-      </Editor.20>
-      <Editor.21>
-       <FileBarIndex>9</FileBarIndex>
-       <RectPosBottom>562</RectPosBottom>
-       <RectPosLeft>128</RectPosLeft>
-       <RectPosRight>748</RectPosRight>
-       <RectPosTop>128</RectPosTop>
-       <RelativeFileName>..\source\infrastructure\bsp\libboard_samv7-ek\source\ili9488_spi.c</RelativeFileName>
-      </Editor.21>
-      <Editor.22>
-       <FileBarIndex>3</FileBarIndex>
+       <FileBarIndex>15</FileBarIndex>
        <RectPosBottom>466</RectPosBottom>
        <RectPosLeft>32</RectPosLeft>
        <RectPosRight>914</RectPosRight>
        <RectPosTop>32</RectPosTop>
        <RelativeFileName>..\source\infrastructure\bsp\libboard_samv7-ek\source\ili9488_spi_dma.c</RelativeFileName>
+      </Editor.20>
+      <Editor.21>
+       <FileBarIndex>7</FileBarIndex>
+       <RectPosBottom>318</RectPosBottom>
+       <RectPosLeft>96</RectPosLeft>
+       <RectPosRight>930</RectPosRight>
+       <RectPosTop>96</RectPosTop>
+       <RelativeFileName>..\source\infrastructure\bsp\libboard_samv7-ek\source\lcdd.c</RelativeFileName>
+      </Editor.21>
+      <Editor.22>
+       <FileBarIndex>1</FileBarIndex>
+       <RectPosBottom>333</RectPosBottom>
+       <RectPosLeft>96</RectPosLeft>
+       <RectPosRight>930</RectPosRight>
+       <RectPosTop>96</RectPosTop>
+       <RelativeFileName>..\source\infrastructure\bsp\libboard_samv7-ek\source\syscalls.c</RelativeFileName>
       </Editor.22>
       <Editor.23>
-       <FileBarIndex>5</FileBarIndex>
-       <RectPosBottom>626</RectPosBottom>
-       <RectPosLeft>192</RectPosLeft>
-       <RectPosRight>812</RectPosRight>
-       <RectPosTop>192</RectPosTop>
-       <RelativeFileName>..\source\infrastructure\bsp\libboard_samv7-ek\source\lcdd.c</RelativeFileName>
-      </Editor.23>
-      <Editor.24>
-       <FileBarIndex>30</FileBarIndex>
+       <FileBarIndex>29</FileBarIndex>
        <RectPosBottom>427</RectPosBottom>
        <RectPosLeft>0</RectPosLeft>
        <RectPosRight>166</RectPosRight>
        <RectPosTop>0</RectPosTop>
        <RelativeFileName>..\source\infrastructure\derivative\libchip_samv7\chip.h</RelativeFileName>
-      </Editor.24>
-      <Editor.25>
-       <FileBarIndex>1</FileBarIndex>
-       <RectPosBottom>530</RectPosBottom>
-       <RectPosLeft>96</RectPosLeft>
-       <RectPosRight>978</RectPosRight>
-       <RectPosTop>96</RectPosTop>
-       <RelativeFileName>..\source\infrastructure\derivative\libchip_samv7\include\cmsis\CMSIS\Include\core_cmInstr.h</RelativeFileName>
-      </Editor.25>
-      <Editor.26>
-       <FileBarIndex>15</FileBarIndex>
+      </Editor.23>
+      <Editor.24>
+       <FileBarIndex>24</FileBarIndex>
        <RectPosBottom>498</RectPosBottom>
        <RectPosLeft>64</RectPosLeft>
        <RectPosRight>851</RectPosRight>
        <RectPosTop>64</RectPosTop>
        <RelativeFileName>..\source\infrastructure\derivative\libchip_samv7\include\samv7\component\component_afec.h</RelativeFileName>
-      </Editor.26>
-      <Editor.27>
-       <FileBarIndex>12</FileBarIndex>
+      </Editor.24>
+      <Editor.25>
+       <FileBarIndex>18</FileBarIndex>
        <RectPosBottom>530</RectPosBottom>
        <RectPosLeft>96</RectPosLeft>
        <RectPosRight>1095</RectPosRight>
        <RectPosTop>96</RectPosTop>
        <RelativeFileName>..\source\infrastructure\derivative\libchip_samv7\include\samv7\component\component_pwm.h</RelativeFileName>
+      </Editor.25>
+      <Editor.26>
+       <FileBarIndex>6</FileBarIndex>
+       <RectPosBottom>286</RectPosBottom>
+       <RectPosLeft>64</RectPosLeft>
+       <RectPosRight>898</RectPosRight>
+       <RectPosTop>64</RectPosTop>
+       <RelativeFileName>..\source\infrastructure\derivative\libchip_samv7\include\samv7\instance\instance_pwm0.h</RelativeFileName>
+      </Editor.26>
+      <Editor.27>
+       <FileBarIndex>0</FileBarIndex>
+       <RectPosBottom>301</RectPosBottom>
+       <RectPosLeft>64</RectPosLeft>
+       <RectPosRight>898</RectPosRight>
+       <RectPosTop>64</RectPosTop>
+       <RelativeFileName>..\source\infrastructure\derivative\libchip_samv7\include\samv7\instance\instance_pwm1.h</RelativeFileName>
       </Editor.27>
       <Editor.28>
-       <FileBarIndex>18</FileBarIndex>
+       <FileBarIndex>22</FileBarIndex>
        <RectPosBottom>530</RectPosBottom>
        <RectPosLeft>96</RectPosLeft>
        <RectPosRight>883</RectPosRight>
@@ -1007,96 +1007,88 @@
        <RelativeFileName>..\source\infrastructure\derivative\libchip_samv7\include\samv7\pio\pio_samv71q21.h</RelativeFileName>
       </Editor.28>
       <Editor.29>
-       <FileBarIndex>7</FileBarIndex>
-       <RectPosBottom>530</RectPosBottom>
-       <RectPosLeft>96</RectPosLeft>
-       <RectPosRight>850</RectPosRight>
-       <RectPosTop>96</RectPosTop>
-       <RelativeFileName>..\source\infrastructure\derivative\libchip_samv7\include\samv7\samv71q21.h</RelativeFileName>
-      </Editor.29>
-      <Editor.3>
-       <FileBarIndex>13</FileBarIndex>
-       <RectPosBottom>562</RectPosBottom>
-       <RectPosLeft>128</RectPosLeft>
-       <RectPosRight>1127</RectPosRight>
-       <RectPosTop>128</RectPosTop>
-       <RelativeFileName>..\source\bsw\mcal\afec\afec.h</RelativeFileName>
-      </Editor.3>
-      <Editor.30>
-       <FileBarIndex>31</FileBarIndex>
+       <FileBarIndex>30</FileBarIndex>
        <RectPosBottom>459</RectPosBottom>
        <RectPosLeft>32</RectPosLeft>
        <RectPosRight>391</RectPosRight>
        <RectPosTop>32</RectPosTop>
        <RelativeFileName>..\source\infrastructure\toolset\gcc\startup_sam.c</RelativeFileName>
-      </Editor.30>
-      <Editor.31>
-       <FileBarIndex>8</FileBarIndex>
-       <RectPosBottom>498</RectPosBottom>
-       <RectPosLeft>64</RectPosLeft>
-       <RectPosRight>818</RectPosRight>
-       <RectPosTop>64</RectPosTop>
-       <RelativeFileName>Debug\BaseProject.map</RelativeFileName>
-      </Editor.31>
-      <Editor.4>
-       <FileBarIndex>14</FileBarIndex>
+      </Editor.29>
+      <Editor.3>
+       <FileBarIndex>10</FileBarIndex>
        <RectPosBottom>587</RectPosBottom>
        <RectPosLeft>160</RectPosLeft>
        <RectPosRight>352</RectPosRight>
        <RectPosTop>160</RectPosTop>
        <RelativeFileName>..\source\bsw\mcal\afec_dma\afe_dma.c</RelativeFileName>
-      </Editor.4>
-      <Editor.5>
-       <FileBarIndex>16</FileBarIndex>
+      </Editor.3>
+      <Editor.30>
+       <FileBarIndex>12</FileBarIndex>
+       <RectPosBottom>498</RectPosBottom>
+       <RectPosLeft>64</RectPosLeft>
+       <RectPosRight>818</RectPosRight>
+       <RectPosTop>64</RectPosTop>
+       <RelativeFileName>Debug\BaseProject.map</RelativeFileName>
+      </Editor.30>
+      <Editor.4>
+       <FileBarIndex>11</FileBarIndex>
        <RectPosBottom>619</RectPosBottom>
        <RectPosLeft>192</RectPosLeft>
        <RectPosRight>384</RectPosRight>
        <RectPosTop>192</RectPosTop>
        <RelativeFileName>..\source\bsw\mcal\afec_dma\afe_dma.h</RelativeFileName>
-      </Editor.5>
-      <Editor.6>
-       <FileBarIndex>17</FileBarIndex>
+      </Editor.4>
+      <Editor.5>
+       <FileBarIndex>14</FileBarIndex>
        <RectPosBottom>498</RectPosBottom>
        <RectPosLeft>64</RectPosLeft>
        <RectPosRight>570</RectPosRight>
        <RectPosTop>64</RectPosTop>
        <RelativeFileName>..\source\bsw\mcal\exceptions\exceptions.c</RelativeFileName>
+      </Editor.5>
+      <Editor.6>
+       <FileBarIndex>3</FileBarIndex>
+       <RectPosBottom>301</RectPosBottom>
+       <RectPosLeft>64</RectPosLeft>
+       <RectPosRight>898</RectPosRight>
+       <RectPosTop>64</RectPosTop>
+       <RelativeFileName>..\source\bsw\mcal\exceptions\exceptions.h</RelativeFileName>
       </Editor.6>
       <Editor.7>
-       <FileBarIndex>19</FileBarIndex>
-       <RectPosBottom>530</RectPosBottom>
-       <RectPosLeft>96</RectPosLeft>
-       <RectPosRight>602</RectPosRight>
-       <RectPosTop>96</RectPosTop>
-       <RelativeFileName>..\source\bsw\mcal\pio\pio.c</RelativeFileName>
+       <FileBarIndex>4</FileBarIndex>
+       <RectPosBottom>269</RectPosBottom>
+       <RectPosLeft>32</RectPosLeft>
+       <RectPosRight>866</RectPosRight>
+       <RectPosTop>32</RectPosTop>
+       <RelativeFileName>..\source\bsw\mcal\pio\pio_it.c</RelativeFileName>
       </Editor.7>
       <Editor.8>
-       <FileBarIndex>20</FileBarIndex>
-       <RectPosBottom>498</RectPosBottom>
-       <RectPosLeft>64</RectPosLeft>
-       <RectPosRight>851</RectPosRight>
-       <RectPosTop>64</RectPosTop>
-       <RelativeFileName>..\source\bsw\mcal\pio\pio.h</RelativeFileName>
+       <FileBarIndex>13</FileBarIndex>
+       <RectPosBottom>482</RectPosBottom>
+       <RectPosLeft>0</RectPosLeft>
+       <RectPosRight>706</RectPosRight>
+       <RectPosTop>0</RectPosTop>
+       <RelativeFileName>..\source\bsw\mcal\pmc\pmc.c</RelativeFileName>
       </Editor.8>
       <Editor.9>
-       <FileBarIndex>21</FileBarIndex>
-       <RectPosBottom>594</RectPosBottom>
-       <RectPosLeft>160</RectPosLeft>
-       <RectPosRight>947</RectPosRight>
-       <RectPosTop>160</RectPosTop>
-       <RelativeFileName>..\source\bsw\mcal\pmc\pmc.c</RelativeFileName>
+       <FileBarIndex>5</FileBarIndex>
+       <RectPosBottom>222</RectPosBottom>
+       <RectPosLeft>0</RectPosLeft>
+       <RectPosRight>834</RectPosRight>
+       <RectPosTop>0</RectPosTop>
+       <RelativeFileName>..\source\bsw\mcal\pwm\pwmc.c</RelativeFileName>
       </Editor.9>
       <EditorHistoryFile.0>
-       <RelativeFileName>..\source\bsw\services\system\memalloc\MemAlloc.c</RelativeFileName>
+       <RelativeFileName>..\source\bsw\mcal\pio\pio.c</RelativeFileName>
       </EditorHistoryFile.0>
       <EditorHistoryFile.1>
-       <RelativeFileName>..\source\infrastructure\bsp\libboard_samv7-ek\resources\system_sam.c</RelativeFileName>
+       <RelativeFileName>..\source\bsw\mcal\pio\pio.h</RelativeFileName>
       </EditorHistoryFile.1>
       <EditorHistoryFile.2>
-       <RelativeFileName>..\source\bsw\mcal\afec\afec.h</RelativeFileName>
+       <RelativeFileName>..\source\bsw\mcal\pmc\pmc.c</RelativeFileName>
       </EditorHistoryFile.2>
       <EditorHistoryFile.3>
-       <RelativeFileName>..\source\appl\main.c</RelativeFileName>
+       <RelativeFileName>..\source\bsw\mcal\pwm\pwmc.c</RelativeFileName>
       </EditorHistoryFile.3>
      </Documents.0>
      <Progress>
@@ -1132,6 +1124,30 @@
          <Scale>0</Scale>
         </ExpressionDisplay>
        </Watch.0>
+       <Watch.1>
+        <WatchName>value</WatchName>
+        <ExpressionDisplay>
+         <Color>0</Color>
+         <ColorBack>8421376</ColorBack>
+         <ColorText>0</ColorText>
+         <Enabled>0</Enabled>
+         <Hi type="D">100.0000000000000000</Hi>
+         <Lo type="D">0.0000000000000000</Lo>
+         <Scale>0</Scale>
+        </ExpressionDisplay>
+       </Watch.1>
+       <Watch.2>
+        <WatchName>PWM0</WatchName>
+        <ExpressionDisplay>
+         <Color>0</Color>
+         <ColorBack>8421376</ColorBack>
+         <ColorText>0</ColorText>
+         <Enabled>0</Enabled>
+         <Hi type="D">100.0000000000000000</Hi>
+         <Lo type="D">0.0000000000000000</Lo>
+         <Scale>0</Scale>
+        </ExpressionDisplay>
+       </Watch.2>
       </WatchPane.0>
       <WatchPane.2>
        <Watch.0>
@@ -1201,7 +1217,7 @@
       <TypeOfWnd>-1</TypeOfWnd>
       <DockRect.0>
        <AreHorz>0</AreHorz>
-       <Percent>458</Percent>
+       <Percent>364</Percent>
        <Type>0</Type>
        <TypeOfWnd>-1</TypeOfWnd>
        <DockRect.0>
@@ -1388,12 +1404,12 @@
       </DockRect.1>
       <DockRect.2>
        <AreHorz>0</AreHorz>
-       <Percent>197</Percent>
+       <Percent>577</Percent>
        <Type>0</Type>
        <TypeOfWnd>-1</TypeOfWnd>
        <DockRect.0>
         <AreHorz>1</AreHorz>
-        <Percent>1071</Percent>
+        <Percent>282</Percent>
         <strTypeOfWnd>Output</strTypeOfWnd>
         <Type>0</Type>
         <TypeOfWnd>0</TypeOfWnd>
@@ -1406,7 +1422,7 @@
        </DockRect.1>
        <DockRect.2>
         <AreHorz>1</AreHorz>
-        <Percent>844</Percent>
+        <Percent>1633</Percent>
         <strTypeOfWnd>SFR</strTypeOfWnd>
         <Type>0</Type>
         <TypeOfWnd>12</TypeOfWnd>
@@ -1415,7 +1431,7 @@
           <Tree>
            <HeaderWidth.0>200</HeaderWidth.0>
            <HeaderWidth.1>189</HeaderWidth.1>
-           <HeaderWidth.2>400</HeaderWidth.2>
+           <HeaderWidth.2>1275</HeaderWidth.2>
            <HeaderWidth.3>100</HeaderWidth.3>
            <HeaderWidth.4>400</HeaderWidth.4>
           </Tree>
@@ -1469,7 +1485,7 @@
          <Condition></Condition>
          <Condition_Count>0</Condition_Count>
          <ConditionEnabled>False</ConditionEnabled>
-         <Name>&quot;..\source\bsw\services\system\scheduler\Tasks.c&quot;::45</Name>
+         <Name>&quot;..\source\bsw\services\system\scheduler\Tasks.c&quot;::91</Name>
         </__>
        </BP.1>
        <BP.2>
@@ -1478,11 +1494,11 @@
          <ActionScript></ActionScript>
          <ActionScriptParams></ActionScriptParams>
          <ActionShow>0</ActionShow>
-         <Active>True</Active>
+         <Active>False</Active>
          <Condition></Condition>
          <Condition_Count>0</Condition_Count>
          <ConditionEnabled>False</ConditionEnabled>
-         <Name>&quot;..\source\bsw\services\system\scheduler\Tasks.c&quot;::47</Name>
+         <Name>&quot;..\source\appl\main.c&quot;::110</Name>
         </__>
        </BP.2>
        <BP.3>
@@ -1491,11 +1507,11 @@
          <ActionScript></ActionScript>
          <ActionScriptParams></ActionScriptParams>
          <ActionShow>0</ActionShow>
-         <Active>True</Active>
+         <Active>False</Active>
          <Condition></Condition>
          <Condition_Count>0</Condition_Count>
          <ConditionEnabled>False</ConditionEnabled>
-         <Name>&quot;..\source\appl\main.c&quot;::110</Name>
+         <Name>&quot;..\source\bsw\mcal\afec_dma\afe_dma.c&quot;::219</Name>
         </__>
        </BP.3>
        <BP.4>
@@ -1504,11 +1520,11 @@
          <ActionScript></ActionScript>
          <ActionScriptParams></ActionScriptParams>
          <ActionShow>0</ActionShow>
-         <Active>True</Active>
+         <Active>False</Active>
          <Condition></Condition>
          <Condition_Count>0</Condition_Count>
          <ConditionEnabled>False</ConditionEnabled>
-         <Name>&quot;..\source\bsw\mcal\afec_dma\afe_dma.c&quot;::219</Name>
+         <Name>&quot;..\source\bsw\mcal\afec_dma\afe_dma.c&quot;::237</Name>
         </__>
        </BP.4>
        <BP.5>
@@ -1521,9 +1537,61 @@
          <Condition></Condition>
          <Condition_Count>0</Condition_Count>
          <ConditionEnabled>False</ConditionEnabled>
-         <Name>&quot;..\source\bsw\mcal\afec_dma\afe_dma.c&quot;::237</Name>
+         <Name>&quot;..\source\bsw\services\system\scheduler\Tasks.c&quot;::52</Name>
         </__>
        </BP.5>
+       <BP.6>
+        <__>
+         <ActionEnabled>0</ActionEnabled>
+         <ActionScript></ActionScript>
+         <ActionScriptParams></ActionScriptParams>
+         <ActionShow>0</ActionShow>
+         <Active>True</Active>
+         <Condition></Condition>
+         <Condition_Count>0</Condition_Count>
+         <ConditionEnabled>False</ConditionEnabled>
+         <Name>&quot;..\source\bsw\mcal\exceptions\exceptions.c&quot;::60</Name>
+        </__>
+       </BP.6>
+       <BP.7>
+        <__>
+         <ActionEnabled>0</ActionEnabled>
+         <ActionScript></ActionScript>
+         <ActionScriptParams></ActionScriptParams>
+         <ActionShow>0</ActionShow>
+         <Active>True</Active>
+         <Condition></Condition>
+         <Condition_Count>0</Condition_Count>
+         <ConditionEnabled>False</ConditionEnabled>
+         <Name>&quot;..\source\bsw\mcal\exceptions\exceptions.c&quot;::65</Name>
+        </__>
+       </BP.7>
+       <BP.8>
+        <__>
+         <ActionEnabled>0</ActionEnabled>
+         <ActionScript></ActionScript>
+         <ActionScriptParams></ActionScriptParams>
+         <ActionShow>0</ActionShow>
+         <Active>True</Active>
+         <Condition></Condition>
+         <Condition_Count>0</Condition_Count>
+         <ConditionEnabled>False</ConditionEnabled>
+         <Name>&quot;..\source\bsw\mcal\exceptions\exceptions.c&quot;::55</Name>
+        </__>
+       </BP.8>
+       <BP.9>
+        <__>
+         <ActionEnabled>0</ActionEnabled>
+         <ActionScript></ActionScript>
+         <ActionScriptParams></ActionScriptParams>
+         <ActionShow>0</ActionShow>
+         <Active>True</Active>
+         <Condition></Condition>
+         <Condition_Count>0</Condition_Count>
+         <ConditionEnabled>False</ConditionEnabled>
+         <Name>&quot;..\source\bsw\services\system\scheduler\Tasks.c&quot;::90</Name>
+        </__>
+       </BP.9>
       </Fetch>
      </Breakpoints>
      <CASETool>
@@ -1818,14 +1886,14 @@
      <GlobalData>
       <FindInFiles>
        <CaseSensitive>0</CaseSensitive>
-       <FindWhat.0>AfeCallback</FindWhat.0>
-       <FindWhat.1>pRxBuff</FindWhat.1>
-       <FindWhat.2>sXdmad pXdmad</FindWhat.2>
-       <FindWhat.3>AfeCmd </FindWhat.3>
-       <FindWhat.4>Xdmad</FindWhat.4>
-       <FindWhat.5>PWMC_SetDutyCycle</FindWhat.5>
-       <FindWhat.6>PWMC_ConfigureChannel</FindWhat.6>
-       <FindWhat.7>PWMC_SetPeriod</FindWhat.7>
+       <FindWhat.0>CMPV</FindWhat.0>
+       <FindWhat.1>PWM_IER1_CHID1</FindWhat.1>
+       <FindWhat.2>PWM_ELMR</FindWhat.2>
+       <FindWhat.3>PWM_ELMR_CSEL0</FindWhat.3>
+       <FindWhat.4>PWM_CMPV0</FindWhat.4>
+       <FindWhat.5>PWM_CH_NUM</FindWhat.5>
+       <FindWhat.6>PWM_IER2_WRDY</FindWhat.6>
+       <FindWhat.7>PWM_IER2_CMPM0</FindWhat.7>
        <Folder.0>..\</Folder.0>
        <Folder.1>D:\programiranje\STM32F4 - Copy\stm32f4x7_eth_lwip\STM32F4x7_ETH_LwIP_V1.0.0\</Folder.1>
        <Folder.2></Folder.2>
@@ -2074,7 +2142,7 @@
        <AbortGroupUpdateOnAccessError>1</AbortGroupUpdateOnAccessError>
        <Access>0</Access>
        <Display>1</Display>
-       <FilterString>pw</FilterString>
+       <FilterString>pwm</FilterString>
        <RadixPrefix>0</RadixPrefix>
        <ShortNames>0</ShortNames>
        <ShowFilter>1</ShowFilter>
@@ -2248,33 +2316,21 @@
        </Items.0>
       </OSWindow>
       <ProjectWindow>
-       <Selected>main.c</Selected>
+       <Selected>Tasks.c</Selected>
        <Items.0>
         <__>
          <Name>Files</Name>
-         <Options>5</Options>
+         <Options>1</Options>
          <Items.0>
           <__>
            <Name>appl</Name>
-           <Options>5</Options>
-           <Items.0>
-            <__>
-             <Name>main.c</Name>
-             <Options>4</Options>
-            </__>
-           </Items.0>
+           <Options>1</Options>
           </__>
          </Items.0>
          <Items.1>
           <__>
            <Name>ecual</Name>
            <Options>1</Options>
-           <Items.0>
-            <__>
-             <Name>led.c</Name>
-             <Options>4</Options>
-            </__>
-           </Items.0>
           </__>
          </Items.1>
          <Items.2>
@@ -2283,7 +2339,7 @@
            <Options>1</Options>
            <Items.0>
             <__>
-             <Name>afe_dma.c</Name>
+             <Name>wdt.c</Name>
              <Options>4</Options>
             </__>
            </Items.0>
@@ -2292,7 +2348,7 @@
          <Items.3>
           <__>
            <Name>services</Name>
-           <Options>1</Options>
+           <Options>5</Options>
            <Items.0>
             <__>
              <Name>app_scheduler.c</Name>
@@ -2305,21 +2361,21 @@
           <__>
            <Name>toolset</Name>
            <Options>1</Options>
+           <Items.0>
+            <__>
+             <Name>sam_flash.ld</Name>
+             <Options>4</Options>
+            </__>
+           </Items.0>
           </__>
          </Items.4>
-         <Items.5>
-          <__>
-           <Name>Dependencies </Name>
-           <Options>1</Options>
-          </__>
-         </Items.5>
         </__>
        </Items.0>
       </ProjectWindow>
       <SFR>
        <InitScript></InitScript>
        <GlobalState>
-        <Selected>XDMAC_GTYPE</Selected>
+        <Selected>PWM0_IER2</Selected>
         <Items.0>
          <__>
           <Name>ATSAMV7xx21</Name>
@@ -2332,40 +2388,118 @@
           </Items.0>
           <Items.1>
            <__>
-            <Name>XDMAC</Name>
-            <Options>5</Options>
+            <Name>PWM0</Name>
+            <Options>1</Options>
             <Items.0>
              <__>
-              <Name>XDMAC_GTYPE</Name>
-              <Options>4</Options>
+              <Name>PWM0_DIS</Name>
+              <Options>1</Options>
              </__>
             </Items.0>
             <Items.1>
              <__>
-              <Name>XDMAC_GCFG</Name>
-              <Options>0</Options>
+              <Name>PWM0_SR</Name>
+              <Options>5</Options>
              </__>
             </Items.1>
+            <Items.10>
+             <__>
+              <Name>PWM0_SCUPUPD</Name>
+              <Options>0</Options>
+             </__>
+            </Items.10>
+            <Items.11>
+             <__>
+              <Name>PWM0_IER2</Name>
+              <Options>0</Options>
+             </__>
+            </Items.11>
+            <Items.12>
+             <__>
+              <Name>PWM0_IDR2</Name>
+              <Options>0</Options>
+             </__>
+            </Items.12>
+            <Items.13>
+             <__>
+              <Name>PWM0_IMR2</Name>
+              <Options>0</Options>
+             </__>
+            </Items.13>
+            <Items.14>
+             <__>
+              <Name>PWM0_WPSR</Name>
+              <Options>1</Options>
+             </__>
+            </Items.14>
+            <Items.15>
+             <__>
+              <Name>PWM0_CDTYUPD2</Name>
+              <Options>1</Options>
+             </__>
+            </Items.15>
             <Items.2>
              <__>
-              <Name>XDMAC_GWAC</Name>
+              <Name>PWM0_IER1</Name>
               <Options>0</Options>
              </__>
             </Items.2>
             <Items.3>
              <__>
-              <Name>XDMAC_GIE</Name>
-              <Options>0</Options>
+              <Name>PWM0_IDR1</Name>
+              <Options>1</Options>
              </__>
             </Items.3>
             <Items.4>
              <__>
-              <Name>XDMAC_GID</Name>
+              <Name>PWM0_IMR1</Name>
               <Options>0</Options>
              </__>
             </Items.4>
+            <Items.5>
+             <__>
+              <Name>PWM0_ISR1</Name>
+              <Options>0</Options>
+             </__>
+            </Items.5>
+            <Items.6>
+             <__>
+              <Name>PWM0_SCM</Name>
+              <Options>0</Options>
+             </__>
+            </Items.6>
+            <Items.7>
+             <__>
+              <Name>PWM0_DMAR</Name>
+              <Options>0</Options>
+             </__>
+            </Items.7>
+            <Items.8>
+             <__>
+              <Name>PWM0_SCUC</Name>
+              <Options>0</Options>
+             </__>
+            </Items.8>
+            <Items.9>
+             <__>
+              <Name>PWM0_SCUP</Name>
+              <Options>0</Options>
+             </__>
+            </Items.9>
            </__>
           </Items.1>
+          <Items.2>
+           <__>
+            <Name>AFEC0</Name>
+            <Options>1</Options>
+           </__>
+          </Items.2>
+          <Items.3>
+           <__>
+            <Name>XDMAC</Name>
+            <Options>1</Options>
+           </__>
+          </Items.3>
          </__>
         </Items.0>
        </GlobalState>
