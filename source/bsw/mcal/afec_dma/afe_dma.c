@@ -55,13 +55,16 @@
 #include <stdint.h>
 #include <assert.h>
 #include "afe_dma.h"
-#include "afec.h"
+
 
 /*  DMA driver instance */
 static uint32_t afeDmaRxChannel;
 AfeDma _Afed;
 AfeCmd _AfeCommand;
-sXdmad Xdmad_Loc;
+
+uint16_t BuffSize;
+uint16_t BfrCnt;
+uint32_t *BuffAddr;
 
 /*----------------------------------------------------------------------------
  *        Local functions
@@ -108,7 +111,6 @@ static uint8_t _AfeConfigureDmaChannels( AfeDma* pAfed )
 	/* Driver initialize */
 	XDMAD_Initialize( pAfed->pXdmad, 0 );
 
-	XDMAD_FreeChannel( pAfed->pXdmad, afeDmaRxChannel);
 
 	/* Allocate a DMA channel for AFE0/1 RX. */
 	afeDmaRxChannel = 
@@ -116,6 +118,7 @@ static uint8_t _AfeConfigureDmaChannels( AfeDma* pAfed )
 	if ( afeDmaRxChannel == XDMAD_ALLOC_FAILED ) {
 		return AFE_ERROR;
 	}
+	XDMAD_FreeChannel( pAfed->pXdmad, afeDmaRxChannel);
 
 	/* Setup callbacks for AFE0/1 RX */
 	XDMAD_SetCallback(pAfed->pXdmad, afeDmaRxChannel, 
@@ -162,6 +165,7 @@ static uint8_t _Afe_configureLinkList(Afec *pAfeHw, void *pXdmad, AfeCmd *pComma
 	xdmadRxCfg.mbr_bc = 0;
 	xdmadRxCfg.mbr_sus = 0;
 	xdmadRxCfg.mbr_dus =0;
+ 	xdmadRxCfg.mbr_ds =0;
 
 	xdmaInt =  (XDMAC_CIE_BIE   |
 				XDMAC_CIE_DIE   |
@@ -190,6 +194,29 @@ void AFEC_DMA_INIT(uint32_t *pu32Buff)
 	_AfeCommand.callback = NULL;
 	_AfeCommand.pArgument = NULL;
 }
+
+
+
+
+void TASK_AFEC_DMA(void)
+{
+	Afe_SendData(&_Afed, &_AfeCommand);
+
+	BfrCnt++;
+
+	if(BfrCnt <= BuffSize)
+	{
+		_AfeCommand.pRxBuff ++;
+	}
+
+	else
+	{
+		BfrCnt = 0;
+		_AfeCommand.pRxBuff = BuffAddr;
+	}
+	AFEC_StartConversion(AFEC0);					
+}
+
 /**
  * \brief Initializes the AfeDma structure and the corresponding AFE & DMA .
  * hardware select value.
@@ -231,7 +258,7 @@ uint32_t Afe_SendData( AfeDma *pAfed, AfeCmd *pCommand)
 
 	/* Try to get the dataflash semaphore */
 	if (pAfed->semaphore == 0) {
-
+		AFEC_StartConversion(pAfeHw);
 		return AFE_ERROR_LOCK;
 	}
 	pAfed->semaphore--;

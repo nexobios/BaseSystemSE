@@ -72,6 +72,7 @@
  *----------------------------------------------------------------------------*/
 
 #include "chip.h"
+#include "afe_dma.h"
 
 #include <utility.h>
 #include <stdint.h>

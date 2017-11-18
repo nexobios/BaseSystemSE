@@ -543,5 +543,11 @@ uint32_t XDMAC_GetChDestinationAddr(Xdmac *pXdmac, uint8_t channel)
 	return pXdmac->XDMAC_CHID[channel].XDMAC_CDA;
 }
 
+
+void XDMAC_Handler(void)
+{
+  XDMAD_Handler(&Xdmad_Loc);
+}
+
 /**@}*/
 

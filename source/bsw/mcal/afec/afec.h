@@ -160,8 +160,7 @@ CMPSEL field is compared. */
  *------------------------------------------------------------------------------*/
 extern void AFEC_Initialize( Afec* pAFEC, uint32_t dwId );
 extern uint32_t AFEC_SetClock( Afec* pAFEC, uint32_t dwPres, uint32_t dwMck );
-extern void AFEC_SetTiming( Afec* pAFEC, uint32_t dwStartup, uint32_t dwTracking, 
-	uint32_t dwSettling );
+extern void AFEC_SetTiming( Afec* pAFEC, uint32_t dwStartup, uint32_t dwSettling );
 extern void AFEC_SetTrigger( Afec* pAFEC, uint32_t dwTrgSel );
 extern void AFEC_SetAnalogChange( Afec* pAFE, uint8_t bEnDis );
 extern void AFEC_SetSleepMode( Afec* pAFEC, uint8_t bEnDis );

@@ -137,14 +137,12 @@ extern uint32_t AFEC_SetClock( Afec* pAFE, uint32_t dwClk, uint32_t dwMck )
  * \param dwTracking tracking value
  * \param dwSettling settling value
  */
-extern void AFEC_SetTiming( Afec* pAFE, uint32_t dwStartup, uint32_t dwTracking, 
-						uint32_t dwSettling )
+extern void AFEC_SetTiming( Afec* pAFE, uint32_t dwStartup, uint32_t dwSettling )
 {
 	uint32_t dwMr;
 
 	dwMr = pAFE->AFEC_MR;
-  /* TODO: FrAg - AFEC_MR_SETTLING_Msk is not defined in the MASKs */
-	dwMr &= (~AFEC_MR_STARTUP_Msk) & (~AFEC_MR_TRACKTIM_Msk) /*& (~AFEC_MR_SETTLING_Msk)*/;
+	dwMr &= (~AFEC_MR_STARTUP_Msk) & (~AFEC_MR_TRANSFER_Msk);
 
 	/* Formula:
 	 *     Startup  Time = startup value / AFEClock
@@ -153,7 +151,7 @@ extern void AFEC_SetTiming( Afec* pAFE, uint32_t dwStartup, uint32_t dwTracking,
 	 *     Settling Time = settling value / AFEClock
 	 */
   dwMr |= 0x02u << AFEC_MR_TRANSFER_Pos;
-	dwMr |= dwStartup | dwTracking | dwSettling;
+	dwMr |= dwStartup | dwSettling;
 	pAFE->AFEC_MR |= dwMr;
 }
 
@@ -278,6 +276,15 @@ extern void AFEC_SetAnalogChange( Afec* pAFE, uint8_t bEnDis )
 	}
 }
 
+
+extern void AFEC_SetTriggerEnable( Afec* pAFE, uint8_t bEnDis )
+{
+	if ( bEnDis ) {
+		pAFE->AFEC_MR |=  AFEC_MR_TRGEN;
+	} else {
+		pAFE->AFEC_MR &= ~AFEC_MR_TRGEN;
+	}
+}
 /**
  * \brief Set "TAG" mode, show channel number in last data or not.
  *
@@ -330,6 +337,17 @@ extern void AFEC_SetCompareMode( Afec* pAFE, uint32_t dwMode )
 	pAFE->AFEC_EMR |= (dwMode & AFEC_EMR_CMPMODE_Msk);
 }
 
+
+extern void AFEC_SetResolution( Afec* pAFE, uint32_t dwMode )
+{
+	pAFE->AFEC_EMR &= ~(AFEC_EMR_RES_Msk);
+	pAFE->AFEC_EMR |= (dwMode & AFEC_EMR_RES_Msk);
+}
+extern void AFEC_SetSignMode( Afec* pAFE, uint32_t dwMode )
+{
+	pAFE->AFEC_EMR &= ~(AFEC_EMR_SIGNMODE_Msk);
+	pAFE->AFEC_EMR |= (dwMode & AFEC_EMR_SIGNMODE_Msk);
+}
 /**
  * \brief Set comparison window.
  *

@@ -6,7 +6,8 @@
  */ 
 
 #include "Tasks.h"
-#include "led.h"       
+#include "led.h"
+#include "board.h"
 
 uint8_t u8100ms_Ctr=0;
 uint8_t u8100ms_Ctr2=0;
@@ -27,24 +28,20 @@ void AFEC0_Init()
   PIO_Configure(&pinsAFECs[0], 1);
   AFEC_Initialize( AFEC0, ID_AFEC0);           
 
-  AFEC_SetClock(AFEC0, 500 ,BOARD_MCK);
-  AFEC_SetTiming(AFEC0, AFEC_MR_STARTUP_SUT640 , AFEC_MR_TRACKTIM(0),		0);
-  AFEC_SetTrigger( AFEC0,/* AFEC_MR_TRGSEL_AFEC_TRIG0 |*/ AFEC_MR_TRGSEL_AFEC_TRIG4); //Comentada si jala
-  AFEC_SetNumberOfBits( AFEC0, AFEC_EMR_RES_OSR256);
-  AFEC_EnableChannel(AFEC0,AFEC_CHER_CH0);
-  AFEC_StartConversion(AFEC0);
-
-//Revisar cual de estos puede jalar por aparte y crearle funciones
-//  pAfe_ADC0.AFEC_CR = AFEC_CR_SWRST;       /**< \brief (Afec Offset: 0x00) AFEC Control Register */
-//  pAfe_ADC0.AFEC_MR = AFEC_MR_TRGEN_EN | AFEC_MR_TRGSEL_AFEC_TRIG4;       /**< \brief (Afec Offset: 0x04) AFEC Mode Register */
-//  pAfe_ADC0.AFEC_EMR = AFEC_MR_SLEEP_NORMAL;      /**< \brief (Afec Offset: 0x08) AFEC Extended Mode Register */
-//  pAfe_ADC0.AFEC_CHER = AFEC_CHER_CH0;     /**< \brief (Afec Offset: 0x14) AFEC Channel Enable Register */
-//  pAfe_ADC0.AFEC_IER = AFEC_IER_EOC0 | AFEC_IER_DRDY;      /**< \brief (Afec Offset: 0x24) AFEC Interrupt Enable Register */
-//  pAfe_ADC0.AFEC_CGR = AFEC_CVR_GAINCORR(1);      /**< \brief (Afec Offset: 0x54) AFEC Channel Gain Register */
-//  pAfe_ADC0.AFEC_ACR = AFEC_ACR_PGA0EN;      /**< \brief (Afec Offset: 0x94) AFEC Analog Control Register */
-//  pAfe_ADC0.AFEC_SHMR = AFEC_SHMR_DUAL0;     /**< \brief (Afec Offset: 0xA0) AFEC Sample & Hold Mode Register */
- 
+  AFEC_SetClock(AFEC0, T_SAMP ,BOARD_MCK);
+  AFEC_SetTiming(AFEC0, AFEC_MR_STARTUP_SUT16 , AFEC_MR_SETTLING_AST3);
+  AFEC_SetTrigger( AFEC0, AFEC_MR_TRGEN_DIS); 
   
+  //AFEC_SetTriggerEnable(AFEC0,0);
+  AFEC_SetTriggerEnable(AFEC0,1);
+  
+  AFEC_SetResolution(AFEC0,AFEC_EMR_RES_OSR4);
+
+  AFEC_SetSignMode(AFEC0,AFEC_EMR_SIGNMODE_ALL_UNSIGNED);
+
+  AFEC_SetAnalogControl(AFEC0,AFEC_ACR_PGA0_ON);
+  
+  AFEC_EnableChannel(AFEC0,AFEC_CHER_CH0);
 }
 
 void PWM0_Init()
@@ -97,6 +94,7 @@ void vfnTsk_10ms(void)
 		u8500ms_Ctr = 0;
 		LED_Toggle( 1 );
 	}   
+	TASK_AFEC_DMA();
 }
 
 void vfnTsk_50ms(void)

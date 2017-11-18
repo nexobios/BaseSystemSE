@@ -14,7 +14,7 @@
 #include "afec.h"
 
 /*@Yisus Adc struct*/
-#define BOARD_MCK    150000000 
+#define T_SAMP 500
 //Afec pAfe_ADC0;
 //Pwm pPwm_0;                
 AfeDma pAfed;     
