@@ -14,7 +14,13 @@
 /*@Yisus Adc struct*/
 #define BOARD_MCK    150000000 
 #define RxBufferDMASize   8
-uint32_t *RxDMABuffer;
+
+/* Defines for DMA Init */
+#define S_BUFF 1
+#define T_SAMP 500
+/* AFEC DMA Buffer */
+uint32_t u32AfecBuff[S_BUFF];
+
 extern Afec pAfe_ADC0;
 extern Pwm pPwm_0;                
 extern AfeDma pAfed;     
@@ -70,8 +76,8 @@ extern int main( void )
 	printf( "-- Compiled: %s %s With %s--\n\r", __DATE__, __TIME__ , COMPILER_NAME);
 
 	/* Enable I and D cache */
-	//SCB_EnableICache();
-  //SCB_EnableDCache();
+	SCB_EnableICache();
+    SCB_EnableDCache();
 
 	printf( "Configure LED PIOs.\n\r" ) ;
 	_ConfigureLeds() ;
@@ -79,92 +85,19 @@ extern int main( void )
   	/* Initialize Task Scheduler */
 	vfnScheduler_Init(&Tasks[0]);
 	/* Start execution of task scheduler */
+
 	vfnScheduler_Start();
-  
-  
-  /* Init ADC  @Yisus */
 
-  
- /* To configure a XDMA channel, the user has to follow these few steps :
- * <li> Initialize a XDMA driver instance by XDMAD_Initialize().</li>
- * <li> choose an available (disabled) channel using XDMAD_AllocateChannel().</li>
- * <li> After the XDMAC selected channel has been programmed, 
- * XDMAD_PrepareChannel() is to enable clock and dma peripheral of the DMA, and 
- * set Configuration register to set up the transfer type (memory or non-memory 
- * peripheral for source and destination) and flow control device.</li>
- * <li> Invoke XDMAD_StartTransfer() to start DMA transfer  or 
- * XDMAD_StopTransfer() to force stop DMA transfer.</li>
- * <li> Once the buffer of data is transferred, XDMAD_IsTransferDone() 
- * checks if DMA transfer is finished.</li>
- * <li> XDMAD_Handler() handles XDMA interrupt, and invoking XDMAD_SetCallback()
- * if provided.</li>
-  */
-  
-/**
- * \brief Initialize xDMA driver instance.
- * \param pXdmad Pointer to xDMA driver instance.
- * \param bPollingMode Polling DMA transfer:
- *                     1. Via XDMAD_IsTransferDone(); or
- *                     2. Via XDMAD_Handler().
- */
-  //XDMAD_Initialize(&pXdmad, 0 );
+  	PWM0_Init();
+  	AFEC0_Init();
 
-/**
- * \brief Allocate a XDMA channel for upper layer.
- * \param pXdmad  Pointer to xDMA driver instance.
- * \param bSrcID Source peripheral ID, 0xFF for memory.
- * \param bDstID Destination peripheral ID, 0xFF for memory.
- * \return Channel number if allocation successful, return
- * XDMAD_ALLOC_FAILED if allocation failed.
- */
-  //XDMAD_AllocateChannel( &pXdmad,	ID_AFEC0, XDMAD_TRANSFER_MEMORY);
-
-/**
- * \brief Enable clock of the xDMA peripheral, Enable the dma peripheral,
- * configure configuration register for xDMA transfer.
- * \param pXdmad     Pointer to xDMA driver instance.
- * \param dwChannel ControllerNumber << 8 | ChannelNumber.
- * \param dwCfg     Configuration value.
- */
-  //XDMAD_PrepareChannel( &pXdmad, 1);
-/*
-XDMAD_StartTransfer();
-XDMAD_IsTransferDone();
- XDMAD_Handler();
- */
-  
-  
-/**
- * \brief Initializes the AfeDma structure and the corresponding AFE & DMA .
- * hardware select value.
- * The driver will uses DMA channel 0 for RX .
- * The DMA channels are freed automatically when no DMA command processing.
- *
- * \param pAfed  Pointer to a AfeDma instance.
- * \param pAfeHw Associated Afe peripheral.
- * \param AfeId  Afe peripheral identifier.
- * \param pDmad  Pointer to a Dmad instance. 
- */
-  //Afe_ConfigureDma( &pAfed ,AFEC0, ID_AFEC0, &pXdmad );            //AFEC0         //pAfe_ADC0
-  //pAfeCmd.pRxBuff =RxDMABuffer;
-	//pAfeCmd.RxSize =RxBufferDMASize;
-	//pAfeCmd.callback = (*AfeCallback)NULL;
-	//void *pArgument;
-
-  //Afe_SendData( &pAfed , &pAfeCmd);
-  PWM0_Init();
-  AFEC0_Init();  
-  /* Init ADC  @Yisus */
-	
-  /*-- Loop through all the periodic tasks from Task Scheduler --*/
+  	/*Initialize DMA*/
+	AFEC_DMA_INIT(&u32AfecBuff[0]);
+	/*-- Loop through all the periodic tasks from Task Scheduler --*/
 	for(;;)
 	{
 		/* Perform all scheduled tasks */
 		vfnTask_Scheduler();
-       
-
 	}
 
 }
-
-   

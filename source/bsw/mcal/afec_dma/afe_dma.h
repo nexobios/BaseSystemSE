@@ -113,6 +113,8 @@ extern uint32_t Afe_ConfigureDma( AfeDma *pAfed ,
 						   sXdmad *pXdmad );
 extern uint32_t Afe_SendData( AfeDma *pAfed, AfeCmd *pCommand);
 
+void AFEC_DMA_INIT(uint32_t *pu32Buff);
+
 
 #endif /* #ifndef _AFE_DMA_ */
 

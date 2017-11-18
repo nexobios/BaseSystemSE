@@ -59,6 +59,9 @@
 
 /*  DMA driver instance */
 static uint32_t afeDmaRxChannel;
+AfeDma _Afed;
+AfeCmd _AfeCommand;
+sXdmad Xdmad_Loc;
 
 /*----------------------------------------------------------------------------
  *        Local functions
@@ -178,7 +181,15 @@ static uint8_t _Afe_configureLinkList(Afec *pAfeHw, void *pXdmad, AfeCmd *pComma
  *        Exported functions
  *----------------------------------------------------------------------------*/
 
+void AFEC_DMA_INIT(uint32_t *pu32Buff)
+{
+	Afe_ConfigureDma(&_Afed, AFEC0, ID_AFEC0, &Xdmad_Loc);
 
+	_AfeCommand.pRxBuff = pu32Buff;
+	_AfeCommand.RxSize =1;
+	_AfeCommand.callback = NULL;
+	_AfeCommand.pArgument = NULL;
+}
 /**
  * \brief Initializes the AfeDma structure and the corresponding AFE & DMA .
  * hardware select value.
@@ -246,5 +257,5 @@ uint32_t Afe_SendData( AfeDma *pAfed, AfeCmd *pCommand)
 	if (XDMAD_StartTransfer( pAfed->pXdmad, afeDmaRxChannel )) 
 		return AFE_ERROR_LOCK;
 
-	return AFE_OK;;
+	return AFE_OK;
 }
