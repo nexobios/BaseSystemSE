@@ -62,8 +62,8 @@ static uint32_t afeDmaRxChannel;
 AfeDma _Afed;
 AfeCmd _AfeCommand;
 
-uint16_t BuffSize;
-uint16_t BfrCnt;
+uint16_t BuffSize = 1;
+uint16_t BfrCnt = 0;
 uint32_t *BuffAddr;
 
 /*----------------------------------------------------------------------------
@@ -81,7 +81,7 @@ static void Afe_Rx_Cb(uint32_t channel, AfeDma* pArg)
 	AfeCmd *pAfedCmd = pArg->pCurrentCommand;
 	if (channel != afeDmaRxChannel)
 		return;
-
+  printf("Transfer Done (Afe_Rx_Cb) \n\r");
 	/* Configure and enable interrupt on RC compare */
 	NVIC_ClearPendingIRQ(XDMAC_IRQn);
 	NVIC_DisableIRQ(XDMAC_IRQn);
@@ -187,10 +187,11 @@ static uint8_t _Afe_configureLinkList(Afec *pAfeHw, void *pXdmad, AfeCmd *pComma
 
 void AFEC_DMA_INIT(uint32_t *pu32Buff)
 {
+	BuffAddr = pu32Buff;
 	Afe_ConfigureDma(&_Afed, AFEC0, ID_AFEC0, &Xdmad_Loc);
 
 	_AfeCommand.pRxBuff = pu32Buff;
-	_AfeCommand.RxSize =1;
+	_AfeCommand.RxSize = 1;
 	_AfeCommand.callback = NULL;
 	_AfeCommand.pArgument = NULL;
 }
@@ -215,6 +216,7 @@ void TASK_AFEC_DMA(void)
 		_AfeCommand.pRxBuff = BuffAddr;
 	}
 	AFEC_StartConversion(AFEC0);					
+	printf("\n\rAFEC_CDR = %x",AFEC0->AFEC_CDR);	//Read AFEC value
 }
 
 /**

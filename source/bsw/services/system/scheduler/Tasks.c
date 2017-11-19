@@ -32,8 +32,8 @@ void AFEC0_Init()
   AFEC_SetTiming(AFEC0, AFEC_MR_STARTUP_SUT16 , AFEC_MR_SETTLING_AST3);
   AFEC_SetTrigger( AFEC0, AFEC_MR_TRGEN_DIS); 
   
-  //AFEC_SetTriggerEnable(AFEC0,0);
-  AFEC_SetTriggerEnable(AFEC0,1);
+  AFEC_SetTriggerEnable(AFEC0,0);
+  //AFEC_SetTriggerEnable(AFEC0,1);  with PWM
   
   AFEC_SetResolution(AFEC0,AFEC_EMR_RES_OSR4);
 

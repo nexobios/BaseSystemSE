@@ -77,7 +77,7 @@ extern int main( void )
 
 	/* Enable I and D cache */
 	SCB_EnableICache();
-    SCB_EnableDCache();
+  SCB_EnableDCache();
 
 	printf( "Configure LED PIOs.\n\r" ) ;
 	_ConfigureLeds() ;
@@ -86,13 +86,17 @@ extern int main( void )
 	vfnScheduler_Init(&Tasks[0]);
 	/* Start execution of task scheduler */
 
+  /*Initialize PWM*/
+	//PWM0_Init();
+	
+  /*Initialize AFEC*/
+  AFEC0_Init();
+
+  /*Initialize DMA*/
+	AFEC_DMA_INIT(&u32AfecBuff[0]);
+
 	vfnScheduler_Start();
 
-  	PWM0_Init();
-  	AFEC0_Init();
-
-  	/*Initialize DMA*/
-	AFEC_DMA_INIT(&u32AfecBuff[0]);
 	/*-- Loop through all the periodic tasks from Task Scheduler --*/
 	for(;;)
 	{

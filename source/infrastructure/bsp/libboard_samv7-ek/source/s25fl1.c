@@ -91,13 +91,6 @@ static sXdmad qspiDmaInst;
 #define WRITE_DEV       1 
 
 #define PAGE_SIZE       256
-/**
- * \brief XDMA handler.
- */
-void XDMAC_Handler(void)
-{
-	XDMAD_Handler(&qspiDmaInst);
-}
 
 /**
  * \brief Start S25FL1D Send command with/without data write/read.
