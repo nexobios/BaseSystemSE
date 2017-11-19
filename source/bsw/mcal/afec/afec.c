@@ -72,6 +72,7 @@
  *----------------------------------------------------------------------------*/
 
 #include "chip.h"
+#include "board.h"
 
 
 /*----------------------------------------------------------------------------
@@ -80,6 +81,8 @@
 
 /** Current working clock */
 static uint32_t dwAFEClock = 0;
+
+static const Pin pinsAFEC[] = AFEC_PIN_CFG;
 
 /*----------------------------------------------------------------------------
  *        Exported functions
@@ -473,3 +476,40 @@ void AFEC_SetAnalogControl( Afec *pAFE, uint32_t control)
 }
 
 
+/**
+ * \brief Initialization of AFEC0 peripheral
+ *
+ * \param void
+ */
+void AFEC0_Init()
+{
+/*
+  Configurate the pins for AFEC.
+  Initialize the AFEC with AFEC_Initialize().
+  Set AFEC clock and timing with AFEC_SetClock() and AFEC_SetTiming().
+  Select the active channel using AFEC_EnableChannel().
+  Start the conversion with AFEC_StartConversion().
+  Wait the end of the conversion by polling status with AFEC_GetStatus().
+  Finally, get the converted data using AFEC_GetConvertedData() or AFEC_GetLastConvertedData().
+  */
+
+  PIO_Configure(&pinsAFEC[0],PIO_LISTSIZE(pinsAFEC));       /*AFEC0 -> Pin Configuration (PD30)*/
+  
+  AFEC_Initialize( AFEC0, ID_AFEC0);           
+  AFEC_SetClock(AFEC0, T_SAMP ,BOARD_MCK);
+  AFEC_SetTiming(AFEC0, AFEC_MR_STARTUP_SUT16 , AFEC_MR_SETTLING_AST3);
+  
+  
+  AFEC_SetTrigger( AFEC0, AFEC_MR_TRGEN_DIS); 
+  
+  AFEC_SetTriggerEnable(AFEC0,0);
+  //AFEC_SetTriggerEnable(AFEC0,1);  with PWM
+  
+  AFEC_SetResolution(AFEC0,AFEC_EMR_RES_OSR4);
+
+  AFEC_SetSignMode(AFEC0,AFEC_EMR_SIGNMODE_ALL_UNSIGNED);
+
+  AFEC_SetAnalogControl(AFEC0,AFEC_ACR_PGA0_ON);
+  
+  AFEC_EnableChannel(AFEC0,AFEC_CHER_CH0);
+}

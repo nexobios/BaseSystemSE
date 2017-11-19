@@ -59,8 +59,9 @@
 
 /*  DMA driver instance */
 static uint32_t afeDmaRxChannel;
-AfeDma _Afed;
+AfeDma _AfeDma;       /*AfeDma Instance*/
 AfeCmd _AfeCommand;
+sXdmad _sXdmad;       /*DMA driver Instance*/
 
 uint16_t BuffSize = 1;
 uint16_t BfrCnt = 0;
@@ -185,23 +186,22 @@ static uint8_t _Afe_configureLinkList(Afec *pAfeHw, void *pXdmad, AfeCmd *pComma
  *        Exported functions
  *----------------------------------------------------------------------------*/
 
-void AFEC_DMA_INIT(uint32_t *pu32Buff)
+void Afe_Dma_Init( uint32_t *pu32Buff, uint16_t u16BuffSize )
 {
 	BuffAddr = pu32Buff;
-	Afe_ConfigureDma(&_Afed, AFEC0, ID_AFEC0, &Xdmad_Loc);
-
+  
+	Afe_ConfigureDma(&_AfeDma, AFEC0, ID_AFEC0, &_sXdmad);
+  
+  /*Initialization of AfeCmd structure*/
 	_AfeCommand.pRxBuff = pu32Buff;
-	_AfeCommand.RxSize = 1;
+	_AfeCommand.RxSize = u16BuffSize;
 	_AfeCommand.callback = NULL;
 	_AfeCommand.pArgument = NULL;
 }
 
-
-
-
 void TASK_AFEC_DMA(void)
 {
-	Afe_SendData(&_Afed, &_AfeCommand);
+	Afe_SendData(&_AfeDma, &_AfeCommand);
 
 	BfrCnt++;
 

@@ -43,6 +43,9 @@
 
 #include <stdint.h>
 #include <assert.h>
+
+extern sXdmad _sXdmad;
+
 /** \addtogroup dmac_functions XDMAC Functions
  *@{
  */
@@ -546,7 +549,7 @@ uint32_t XDMAC_GetChDestinationAddr(Xdmac *pXdmac, uint8_t channel)
 
 void XDMAC_Handler(void)
 {
-  XDMAD_Handler(&Xdmad_Loc);
+  XDMAD_Handler(&_sXdmad);
 }
 
 /**@}*/

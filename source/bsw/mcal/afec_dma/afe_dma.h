@@ -62,8 +62,6 @@
  *        Types
  *----------------------------------------------------------------------------*/
 
-sXdmad Xdmad_Loc;
-
 /** AFE transfer complete callback. */
 typedef void (*AfeCallback)( uint8_t, void* ) ;
 
@@ -115,9 +113,10 @@ extern uint32_t Afe_ConfigureDma( AfeDma *pAfed ,
 						   Afec *pAfeHw ,
 						   uint8_t AfeId,
 						   sXdmad *pXdmad );
+
 extern uint32_t Afe_SendData( AfeDma *pAfed, AfeCmd *pCommand);
 
-void AFEC_DMA_INIT(uint32_t *pu32Buff);
+extern void Afe_Dma_Init( uint32_t *pu32Buff, uint16_t u16BuffSize );
 
 
 #endif /* #ifndef _AFE_DMA_ */

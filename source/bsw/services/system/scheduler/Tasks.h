@@ -13,17 +13,10 @@
 #include "afe_dma.h"
 #include "afec.h"
 
-/*@Yisus Adc struct*/
-#define T_SAMP 500
-//Afec pAfe_ADC0;
-//Pwm pPwm_0;                
+/*@Yisus Adc struct*/               
 AfeDma pAfed;     
 sXdmad pXdmad;
 AfeCmd pAfeCmd;
-//#define AfeId   35
-static const Pin pinsAFECs[] = {AFEC_PIN_CFG};
-/*@Yisus Adc struct*/
-
 
 /*-- Variables -------------------------------------------------------*/
 

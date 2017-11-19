@@ -15,21 +15,16 @@
 #define BOARD_MCK    150000000 
 #define RxBufferDMASize   8
 
-/* Defines for DMA Init */
-#define S_BUFF 1
-#define T_SAMP 500
+/* AFEC DMA Buffer Size */
+#define BUFF_SIZE 1
 /* AFEC DMA Buffer */
-uint32_t u32AfecBuff[S_BUFF];
+uint32_t u32AfecBuff[BUFF_SIZE];
 
 extern Afec pAfe_ADC0;
 extern Pwm pPwm_0;                
 extern AfeDma pAfed;     
 extern sXdmad pXdmad;
 extern AfeCmd pAfeCmd;
-//#define AfeId   35
-//static const Pin pinsAFECs[] = {AFEC_PIN_CFG};
-/*@Yisus Adc struct*/
-
 
 TaskType Tasks[]={
 /*  TaskPriority    TaskId   TaskFunctionPointer   */
@@ -82,7 +77,7 @@ extern int main( void )
 	printf( "Configure LED PIOs.\n\r" ) ;
 	_ConfigureLeds() ;
   
-  	/* Initialize Task Scheduler */
+  /* Initialize Task Scheduler */
 	vfnScheduler_Init(&Tasks[0]);
 	/* Start execution of task scheduler */
 
@@ -93,7 +88,7 @@ extern int main( void )
   AFEC0_Init();
 
   /*Initialize DMA*/
-	AFEC_DMA_INIT(&u32AfecBuff[0]);
+	Afe_Dma_Init(&u32AfecBuff[0],BUFF_SIZE);
 
 	vfnScheduler_Start();
 

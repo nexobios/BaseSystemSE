@@ -12,38 +12,6 @@
 uint8_t u8100ms_Ctr=0;
 uint8_t u8100ms_Ctr2=0;
 
-void AFEC0_Init()
-{
-/*
-  Configurate the pins for AFEC.
-  Initialize the AFEC with AFEC_Initialize().
-  Set AFEC clock and timing with AFEC_SetClock() and AFEC_SetTiming().
-  Select the active channel using AFEC_EnableChannel().
-  Start the conversion with AFEC_StartConversion().
-  Wait the end of the conversion by polling status with AFEC_GetStatus().
-  Finally, get the converted data using AFEC_GetConvertedData() or AFEC_GetLastConvertedData().
-  */
-  /* First config*/
-  
-  PIO_Configure(&pinsAFECs[0], 1);
-  AFEC_Initialize( AFEC0, ID_AFEC0);           
-
-  AFEC_SetClock(AFEC0, T_SAMP ,BOARD_MCK);
-  AFEC_SetTiming(AFEC0, AFEC_MR_STARTUP_SUT16 , AFEC_MR_SETTLING_AST3);
-  AFEC_SetTrigger( AFEC0, AFEC_MR_TRGEN_DIS); 
-  
-  AFEC_SetTriggerEnable(AFEC0,0);
-  //AFEC_SetTriggerEnable(AFEC0,1);  with PWM
-  
-  AFEC_SetResolution(AFEC0,AFEC_EMR_RES_OSR4);
-
-  AFEC_SetSignMode(AFEC0,AFEC_EMR_SIGNMODE_ALL_UNSIGNED);
-
-  AFEC_SetAnalogControl(AFEC0,AFEC_ACR_PGA0_ON);
-  
-  AFEC_EnableChannel(AFEC0,AFEC_CHER_CH0);
-}
-
 void PWM0_Init()
 {
   PMC_EnablePeripheral(ID_PWM0);

@@ -155,6 +155,8 @@ CMPSEL field is compared. */
 
 #define AFEC_GetLastConvertedData(pAFEC)      ((pAFEC)->AFEC_LCDR)
 
+#define T_SAMP 500       /*AFEC Sampling Rate*/
+
 /*------------------------------------------------------------------------------
  *         Exported functions
  *------------------------------------------------------------------------------*/
