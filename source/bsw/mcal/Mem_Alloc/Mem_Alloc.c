@@ -15,8 +15,10 @@ void Mem_init(){
 	uint32_t *ptr_start = _MEM_HEAP_START;
 	uint32_t *ptr_end 	= _MEM_HEAP_END;
 
-	while(ptr_start <= ptr_end)
+	while(ptr_start <= ptr_end){
 		*ptr_start = (uint32_t)0;
+		ptr_start++;
+	}
 
 	/* Structure init */
 	psMemoryHandler = (MemHandlerType *)malloc(sizeof(MemHandlerType));
