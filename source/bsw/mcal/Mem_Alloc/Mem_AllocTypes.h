@@ -6,6 +6,7 @@
  *------------------------------------------------------------------------------*/
 
 #include <stdint.h>
+#include "board.h"
 
 /*------------------------------------------------------------------------------
  *         Global functions
@@ -15,15 +16,15 @@
  extern "C" {
 #endif
 
-typedef uint8_t* Mem_ReturnType;
-typedef uint8_t* Mem_Uint8PtrType;
-typedef uint16_t Mem_SizeType;
+typedef uint8_t* Mem_ReturnType_t;
+typedef uint8_t* Mem_Uint8PtrType_t;
+typedef uint16_t Mem_SizeType_t;
 
 typedef struct _MemHandlerType{
-	Mem_Uint8PtrType memStart;
-	Mem_Uint8PtrType memEnd;
-	Mem_Uint8PtrType currAddr;
-	uint16_t freeBytes;
+	Mem_Uint8PtrType_t memStart;
+	Mem_Uint8PtrType_t memEnd;
+	Mem_Uint8PtrType_t currAddr;
+	Mem_SizeType_t freeBytes;
 } MemHandlerType;
 
 

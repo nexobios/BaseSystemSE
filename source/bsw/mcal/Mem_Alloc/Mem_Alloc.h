@@ -16,8 +16,14 @@
  extern "C" {
 #endif
 
+extern void* HEAP_ALLOC_SIZE;
+extern void* _MEM_HEAP_START;
+extern void* _MEM_HEAP_END;
+
+MemHandlerType *psMemoryHandler;
+
 void Mem_init ( void );
-Mem_ReturnType Mem_Alloc ( Mem_SizeType Size );
+Mem_ReturnType_t Mem_Alloc ( Mem_SizeType_t Size );
 
 
 

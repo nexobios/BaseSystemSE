@@ -39,7 +39,8 @@ SEARCH_DIR(.)
 MEMORY
 {
   rom (rx)  : ORIGIN = 0x00400000, LENGTH = 0x00200000
-  ram (rwx) : ORIGIN = 0x20400000, LENGTH = 0x00060000
+  ram (rwx) : ORIGIN = 0x20400000, LENGTH = 0x00050000
+  heap (rwx) : ORIGIN = 0x20450000, LENGTH = 0x00010000
   sdram(rwx): ORIGIN = 0x70000000, LENGTH = 0x00200000
 }
 
@@ -48,6 +49,9 @@ STACK_SIZE = DEFINED(STACK_SIZE) ? STACK_SIZE : 0x2000;
 
 /* The heapsize used by the application. NOTE: you need to adjust according to your application. */
 HEAP_SIZE = DEFINED(HEAP_SIZE) ? HEAP_SIZE : 0x1000;
+
+/* The heap_alloc size. */
+HEAP_ALLOC_SIZE = DEFINED(HEAP_ALLOC_SIZE) ? HEAP_ALLOC_SIZE : 0x10000;
 
 INCLUDE sam_flash.ld
 INCLUDE sam_sdram.ld

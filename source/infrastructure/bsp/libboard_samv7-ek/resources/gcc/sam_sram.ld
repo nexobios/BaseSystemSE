@@ -136,4 +136,14 @@ SECTIONS
     . = ALIGN(4);
     _end = . ;
     _ram_end_ = ORIGIN(ram) + LENGTH(ram) -1 ;
+
+    /* heap_alloc section */
+    .heap_alloc (NOLOAD):
+    {
+        . = ALIGN(32);
+        _MEM_HEAP_START = .;
+        . = . + HEAP_ALLOC_SIZE;
+        . = ALIGN(32);
+        _MEM_HEAP_END = .;
+    } > heap
 }
