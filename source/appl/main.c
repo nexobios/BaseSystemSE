@@ -115,8 +115,7 @@ extern int main( void )
     {
         for (j_index = 0; j_index < 2; j_index++)
         {     /* Mask to be scaled up by a factor of 2^16*/
-              //AvgMask2x2scaled[i_index][j_index] = (uint32_t)(AvgMask2x2[i_index][j_index] * 0x00010000);
-              tmp = (uint32_t)(AvgMask2x2[i_index][j_index] * 0x00010000);
+              AvgMask2x2scaled[i_index][j_index] = (uint32_t)(AvgMask2x2[i_index][j_index] * 0x00010000);
         }
     }
     /* Perform correlation operation */
