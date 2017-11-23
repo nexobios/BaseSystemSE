@@ -113,6 +113,16 @@ SECTIONS
         _ezero = .;
     } > ram
 
+    /* four_byte_aligment section */
+    .four_byte_aligment :
+    {
+        . = ALIGN(4);
+        _sfour_byte_aligment = .;
+        KEEP(*(.four_byte_aligment));  /* keep my variable even if not referenced */
+        . = ALIGN(4);
+        _efour_byte_aligment = .;
+    } > ram
+
     /* stack section */
     .stack (NOLOAD):
     {

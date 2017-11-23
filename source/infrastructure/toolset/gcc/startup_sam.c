@@ -41,6 +41,9 @@ extern uint32_t _ezero;
 extern uint32_t _sstack;
 extern uint32_t _estack;
 
+extern uint32_t _sfour_byte_aligment;
+extern uint32_t _efour_byte_aligment;
+
 /** \cond DOXYGEN_SHOULD_SKIP_THIS */
 int main(void);
 /** \endcond */
