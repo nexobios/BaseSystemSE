@@ -36,7 +36,7 @@ void vfnTsk_10ms(void)
 	if (25 <= u8500ms_Ctr)
 	{
 		u8500ms_Ctr = 0;
-		LED_Toggle( 1 );
+	//	LED_Toggle( 1 );
 	}   
 }
 
@@ -54,7 +54,7 @@ void vfnTsk_100ms(void)
 	if (5 <= u8100ms_Ctr)
 	{
 		u8100ms_Ctr = 0;
-		LED_Toggle( 0 );
+	//	LED_Toggle( 0 );
 	}
     if (10 <= u8100ms_Ctr2)
 	{

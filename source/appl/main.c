@@ -110,7 +110,9 @@ extern int main( void )
 	vfnScheduler_Start();       
     
     /** Indication for measurement */
-    LED_Set(1);
+  while(1)
+  {
+    LED_Toggle( 1 );
     
     /* Convert to integer and scale up correlation mask in order to avoid loosing resolution */
     #ifdef OPTIMIZE
@@ -169,8 +171,7 @@ extern int main( void )
         }
     #endif /* #ifdef OPTIMIZE */
     /** End of indication for measurement */
-    LED_Clear(1);
-    
+  }
 	/* Once all the basic services have been started, go to infinite loop to serviced activated tasks */
     for(;;)
     {			    
