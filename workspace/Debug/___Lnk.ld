@@ -27,31 +27,30 @@
 /* EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.                           */
 /* ---------------------------------------------------------------------------- */
 
-INPUT (C:\Users\uidv3807\Documents\Especialidad_ITESO\Sist_Embebidos\BaseProject\workspace\Debug\dbg_console.o 
-C:\Users\uidv3807\Documents\Especialidad_ITESO\Sist_Embebidos\BaseProject\workspace\Debug\board_lowlevel.o 
-C:\Users\uidv3807\Documents\Especialidad_ITESO\Sist_Embebidos\BaseProject\workspace\Debug\board_memories.o 
-C:\Users\uidv3807\Documents\Especialidad_ITESO\Sist_Embebidos\BaseProject\workspace\Debug\exceptions.o 
-C:\Users\uidv3807\Documents\Especialidad_ITESO\Sist_Embebidos\BaseProject\workspace\Debug\pio.o 
-C:\Users\uidv3807\Documents\Especialidad_ITESO\Sist_Embebidos\BaseProject\workspace\Debug\mpu.o 
-C:\Users\uidv3807\Documents\Especialidad_ITESO\Sist_Embebidos\BaseProject\workspace\Debug\pmc.o 
-C:\Users\uidv3807\Documents\Especialidad_ITESO\Sist_Embebidos\BaseProject\workspace\Debug\uart.o 
-C:\Users\uidv3807\Documents\Especialidad_ITESO\Sist_Embebidos\BaseProject\workspace\Debug\wdt.o 
-C:\Users\uidv3807\Documents\Especialidad_ITESO\Sist_Embebidos\BaseProject\workspace\Debug\pio_it.o 
-C:\Users\uidv3807\Documents\Especialidad_ITESO\Sist_Embebidos\BaseProject\workspace\Debug\supc.o 
-C:\Users\uidv3807\Documents\Especialidad_ITESO\Sist_Embebidos\BaseProject\workspace\Debug\tc.o 
-C:\Users\uidv3807\Documents\Especialidad_ITESO\Sist_Embebidos\BaseProject\workspace\Debug\xdma_hardware_interface.o 
-C:\Users\uidv3807\Documents\Especialidad_ITESO\Sist_Embebidos\BaseProject\workspace\Debug\xdmac.o 
-C:\Users\uidv3807\Documents\Especialidad_ITESO\Sist_Embebidos\BaseProject\workspace\Debug\xdmad.o 
-C:\Users\uidv3807\Documents\Especialidad_ITESO\Sist_Embebidos\BaseProject\workspace\Debug\fpu.o 
-C:\Users\uidv3807\Documents\Especialidad_ITESO\Sist_Embebidos\BaseProject\workspace\Debug\syscalls.o 
-C:\Users\uidv3807\Documents\Especialidad_ITESO\Sist_Embebidos\BaseProject\workspace\Debug\system_sam.o 
-C:\Users\uidv3807\Documents\Especialidad_ITESO\Sist_Embebidos\BaseProject\workspace\Debug\timetick.o 
-C:\Users\uidv3807\Documents\Especialidad_ITESO\Sist_Embebidos\BaseProject\workspace\Debug\app_scheduler.o 
-C:\Users\uidv3807\Documents\Especialidad_ITESO\Sist_Embebidos\BaseProject\workspace\Debug\Tasks.o 
-C:\Users\uidv3807\Documents\Especialidad_ITESO\Sist_Embebidos\BaseProject\workspace\Debug\led.o 
-C:\Users\uidv3807\Documents\Especialidad_ITESO\Sist_Embebidos\BaseProject\workspace\Debug\main.o 
-C:\Users\uidv3807\Documents\Especialidad_ITESO\Sist_Embebidos\BaseProject\workspace\Debug\lena_image.o 
-C:\Users\uidv3807\Documents\Especialidad_ITESO\Sist_Embebidos\BaseProject\workspace\Debug\startup_sam.o)
+INPUT (C:\Users\DIMMU\Documents\REPOS\ITESO\workspace\Debug\dbg_console.o 
+C:\Users\DIMMU\Documents\REPOS\ITESO\workspace\Debug\board_lowlevel.o 
+C:\Users\DIMMU\Documents\REPOS\ITESO\workspace\Debug\board_memories.o 
+C:\Users\DIMMU\Documents\REPOS\ITESO\workspace\Debug\exceptions.o 
+C:\Users\DIMMU\Documents\REPOS\ITESO\workspace\Debug\pio.o 
+C:\Users\DIMMU\Documents\REPOS\ITESO\workspace\Debug\mpu.o 
+C:\Users\DIMMU\Documents\REPOS\ITESO\workspace\Debug\pmc.o 
+C:\Users\DIMMU\Documents\REPOS\ITESO\workspace\Debug\uart.o 
+C:\Users\DIMMU\Documents\REPOS\ITESO\workspace\Debug\wdt.o 
+C:\Users\DIMMU\Documents\REPOS\ITESO\workspace\Debug\pio_it.o 
+C:\Users\DIMMU\Documents\REPOS\ITESO\workspace\Debug\supc.o 
+C:\Users\DIMMU\Documents\REPOS\ITESO\workspace\Debug\tc.o 
+C:\Users\DIMMU\Documents\REPOS\ITESO\workspace\Debug\xdma_hardware_interface.o 
+C:\Users\DIMMU\Documents\REPOS\ITESO\workspace\Debug\xdmac.o 
+C:\Users\DIMMU\Documents\REPOS\ITESO\workspace\Debug\xdmad.o 
+C:\Users\DIMMU\Documents\REPOS\ITESO\workspace\Debug\fpu.o 
+C:\Users\DIMMU\Documents\REPOS\ITESO\workspace\Debug\syscalls.o 
+C:\Users\DIMMU\Documents\REPOS\ITESO\workspace\Debug\system_sam.o 
+C:\Users\DIMMU\Documents\REPOS\ITESO\workspace\Debug\timetick.o 
+C:\Users\DIMMU\Documents\REPOS\ITESO\workspace\Debug\app_scheduler.o 
+C:\Users\DIMMU\Documents\REPOS\ITESO\workspace\Debug\Tasks.o 
+C:\Users\DIMMU\Documents\REPOS\ITESO\workspace\Debug\led.o 
+C:\Users\DIMMU\Documents\REPOS\ITESO\workspace\Debug\main.o 
+C:\Users\DIMMU\Documents\REPOS\ITESO\workspace\Debug\startup_sam.o)
 
 /*------------------------------------------------------------------------------
  *      Linker script for running in internal FLASH on the ATSAMV71Q21

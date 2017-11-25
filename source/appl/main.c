@@ -5,6 +5,7 @@
 #include    "board.h"
 #include "app_scheduler.h"
 #include "Tasks.h"    
+#include "fpu.h"    
 #include <stdbool.h>
 #include <stdio.h>
 /** Task scheduler definitions */
@@ -51,6 +52,9 @@ float AvgMask2x2[2][2] =
     0.25, 0.25
 };
 
+ uint32_t *ptrScaled;
+ float *ptrOriginal;
+ // #define DebugCom
 /* Intermediate scaled up image - temporary pixel calculation */     
 uint32_t Filtered2x2scaled __attribute__((section(".four_byte_aligment")));
 /* Intermediate Mask in integer numbers to accelerate execution */
@@ -105,44 +109,94 @@ extern int main( void )
 	/* Configure Non-preemtive scheduler */
 	vfnScheduler_Init(&Tasks[0]);
 	/* Start scheduler */
-	vfnScheduler_Start();       
-    
+	vfnScheduler_Start();  
+  
+  /*@Yisus Implemented Code*/
+  uint32_t *ptrScaled;
+  float *ptrOriginal;
+  ptrOriginal=&AvgMask2x2[0][0];  
+  ptrScaled=&AvgMask2x2scaled[0][0];
+  const uint32_t vvmul=65536;  
+  /*@Yisus Implemented Code*/
     /** Indication for measurement */
-    LED_Set(1);
+  
+  while(1)       
+  {
+  LED_Toggle(1);
     
     /* Convert to integer and scale up correlation mask in order to avoid loosing resolution */
-    for (i_index = 0; i_index < 2; i_index++)
-    {
-        for (j_index = 0; j_index < 2; j_index++)
-        {     /* Mask to be scaled up by a factor of 2^16*/
-              AvgMask2x2scaled[i_index][j_index] = (uint32_t)(AvgMask2x2[i_index][j_index] * 0x00010000);
-        }
-    }
-    /* Perform correlation operation */
-    for (i_index = 0; i_index < IMAGE_ROWS-1; i_index++)
-    {
-        for (j_index = 0; j_index < IMAGE_COLS; j_index++)
-        {     /* For items on the first column */
-            if(j_index == 0)
+     #ifdef DebugCom
+      for (i_index = 0; i_index < 2; i_index++)
+      {
+          for (j_index = 0; j_index < 2; j_index++)
+          {     AvgMask2x2scaled[i_index][j_index] = (uint32_t)(AvgMask2x2[i_index][j_index] * 0x00010000);
+          }
+      } 
+      #else
+        const uint32_t f00=*ptrOriginal * vvmul;
+        ptrScaled++;
+        ptrOriginal++;
+        const uint32_t f01=*ptrOriginal * vvmul;
+        ptrScaled++;
+        ptrOriginal++;
+        const uint32_t f10=*ptrOriginal * vvmul;
+        ptrScaled++;
+        ptrOriginal++;
+        const uint32_t f11=*ptrOriginal * vvmul;
+      #endif        
+       
+        
+         #ifdef DebugCom
+            /* Perform correlation operation */
+            for (i_index = 0; i_index < IMAGE_ROWS-1; i_index++)
             {
-                Filtered2x2scaled = 
-                    (uint32_t)(Lena_Image[i_index][j_index] * AvgMask2x2scaled[0][0]) +
-                    (uint32_t)(Lena_Image[i_index+1][j_index] * AvgMask2x2scaled[1][1]);       
+                for (j_index = 0; j_index < IMAGE_COLS; j_index++)
+                {     /* For items on the first column */
+                    if(j_index==0)
+                       {
+                          Filtered2x2scaled = 
+                              (uint32_t)(Lena_Image[i_index][j_index] * AvgMask2x2scaled[0][0]) +
+                              (uint32_t)(Lena_Image[i_index+1][j_index] * AvgMask2x2scaled[1][1]);       
+                      }
+                      else
+                      {
+                          Filtered2x2scaled = 
+                              (uint32_t)(Lena_Image[i_index][j_index] * AvgMask2x2scaled[0][0]) +
+                              (uint32_t)(Lena_Image[i_index+1][j_index] * AvgMask2x2scaled[1][0]) +
+                              (uint32_t)(Lena_Image[i_index+1][j_index-1] * AvgMask2x2scaled[1][1]) + 
+                              (uint32_t)(Lena_Image[i_index][j_index-1] * AvgMask2x2scaled[0][1]);
+                      } 
+                      
+                   
+                    /* Scale down result */
+                    Lena_Image_Filtered[i_index][j_index] = (uint8_t)( Filtered2x2scaled >> 16);
+                }                                        
             }
-            else
+         #else 
+            for (i_index = 0; i_index < IMAGE_ROWS-1; i_index++)
             {
-                Filtered2x2scaled = 
-                    (uint32_t)(Lena_Image[i_index][j_index] * AvgMask2x2scaled[0][0]) +
-                    (uint32_t)(Lena_Image[i_index+1][j_index] * AvgMask2x2scaled[1][0]) +
-                    (uint32_t)(Lena_Image[i_index+1][j_index-1] * AvgMask2x2scaled[1][1]) + 
-                    (uint32_t)(Lena_Image[i_index][j_index-1] * AvgMask2x2scaled[0][1]);
+                 Filtered2x2scaled = 
+                          (uint32_t)(Lena_Image[i_index][0] * f00) +
+                          (uint32_t)(Lena_Image[i_index+1][0] * f11);       
+                
+                for (j_index = 0; j_index < IMAGE_COLS; j_index++)
+                {     /* For items on the first column */
+                  
+                      Filtered2x2scaled = 
+                          (uint32_t)(Lena_Image[i_index][j_index] * f00) +
+                          (uint32_t)(Lena_Image[i_index+1][j_index] * f10) +
+                          (uint32_t)(Lena_Image[i_index+1][j_index-1] * f11) + 
+                          (uint32_t)(Lena_Image[i_index][j_index-1] * f01); 
+                 
+                }
             }
-            /* Scale down result */
-            Lena_Image_Filtered[i_index][j_index] = (uint8_t)( Filtered2x2scaled >> 16);
-        }
-    }
+             
+           #endif 
+                      
+    
     /** End of indication for measurement */
-    LED_Clear(1);
+    //LED_Clear(1);
+}
     
 	/* Once all the basic services have been started, go to infinite loop to serviced activated tasks */
     for(;;)
