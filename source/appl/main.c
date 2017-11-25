@@ -56,8 +56,15 @@ float AvgMask2x2[2][2] =
  float *ptrOriginal;
   //#define DebugCom
   #define SameValue
+  #define ASMMamalon
 /* Intermediate scaled up image - temporary pixel calculation */     
 uint32_t Filtered2x2scaled __attribute__((section(".four_byte_aligment")));
+uint32_t var_a __attribute__((section(".four_byte_aligment")));
+uint32_t var_b __attribute__((section(".four_byte_aligment")));
+uint32_t var_c __attribute__((section(".four_byte_aligment")));
+uint32_t var_d __attribute__((section(".four_byte_aligment")));
+uint32_t f00 __attribute__((section(".four_byte_aligment")));
+              
 /* Intermediate Mask in integer numbers to accelerate execution */
 uint32_t AvgMask2x2scaled[2][2] __attribute__((section(".four_byte_aligment")));
 /*Output filtered image */     
@@ -117,7 +124,9 @@ extern int main( void )
   float *ptrOriginal;
   ptrOriginal=&AvgMask2x2[0][0];  
   ptrScaled=&AvgMask2x2scaled[0][0];
-  const uint32_t vvmul=65536;  
+  const uint32_t vvmul=65536; 
+  volatile uint32_t var_b,var_c,var_d;
+  uint32_t f11,f01,f10;
   /*@Yisus Implemented Code*/
     /** Indication for measurement */
   
@@ -136,18 +145,18 @@ extern int main( void )
       #else
          
         #ifdef  SameValue
-          const uint32_t f00=*ptrOriginal * vvmul;
+          f00=*ptrOriginal * vvmul;
         #else
-          const uint32_t f00=*ptrOriginal * vvmul;
+          f00=*ptrOriginal * vvmul;
           ptrScaled++;
           ptrOriginal++;
-          const uint32_t f01=*ptrOriginal * vvmul;
+          f01=*ptrOriginal * vvmul;
           ptrScaled++;
           ptrOriginal++;
-          const uint32_t f10=*ptrOriginal * vvmul;
+          f10=*ptrOriginal * vvmul;
           ptrScaled++;
           ptrOriginal++;
-          const uint32_t f11=*ptrOriginal * vvmul;  
+          f11=*ptrOriginal * vvmul;  
         #endif
       #endif        
        
@@ -185,12 +194,31 @@ extern int main( void )
                       Filtered2x2scaled =   (((uint32_t)Lena_Image[i_index][0])+((uint32_t)Lena_Image[i_index+1][0]))*f00;
                       for (j_index = 0; j_index < IMAGE_COLS; j_index++)
                       {     /* For items on the first column */
-                        
-                            Filtered2x2scaled = (
+                          #ifdef  ASMMamalon
+                              var_a= (uint32_t)Lena_Image[i_index][j_index] ;
+                              var_b= (uint32_t)Lena_Image[i_index+1][j_index] ;
+                              var_c= (uint32_t)Lena_Image[i_index+1][j_index-1] ;
+                              var_d= (uint32_t)Lena_Image[i_index][j_index-1] ;
+                              asm volatile(    "ldr R3,=Filtered2x2scaled"   );
+                              asm volatile(    "ldr R4,=var_a"   );
+                              asm volatile(    "ldr R5,=var_b"   );
+                              asm volatile(    "add r4,r4,r5"   );
+                              asm volatile(    "ldr R5,=var_c"  );
+                              asm volatile(    "ldr R6,=var_d"   );
+                              asm volatile(    "add r5,r4,r5"   );
+                              asm volatile(    "add r3,r4,r5"   );
+                              asm volatile(    "ldr R4,=f00"   );
+                                                                      
+                              asm volatile(    "mul r3,r3,r4"   );
+                                         
+                          #else
+                              Filtered2x2scaled = (
                                 (uint32_t)(Lena_Image[i_index][j_index]) +
                                 (uint32_t)(Lena_Image[i_index+1][j_index]) +
                                 (uint32_t)(Lena_Image[i_index+1][j_index-1] ) + 
                                 (uint32_t)(Lena_Image[i_index][j_index-1] ))*f00; 
+                          #endif
+                           
                        
                       }
                 #else
