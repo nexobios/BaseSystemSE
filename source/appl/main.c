@@ -132,16 +132,16 @@ extern int main( void )
         for (i_index = 0; i_index < IMAGE_ROWS-1; i_index++)
         {
             /* For j_index = 0 */
-            Filtered2x2scaled = (uint32_t)((Lena_Image[i_index][0] + Lena_Image[i_index+1][0]) * AvgMask2x2scaled);
+            Filtered2x2scaled = ((uint32_t)(Lena_Image[i_index][0]) + (uint32_t)(Lena_Image[i_index+1][0])) * AvgMask2x2scaled;
             Lena_Image_Filtered[i_index][0] = (uint8_t)( Filtered2x2scaled >> 16);
 
             for (j_index = 1; j_index < IMAGE_COLS; j_index++)
             {     /* For items on the first column */
                 Filtered2x2scaled = 
-                    (uint32_t)((Lena_Image[i_index][j_index] +
-                    Lena_Image[i_index+1][j_index] +
-                    Lena_Image[i_index+1][j_index-1] + 
-                    Lena_Image[i_index][j_index-1]) * AvgMask2x2scaled);
+                    ((uint32_t)(Lena_Image[i_index][j_index]) +
+                    (uint32_t)(Lena_Image[i_index+1][j_index]) +
+                    (uint32_t)(Lena_Image[i_index+1][j_index-1]) + 
+                    (uint32_t)(Lena_Image[i_index][j_index-1])) * AvgMask2x2scaled;
                 /* Scale down result */
                 Lena_Image_Filtered[i_index][j_index] = (uint8_t)( Filtered2x2scaled >> 16);
             }
