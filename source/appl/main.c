@@ -126,7 +126,7 @@ extern int main( void )
   float *ptrOriginal;
   ptrOriginal=&AvgMask2x2[0][0];  
   ptrScaled=&AvgMask2x2scaled[0][0];
-  const uint32_t vvmul=65536; 
+  const uint32_t vvmul=0x00010000; 
   volatile uint32_t var_b,var_c,var_d;
   uint32_t f11,f01,f10;
   /*@Yisus Implemented Code*/
@@ -190,49 +190,51 @@ extern int main( void )
                 }                                        
             }
          #else 
+            #ifdef  SameValue
+              asm volatile(    "ldr R7,=f00"   ); 
+            #endif
             for (i_index = 0; i_index < IMAGE_ROWS-1; i_index++)
             {
                 #ifdef  SameValue
                       Filtered2x2scaled =   (((uint32_t)Lena_Image[i_index][0])+((uint32_t)Lena_Image[i_index+1][0]))*f00;
                       /* Scale down result */
-                      Lena_Image_Filtered[i_index][j_index] = (uint8_t)( Filtered2x2scaled >> 16);
+                      Lena_Image_Filtered[i_index][j_index] = (uint8_t)( Filtered2x2scaled >> 4);
                        
                       for (j_index = 1; j_index < IMAGE_COLS; j_index++)
                       {     /* For items on the first column */
                         
                           #ifdef  ASM_Code
-                              pImage =(uint32_t*)&Lena_Image[i_index][0];
+                              pImage =(uint32_t*)&Lena_Image[i_index][j_index-1];
                               
-                              asm volatile(    "ldr R3,=Filtered2x2scaled"   );
                               //   Lena_Image[i_index][j_index]
-                              asm volatile(    "ldr R4,=pImage"   );  //0
+                              asm volatile(    "ldr R3,=pImage"   );  //0   (Lena_Image[i_index][j_index])
                               //   Lena_Image[i_index][j_index+1]
-                              asm volatile(    "ldr R5,[R4,#4]"   );   // 4
+                              asm volatile(    "ldr R4,[R3,#4]"   );   // 4   (Lena_Image[i_index][j_index-1] ))
                                   
-                              asm volatile(    "add R5,R4,R5"   );
+                              asm volatile(    "add R4,R4,R3"   );    
                               
                               //   Lena_Image[i_index+1][j_index]
-                              asm volatile(    "ldr R6,[R4,#00000130]"   );   //304
+                              asm volatile(    "ldr R5,[R3,#00000130]"   );   //304     (Lena_Image[i_index+1][j_index-1] )
                               //   Lena_Image[i_index+1][j_index+1]
-                              asm volatile(    "ldr R7,[R6,#4]"   );     //308
+                              asm volatile(    "ldr R6,[R5,#4]"   );     //308    (Lena_Image[i_index+1][j_index])
                               
-                              asm volatile(    "add R6,R7,R6"   );
+                              asm volatile(    "add R6,R5,R6"   ); 
                               
-                              asm volatile(    "add R3,R5,R6"   );
+                              asm volatile(    "add R4,R6,R4"   );
                               
-                              asm volatile(    "ldr R7,=f00"   );
-                                                                      
+                              asm volatile(    "ldr R3,=Filtered2x2scaled"   );
+                                        
                               asm volatile(    "mul r3,r3,r7"   );
-                           
+                               
                           #else
                               Filtered2x2scaled = (
                                 (uint32_t)(Lena_Image[i_index][j_index]) +  //0
                                 (uint32_t)(Lena_Image[i_index+1][j_index]) +   //308
                                 (uint32_t)(Lena_Image[i_index+1][j_index-1] ) +     //304
-                                (uint32_t)(Lena_Image[i_index][j_index-1] ))*f00;   //4
+                                (uint32_t)(Lena_Image[i_index][j_index-1] ));//*f00;   //4
                           #endif
                            
-                       Lena_Image_Filtered[i_index][j_index] = (uint8_t)( Filtered2x2scaled >> 16);
+                       Lena_Image_Filtered[i_index][j_index] = (uint8_t)( Filtered2x2scaled >> 4);
                       }
                 #else
                     Filtered2x2scaled = 
