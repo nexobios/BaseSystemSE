@@ -7708,7 +7708,7 @@ OUTPUT(BaseProject.elf elf32-littlearm)
  .debug_macro   0x0001c7ea       0x16 C:\Users\DIMMU\Documents\REPOS\ITESO\workspace\Debug\main.o
  .debug_macro   0x0001c800      0x448 C:\Users\DIMMU\Documents\REPOS\ITESO\workspace\Debug\startup_sam.o
 
-.debug_line     0x00000000    0x10d3f
+.debug_line     0x00000000    0x10d43
  .debug_line    0x00000000     0x13b5 C:\Users\DIMMU\Documents\REPOS\ITESO\workspace\Debug\dbg_console.o
  .debug_line    0x000013b5     0x1273 C:\Users\DIMMU\Documents\REPOS\ITESO\workspace\Debug\board_lowlevel.o
  .debug_line    0x00002628     0x10b6 C:\Users\DIMMU\Documents\REPOS\ITESO\workspace\Debug\exceptions.o
@@ -7724,8 +7724,8 @@ OUTPUT(BaseProject.elf elf32-littlearm)
  .debug_line    0x0000c91b     0x1117 C:\Users\DIMMU\Documents\REPOS\ITESO\workspace\Debug\app_scheduler.o
  .debug_line    0x0000da32      0x225 C:\Users\DIMMU\Documents\REPOS\ITESO\workspace\Debug\Tasks.o
  .debug_line    0x0000dc57     0x11d7 C:\Users\DIMMU\Documents\REPOS\ITESO\workspace\Debug\led.o
- .debug_line    0x0000ee2e     0x138b C:\Users\DIMMU\Documents\REPOS\ITESO\workspace\Debug\main.o
- .debug_line    0x000101b9      0xb86 C:\Users\DIMMU\Documents\REPOS\ITESO\workspace\Debug\startup_sam.o
+ .debug_line    0x0000ee2e     0x138f C:\Users\DIMMU\Documents\REPOS\ITESO\workspace\Debug\main.o
+ .debug_line    0x000101bd      0xb86 C:\Users\DIMMU\Documents\REPOS\ITESO\workspace\Debug\startup_sam.o
 
 .debug_str      0x00000000    0x79653
  .debug_str     0x00000000    0x76e83 C:\Users\DIMMU\Documents\REPOS\ITESO\workspace\Debug\dbg_console.o

@@ -190,9 +190,6 @@ extern int main( void )
                 }                                        
             }
          #else 
-            #ifdef  SameValue
-              asm volatile(    "ldr R7,=f00"   ); 
-            #endif
             for (i_index = 0; i_index < IMAGE_ROWS-1; i_index++)
             {
                 #ifdef  SameValue
@@ -206,26 +203,28 @@ extern int main( void )
                           #ifdef  ASM_Code
                               pImage =(uint32_t*)&Lena_Image[i_index][j_index-1];
                               
+                              asm volatile(    "ldr R3,=Filtered2x2scaled"   );
                               //   Lena_Image[i_index][j_index]
-                              asm volatile(    "ldr R3,=pImage"   );  //0   (Lena_Image[i_index][j_index])
+                              asm volatile(    "ldr R4,=pImage"   );  //0   (Lena_Image[i_index][j_index])
                               //   Lena_Image[i_index][j_index+1]
-                              asm volatile(    "ldr R4,[R3,#4]"   );   // 4   (Lena_Image[i_index][j_index-1] ))
+                              asm volatile(    "ldr R5,[R4,#4]"   );   // 4   (Lena_Image[i_index][j_index-1] ))
                                   
-                              asm volatile(    "add R4,R4,R3"   );    
+                              asm volatile(    "add R5,R4,R5"   );
                               
                               //   Lena_Image[i_index+1][j_index]
-                              asm volatile(    "ldr R5,[R3,#00000130]"   );   //304     (Lena_Image[i_index+1][j_index-1] )
+                              asm volatile(    "ldr R6,[R4,#00000130]"   );   //304     (Lena_Image[i_index+1][j_index-1] )
                               //   Lena_Image[i_index+1][j_index+1]
-                              asm volatile(    "ldr R6,[R5,#4]"   );     //308    (Lena_Image[i_index+1][j_index])
+                              asm volatile(    "ldr R7,[R6,#4]"   );     //308    (Lena_Image[i_index+1][j_index])
                               
-                              asm volatile(    "add R6,R5,R6"   ); 
+                              asm volatile(    "add R6,R7,R6"   );
                               
-                              asm volatile(    "add R4,R6,R4"   );
+                              asm volatile(    "add R3,R5,R6"   );
                               
-                              asm volatile(    "ldr R3,=Filtered2x2scaled"   );
-                                        
+                              asm volatile(    "ldr R7,=f00"   );
+                                                                      
                               asm volatile(    "mul r3,r3,r7"   );
-                               
+                                                                  
+                           
                           #else
                               Filtered2x2scaled = (
                                 (uint32_t)(Lena_Image[i_index][j_index]) +  //0
