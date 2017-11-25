@@ -4,7 +4,7 @@ ANALYZING
 ANALYZING
 EMULATION	POD: Cortex (JTAG,SWD)   CPU: Cortex-M7
 DEBUG	PROTOCOL: SWD; RESET: SoC
-LOADING 	136184 bytes
+LOADING 	136024 bytes
 PROGRAMMING	Atmel ATSAMV7 (2048 kB) (4 sectors)
 UMI_ERROR	 Verify error. Monitor error code = 31 / FFFFFFFF
 UMI_ERROR	 Verify error. Monitor error code = 31 / FFFFFFFF

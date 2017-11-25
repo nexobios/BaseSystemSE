@@ -54,7 +54,8 @@ float AvgMask2x2[2][2] =
 
  uint32_t *ptrScaled;
  float *ptrOriginal;
- // #define DebugCom
+  //#define DebugCom
+  #define SameValue
 /* Intermediate scaled up image - temporary pixel calculation */     
 uint32_t Filtered2x2scaled __attribute__((section(".four_byte_aligment")));
 /* Intermediate Mask in integer numbers to accelerate execution */
@@ -133,16 +134,21 @@ extern int main( void )
           }
       } 
       #else
-        const uint32_t f00=*ptrOriginal * vvmul;
-        ptrScaled++;
-        ptrOriginal++;
-        const uint32_t f01=*ptrOriginal * vvmul;
-        ptrScaled++;
-        ptrOriginal++;
-        const uint32_t f10=*ptrOriginal * vvmul;
-        ptrScaled++;
-        ptrOriginal++;
-        const uint32_t f11=*ptrOriginal * vvmul;
+         
+        #ifdef  SameValue
+          const uint32_t f00=*ptrOriginal * vvmul;
+        #else
+          const uint32_t f00=*ptrOriginal * vvmul;
+          ptrScaled++;
+          ptrOriginal++;
+          const uint32_t f01=*ptrOriginal * vvmul;
+          ptrScaled++;
+          ptrOriginal++;
+          const uint32_t f10=*ptrOriginal * vvmul;
+          ptrScaled++;
+          ptrOriginal++;
+          const uint32_t f11=*ptrOriginal * vvmul;  
+        #endif
       #endif        
        
         
@@ -175,20 +181,35 @@ extern int main( void )
          #else 
             for (i_index = 0; i_index < IMAGE_ROWS-1; i_index++)
             {
-                 Filtered2x2scaled = 
-                          (uint32_t)(Lena_Image[i_index][0] * f00) +
-                          (uint32_t)(Lena_Image[i_index+1][0] * f11);       
-                
-                for (j_index = 0; j_index < IMAGE_COLS; j_index++)
-                {     /* For items on the first column */
-                  
-                      Filtered2x2scaled = 
-                          (uint32_t)(Lena_Image[i_index][j_index] * f00) +
-                          (uint32_t)(Lena_Image[i_index+1][j_index] * f10) +
-                          (uint32_t)(Lena_Image[i_index+1][j_index-1] * f11) + 
-                          (uint32_t)(Lena_Image[i_index][j_index-1] * f01); 
+                #ifdef  SameValue
+                      Filtered2x2scaled =   (((uint32_t)Lena_Image[i_index][0])+((uint32_t)Lena_Image[i_index+1][0]))*f00;
+                      for (j_index = 0; j_index < IMAGE_COLS; j_index++)
+                      {     /* For items on the first column */
+                        
+                            Filtered2x2scaled = (
+                                (uint32_t)(Lena_Image[i_index][j_index]) +
+                                (uint32_t)(Lena_Image[i_index+1][j_index]) +
+                                (uint32_t)(Lena_Image[i_index+1][j_index-1] ) + 
+                                (uint32_t)(Lena_Image[i_index][j_index-1] ))*f00; 
+                       
+                      }
+                #else
+                    Filtered2x2scaled = 
+                              (uint32_t)(Lena_Image[i_index][0] * f00) +
+                              (uint32_t)(Lena_Image[i_index+1][0] * f11);       
+                    
+                    for (j_index = 0; j_index < IMAGE_COLS; j_index++)
+                    {     /* For items on the first column */
+                      
+                          Filtered2x2scaled = 
+                              (uint32_t)(Lena_Image[i_index][j_index] * f00) +
+                              (uint32_t)(Lena_Image[i_index+1][j_index] * f10) +
+                              (uint32_t)(Lena_Image[i_index+1][j_index-1] * f11) + 
+                              (uint32_t)(Lena_Image[i_index][j_index-1] * f01); 
+                     
+                    }  
+                #endif
                  
-                }
             }
              
            #endif 
