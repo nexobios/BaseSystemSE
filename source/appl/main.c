@@ -11,18 +11,15 @@
 /** Task scheduler definitions */
 #include    "app_scheduler.h"
 /** LED control definitions */ 
-//#include    "led_ctrl.h"
 #include    "led.h"
-/** UART communication */
-//#include    "serial_ctrl.h"
-/** Watchdog control function prototypes definitions */
-//#include    "wdt_ctrl.h"
-/** Dynamic Memory allocation services */
-//#include    "memory_allocation.h"
 /** Input Image */
 #include    "lena_image.h"
-/** Image Processing services */
-//#include    "image_processing.h"
+
+/*----------------------------------------------------------------------------
+ *        Defines
+ *----------------------------------------------------------------------------*/
+
+  #define OPTIMIZE
 
 /*----------------------------------------------------------------------------
  *        Local definitions
@@ -46,29 +43,27 @@ uint16_t j_index;
 uint32_t tmp;
 
 /* Averaging mask */
-float AvgMask2x2[2][2] =
-{
-    0.25, 0.25,   
-    0.25, 0.25
-};
+#ifdef OPTIMIZE
+    float AvgMaskVal = 0.25;
+#else
+    float AvgMask2x2[2][2] =
+    {
+        0.25, 0.25,   
+        0.25, 0.25
+    };
+#endif /* #ifdef OPTIMIZE */
 
- uint32_t *ptrScaled;
- float *ptrOriginal;
-  //#define DebugCom
-  #define SameValue
-  #define ASM_Code
+#ifdef OPTIMIZE
+    uint32_t AvgMaskScaled __attribute__((section(".four_byte_aligment")));
+    uint32_t *pImage __attribute__((section(".four_byte_aligment")));
+#else
+    /* Intermediate Mask in integer numbers to accelerate execution */
+    uint32_t AvgMask2x2scaled[2][2] __attribute__((section(".four_byte_aligment")));
+#endif /* #ifdef OPTIMIZE */
+
+/* Valid for both variants */
 /* Intermediate scaled up image - temporary pixel calculation */     
 uint32_t Filtered2x2scaled __attribute__((section(".four_byte_aligment")));
-uint32_t var_a __attribute__((section(".four_byte_aligment")));
-uint32_t var_b __attribute__((section(".four_byte_aligment")));
-uint32_t var_c __attribute__((section(".four_byte_aligment")));
-uint32_t var_d __attribute__((section(".four_byte_aligment")));
-uint32_t f00 __attribute__((section(".four_byte_aligment")));
-uint32_t *pImage __attribute__((section(".four_byte_aligment")));
-uint32_t *pImageColAdd __attribute__((section(".four_byte_aligment")));
-              
-/* Intermediate Mask in integer numbers to accelerate execution */
-uint32_t AvgMask2x2scaled[2][2] __attribute__((section(".four_byte_aligment")));
 /*Output filtered image */     
 uint8_t Lena_Image_Filtered[IMAGE_ROWS][IMAGE_COLS] __attribute__((section(".four_byte_aligment")));
 
@@ -99,166 +94,101 @@ static void _ConfigureLeds( void )
 extern int main( void )
 {
     /* Disable watchdog */
-	//vfnWdtCtrl_Disable();
-  
-  /* Disable watchdog */
-	WDT_Disable( WDT ) ;
+    WDT_Disable( WDT ) ;
   
 	/* Enable I and D cache */
 	SCB_EnableICache();
 	SCB_EnableDCache(); 
-  /* Enable Floating Point Unit */
-  vfnFpu_enable();
-	/* Dynamic Memory Allocation initialization */
-	//vfnMemAlloc_Init(&DynamicMemAlloc_config[0]);
+    /* Enable Floating Point Unit */
+    vfnFpu_enable();
 	/* Configure LEDs */
-	//vfnLedCtrl_Configure();
-  LED_Configure(1);
-	/* Initialize UART communicaiton */
-	//vfnSerialCtrl_Init();
+    LED_Configure(1);
 	/* Configure Non-preemtive scheduler */
 	vfnScheduler_Init(&Tasks[0]);
 	/* Start scheduler */
 	vfnScheduler_Start();  
   
-  /*@Yisus Implemented Code*/
-  uint32_t *ptrScaled;
-  float *ptrOriginal;
-  ptrOriginal=&AvgMask2x2[0][0];  
-  ptrScaled=&AvgMask2x2scaled[0][0];
-  const uint32_t vvmul=0x00010000; 
-  volatile uint32_t var_b,var_c,var_d;
-  uint32_t f11,f01,f10;
-  /*@Yisus Implemented Code*/
-    /** Indication for measurement */
-  
+    #ifdef  OPTIMIZE
+        /* Variable Inits */
+        const uint32_t vvmul=0x00010000; 
+    #endif /* #ifdef  OPTIMIZE */
+
   while(1)       
   {
-  LED_Toggle(1);
-    
+    /* LED Toggle */
+    LED_Toggle(1);
     /* Convert to integer and scale up correlation mask in order to avoid loosing resolution */
-     #ifdef DebugCom
-      for (i_index = 0; i_index < 2; i_index++)
-      {
-          for (j_index = 0; j_index < 2; j_index++)
-          {     AvgMask2x2scaled[i_index][j_index] = (uint32_t)(AvgMask2x2[i_index][j_index] * 0x00010000);
-          }
-      } 
-      #else
-         
-        #ifdef  SameValue
-          f00=*ptrOriginal * vvmul;
-        #else
-          f00=*ptrOriginal * vvmul;
-          ptrScaled++;
-          ptrOriginal++;
-          f01=*ptrOriginal * vvmul;
-          ptrScaled++;
-          ptrOriginal++;
-          f10=*ptrOriginal * vvmul;
-          ptrScaled++;
-          ptrOriginal++;
-          f11=*ptrOriginal * vvmul;  
-        #endif
-      #endif        
-       
-        
-         #ifdef DebugCom
-            /* Perform correlation operation */
-            for (i_index = 0; i_index < IMAGE_ROWS-1; i_index++)
-            {
-                for (j_index = 0; j_index < IMAGE_COLS; j_index++)
-                {     /* For items on the first column */
-                    if(j_index==0)
-                       {
-                          Filtered2x2scaled = 
-                              (uint32_t)(Lena_Image[i_index][j_index] * AvgMask2x2scaled[0][0]) +
-                              (uint32_t)(Lena_Image[i_index+1][j_index] * AvgMask2x2scaled[1][1]);       
-                      }
-                      else
-                      {
-                          Filtered2x2scaled = 
-                              (uint32_t)(Lena_Image[i_index][j_index] * AvgMask2x2scaled[0][0]) +
-                              (uint32_t)(Lena_Image[i_index+1][j_index] * AvgMask2x2scaled[1][0]) +
-                              (uint32_t)(Lena_Image[i_index+1][j_index-1] * AvgMask2x2scaled[1][1]) + 
-                              (uint32_t)(Lena_Image[i_index][j_index-1] * AvgMask2x2scaled[0][1]);
-                      } 
-                      
-                   
+
+    #ifdef  OPTIMIZE
+        /* No longer required, shift right used instead */
+        /* AvgMaskScaled = AvgMaskVal * vvmul; */
+    #else
+        for (i_index = 0; i_index < 2; i_index++)
+        {
+            for (j_index = 0; j_index < 2; j_index++)
+            {     /* Mask to be scaled up by a factor of 2^16*/
+                AvgMask2x2scaled[i_index][j_index] = (uint32_t)(AvgMask2x2[i_index][j_index] * 0x00010000);
+            }
+        }
+    #endif /* #ifdef OPTIMIZE */
+
+    #ifdef  OPTIMIZE 
+        for (i_index = 0; i_index < IMAGE_ROWS-1; i_index++)
+        {       
+                /* Process elements in the first column j_index = 0 */
+                pImage = (uint32_t *) &Lena_Image[i_index][0];
+                asm volatile("ldr   R3, =Filtered2x2scaled" );  // Load addr of Filtered2x2scaled
+                asm volatile("ldr   R4, =pImage"            );  // Load Lena_Image[i_index][0]
+                asm volatile("ldr   R5, [R4, #00000130]"    );  // Load Lena_Image[i_index + 1][0]
+                asm volatile("add   R3, R4, R5"             );  // Filtered2x2scaled (R3) = Lena_Image[i_index][0] + Lena_Image[i_index + 1][0]
+                /* Scale down result */
+                asm volatile("lsr   R3, R3, #2"             );  // Filtered2x2scaled = Filtered2x2scaled >> 2;
+                Lena_Image_Filtered[i_index][j_index] = (uint8_t) Filtered2x2scaled;
+
+                for (j_index = 1; j_index < IMAGE_COLS; j_index++)
+                {
+                    pImage = (uint32_t *) &Lena_Image[i_index][j_index-1];
+
+                    asm volatile("ldr   R3, =Filtered2x2scaled" );  // Load addr of Filtered2x2scaled
+                    asm volatile("ldr   R4, =pImage"            );  // Load Lena_Image[i_index][j_index - 1], the -1 offset is required by now.
+                    asm volatile("ldr   R5, [R4,#4]"            );  // Load Lena_Image[i_index][j_index]
+                    asm volatile("add   R5, R4, R5"             );  // R5 = Lena_Image[i_index][j_index - 1] + Lena_Image[i_index][j_index]
+                    asm volatile("ldr   R6, [R4, #00000130]"    );  // Load Lena_Image[i_index + 1][j_index - 1]
+                    asm volatile("ldr   R7, [R6, #4]"           );  // Load Lena_Image[i_index + 1][j_index]
+                    asm volatile("add   R6, R7, R6"             );  // R6 = Lena_Image[i_index + 1][j_index - 1] + Lena_Image[i_index + 1][j_index]
+                    asm volatile("add   R3, R5, R6"             );  // Filtered2x2scaled (R3) = R5 + R6
                     /* Scale down result */
-                    Lena_Image_Filtered[i_index][j_index] = (uint8_t)( Filtered2x2scaled >> 16);
-                }                                        
-            }
-         #else 
-            for (i_index = 0; i_index < IMAGE_ROWS-1; i_index++)
-            {
-                #ifdef  SameValue
-                      Filtered2x2scaled =   (((uint32_t)Lena_Image[i_index][0])+((uint32_t)Lena_Image[i_index+1][0]))*f00;
-                      /* Scale down result */
-                      Lena_Image_Filtered[i_index][j_index] = (uint8_t)( Filtered2x2scaled >> 4);
-                       
-                      for (j_index = 1; j_index < IMAGE_COLS; j_index++)
-                      {     /* For items on the first column */
-                        
-                          #ifdef  ASM_Code
-                              pImage =(uint32_t*)&Lena_Image[i_index][j_index-1];
-                              
-                              asm volatile(    "ldr R3,=Filtered2x2scaled"   );
-                              //   Lena_Image[i_index][j_index]
-                              asm volatile(    "ldr R4,=pImage"   );  //0   (Lena_Image[i_index][j_index])
-                              //   Lena_Image[i_index][j_index+1]
-                              asm volatile(    "ldr R5,[R4,#4]"   );   // 4   (Lena_Image[i_index][j_index-1] ))
-                                  
-                              asm volatile(    "add R5,R4,R5"   );
-                              
-                              //   Lena_Image[i_index+1][j_index]
-                              asm volatile(    "ldr R6,[R4,#00000130]"   );   //304     (Lena_Image[i_index+1][j_index-1] )
-                              //   Lena_Image[i_index+1][j_index+1]
-                              asm volatile(    "ldr R7,[R6,#4]"   );     //308    (Lena_Image[i_index+1][j_index])
-                              
-                              asm volatile(    "add R6,R7,R6"   );
-                              
-                              asm volatile(    "add R3,R5,R6"   );
-                              
-                              asm volatile(    "ldr R7,=f00"   );
-                                                                      
-                              asm volatile(    "mul r3,r3,r7"   );
-                                                                  
-                           
-                          #else
-                              Filtered2x2scaled = (
-                                (uint32_t)(Lena_Image[i_index][j_index]) +  //0
-                                (uint32_t)(Lena_Image[i_index+1][j_index]) +   //308
-                                (uint32_t)(Lena_Image[i_index+1][j_index-1] ) +     //304
-                                (uint32_t)(Lena_Image[i_index][j_index-1] ));//*f00;   //4
-                          #endif
-                           
-                       Lena_Image_Filtered[i_index][j_index] = (uint8_t)( Filtered2x2scaled >> 4);
-                      }
-                #else
+                    asm volatile("lsr   R3, R3, #2"             );  // Filtered2x2scaled = Filtered2x2scaled >> 2;
+                    Lena_Image_Filtered[i_index][j_index] = (uint8_t) Filtered2x2scaled;
+                }
+                /* Set j_index = 0 */
+                j_index = 0;
+        }
+    #else
+        for (i_index = 0; i_index < IMAGE_ROWS-1; i_index++)
+        {
+            for (j_index = 0; j_index < IMAGE_COLS; j_index++)
+            {     /* For items on the first column */
+                if(j_index == 0)
+                {
                     Filtered2x2scaled = 
-                              (uint32_t)(Lena_Image[i_index][0] * f00) +
-                              (uint32_t)(Lena_Image[i_index+1][0] * f11);       
-                    
-                    for (j_index = 0; j_index < IMAGE_COLS; j_index++)
-                    {     /* For items on the first column */
-                      
-                          Filtered2x2scaled = 
-                              (uint32_t)(Lena_Image[i_index][j_index] * f00) +
-                              (uint32_t)(Lena_Image[i_index+1][j_index] * f10) +
-                              (uint32_t)(Lena_Image[i_index+1][j_index-1] * f11) + 
-                              (uint32_t)(Lena_Image[i_index][j_index-1] * f01); 
-                     
-                    }  
-                #endif
-                 
+                        (uint32_t)(Lena_Image[i_index][j_index] * AvgMask2x2scaled[0][0]) +
+                        (uint32_t)(Lena_Image[i_index+1][j_index] * AvgMask2x2scaled[1][0]);       
+                }
+                else
+                {
+                    Filtered2x2scaled = 
+                        (uint32_t)(Lena_Image[i_index][j_index] * AvgMask2x2scaled[0][0]) +
+                        (uint32_t)(Lena_Image[i_index+1][j_index] * AvgMask2x2scaled[1][0]) +
+                        (uint32_t)(Lena_Image[i_index+1][j_index-1] * AvgMask2x2scaled[1][1]) + 
+                        (uint32_t)(Lena_Image[i_index][j_index-1] * AvgMask2x2scaled[0][1]);
+                }
+                /* Scale down result */
+                Lena_Image_Filtered[i_index][j_index] = (uint8_t)( Filtered2x2scaled >> 16);
             }
-             
-           #endif 
-                      
-    
-    /** End of indication for measurement */
-    //LED_Clear(1);
+        }
+    #endif
+
 }
     
 	/* Once all the basic services have been started, go to infinite loop to serviced activated tasks */
