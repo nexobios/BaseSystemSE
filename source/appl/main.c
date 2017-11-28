@@ -19,7 +19,7 @@
  *        Defines
  *----------------------------------------------------------------------------*/
 
-  #define OPTIMIZE
+#define OPTIMIZE
 
 /*----------------------------------------------------------------------------
  *        Local definitions
@@ -40,7 +40,6 @@ TaskType Tasks[]={
 /* Auxiliary variables */
 uint16_t i_index;
 uint16_t j_index;
-uint32_t tmp;
 
 /* Averaging mask */
 #ifdef OPTIMIZE

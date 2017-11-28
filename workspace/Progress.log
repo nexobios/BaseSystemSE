@@ -1,10 +1,10 @@
-CONVERTING	C:\Users\DIMMU\Documents\REPOS\ITESO\workspace\Debug\BaseProject.elf
-LOADING	C:\Users\DIMMU\Documents\REPOS\ITESO\workspace\Debug\BaseProject.elf
+CONVERTING	D:\ITESO\SE\Git\BaseSystemSE\workspace\Debug\BaseProject.elf
+LOADING	D:\ITESO\SE\Git\BaseSystemSE\workspace\Debug\BaseProject.elf
 ANALYZING
 ANALYZING
 EMULATION	POD: Cortex (JTAG,SWD)   CPU: Cortex-M7
 DEBUG	PROTOCOL: SWD; RESET: SoC
-LOADING 	136084 bytes
+LOADING 	136200 bytes
 PROGRAMMING	Atmel ATSAMV7 (2048 kB) (4 sectors)
 UMI_ERROR	 Verify error. Monitor error code = 31 / FFFFFFFF
 UMI_ERROR	 Verify error. Monitor error code = 31 / FFFFFFFF
