@@ -17,7 +17,6 @@
  *----------------------------------------------------------------------------*/
 /*@Yisus Adc struct*/
 #define BOARD_MCK    150000000 
-#define RxBufferDMASize   8
 
 /*~~~~~~  Local definitions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 #define TEST_LENGTH_SAMPLES 2048
@@ -32,13 +31,12 @@ uint32_t    u32fft_maxPowerIndex;
 /** Auxiliary output variable that holds the maximum level of signal power */
 float       fft_maxPower;
 
-#define RxBufferDMASize   8
 
 /* AFEC DMA Buffer Size */
 #define BUFF_SIZE 1
 /* AFEC DMA Buffer */
-uint32_t u32AfecBuff[BUFF_SIZE];
 
+uint16_t *RxDMABuffer;
 extern Afec pAfe_ADC0;
 extern Pwm pPwm_0;                
 extern AfeDma pAfed;     
@@ -122,11 +120,10 @@ extern int main( void )
 	pAfeCmd.callback = (*AfeCallback)NULL;
 	//void *pArgument;
   */
-  Afe_Dma_Init(&u32AfecBuff[0],BUFF_SIZE);
+  SET_AFEC_SAMPLING((uint16_t)16, RxDMABuffer, RxBufferDMASize);
   
-  Afe_SendData( &pAfed , &pAfeCmd);
-  PWM0_Init();
-  AFEC0_Init();           
+                  
+   
 	
   /*-- Loop through all the periodic tasks from Task Scheduler --*/
 	for(;;)

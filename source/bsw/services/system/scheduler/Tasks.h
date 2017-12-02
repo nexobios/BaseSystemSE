@@ -15,6 +15,8 @@
 
 /*@Yisus Adc struct*/
 #define BOARD_MCK    150000000 
+
+#define RxBufferDMASize 8             
 //Afec pAfe_ADC0;
 //Pwm pPwm_0;                
 AfeDma pAfed;     
@@ -39,7 +41,7 @@ extern void vfnTsk_10ms(void);
 extern void vfnTsk_50ms(void);
 extern void vfnTsk_100ms(void);
 void AFEC0_Init(void);  
-void PWM0_Init(void);
+void PWM0_Init(uint16_t Period);
 
 /*============================================================================*/
 #endif /*__APP_TASKS */
