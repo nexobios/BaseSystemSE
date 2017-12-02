@@ -448,6 +448,16 @@
          <CompilerOptions>-x c  -mcpu=cortex-m7  -mthumb -mfloat-abi=softfp -mfpu=fpv5-sp-d16 $(DEFINES) $(INCLUDES)  -g3 -c -I $(IRFDIR) -o $(NOEXT).o $(EDNAME) -fno-builtin-fabs</CompilerOptions>
         </FileOptios>
        </File.4>
+       <File.40>
+        <FileName>$(IRFDIR)..\source\libraries\fir_filter.h</FileName>
+       </File.40>
+       <File.41>
+        <FileName>$(IRFDIR)..\source\libraries\fir_filter.c</FileName>
+        <FileOptios>
+         <CompilerDefines>__SAMV71Q21__&#xA;</CompilerDefines>
+         <CompilerOptions>-x c  -mcpu=cortex-m7  -mthumb -mfloat-abi=softfp -mfpu=fpv5-sp-d16 $(DEFINES) $(INCLUDES)  -g3 -c -I $(IRFDIR) -o $(NOEXT).o $(EDNAME) -fno-builtin-fabs</CompilerOptions>
+        </FileOptios>
+       </File.41>
        <File.5>
         <FileName>$(IRFDIR)..\source\bsw\mcal\wdt\wdt.c</FileName>
         <FileOptios>

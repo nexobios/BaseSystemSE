@@ -123,7 +123,7 @@ extern int main( void )
 	//void *pArgument;
   */
   Afe_Dma_Init(&u32AfecBuff[0],BUFF_SIZE);
-
+  
   Afe_SendData( &pAfed , &pAfeCmd);
   PWM0_Init();
   AFEC0_Init();           
