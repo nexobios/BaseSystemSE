@@ -34,6 +34,9 @@
 /*****************************************************************************************************
 * Declaration of module wide FUNCTIONS
 *****************************************************************************************************/
+#define MAX_FILTER_SIZE 10
+
+const float fCoeffArray[MAX_FILTER_SIZE];
 
 /** FIR Filtering */
 void fir_filter(float *fInputData, float *fFIRCoeff, float *fOutputData, uint32_t u32InputDataSize, uint32_t u32KSize);

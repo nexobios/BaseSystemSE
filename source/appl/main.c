@@ -11,6 +11,7 @@
 /**  Fast fourier transform */
 #include    "fft.h"
 #include    "ecg_data.h"
+#include    "fir_filter.h"
 
 /*----------------------------------------------------------------------------
  *        Local definitions
@@ -26,6 +27,7 @@
 float       fft_inputData[TEST_LENGTH_SAMPLES];
 /** Output magnitude data */
 float       fft_signalPower[TEST_LENGTH_SAMPLES/2];
+float       fFiltered_signal[TEST_LENGTH_SAMPLES/2];
 /** Auxiliary output variable that holds the frequency bin with the highest level of signal power */
 uint32_t    u32fft_maxPowerIndex;
 /** Auxiliary output variable that holds the maximum level of signal power */
@@ -136,6 +138,7 @@ extern int main( void )
         }
         /** Perform FFT on the input signal */
         fft(fft_inputData, fft_signalPower, TEST_LENGTH_SAMPLES/2, &u32fft_maxPowerIndex, &fft_maxPower);
+        fir_filter((float *)fft_signalPower, (float *)fCoeffArray, (float *)fFiltered_signal, (uint32_t) (TEST_LENGTH_SAMPLES/2), (uint32_t) MAX_FILTER_SIZE);
         
         /* Publish through emulated Serial the byte that was previously sent through the regular Serial channel */
 		printf("%5d  %5.4f \r\n", u32fft_maxPowerIndex, fft_maxPower);
