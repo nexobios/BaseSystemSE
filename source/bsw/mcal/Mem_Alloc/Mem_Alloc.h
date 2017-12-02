@@ -17,8 +17,10 @@
 #endif
 
 extern uint32_t HEAP_ALLOC_SIZE;
-extern void* _MEM_HEAP_START;
-extern void* _MEM_HEAP_END;
+//extern void* _MEM_HEAP_START;
+//extern void* _MEM_HEAP_END;
+extern uint32_t _MEM_HEAP_START;
+extern uint32_t _MEM_HEAP_END;
 
 MemHandlerType *psMemoryHandler;
 

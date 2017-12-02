@@ -12,8 +12,8 @@ available memory bytes indicator freeBytes are also initialized.
  */
 void Mem_init(){
 	/* Heap memory init */
-	uint32_t *ptr_start = _MEM_HEAP_START;
-	uint32_t *ptr_end 	= _MEM_HEAP_END;
+	uint32_t *ptr_start = &_MEM_HEAP_START;
+	uint32_t *ptr_end 	= &_MEM_HEAP_END;
 
 	while(ptr_start <= ptr_end){
 		*ptr_start = (uint32_t)0;
@@ -24,9 +24,9 @@ void Mem_init(){
 	psMemoryHandler = (MemHandlerType *)malloc(sizeof(MemHandlerType));
 
 	/* Data init */
-	psMemoryHandler->memStart 	= (Mem_Uint8PtrType_t) 	_MEM_HEAP_START;
-	psMemoryHandler->memEnd 	= (Mem_Uint8PtrType_t) 	_MEM_HEAP_END;
-	psMemoryHandler->currAddr 	= (Mem_Uint8PtrType_t) 	_MEM_HEAP_END;
+	psMemoryHandler->memStart 	= (Mem_Uint8PtrType_t) 	&_MEM_HEAP_START;
+	psMemoryHandler->memEnd 	= (Mem_Uint8PtrType_t) 	&_MEM_HEAP_END;
+	psMemoryHandler->currAddr 	= (Mem_Uint8PtrType_t) 	&_MEM_HEAP_END;
 	psMemoryHandler->freeBytes 	= HEAP_ALLOC_SIZE;
 
 }
@@ -48,7 +48,7 @@ Mem_ReturnType_t Mem_Alloc ( Mem_SizeType_t Size ){
 
 		/* Allocate memory */
 		Mem_Uint8PtrType_t tmp_ptr = psMemoryHandler->currAddr;
-		tmp_ptr = (Mem_Uint8PtrType_t)malloc(Size*sizeof(uint8_t));
+		tmp_ptr = (Mem_Uint8PtrType_t)malloc(Size*sizeof(uint32_t));
 
 		/* Align size */
 		Mem_SizeType_t mAdjSize = ((Size % 4) == 0) ? Size : (Size + (4 - (Size % 4)));
