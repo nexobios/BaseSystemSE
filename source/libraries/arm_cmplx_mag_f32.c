@@ -87,7 +87,8 @@ void arm_cmplx_mag_f32(
   uint32_t numSamples)
 {
   float32_t realIn, imagIn;                      /* Temporary variables to hold input values */
-
+  float32_t middleVar,resVar;
+  
 #ifndef ARM_MATH_CM0_FAMILY
 
   /* Run the below code for Cortex-M4 and Cortex-M3 */
@@ -105,20 +106,52 @@ void arm_cmplx_mag_f32(
     realIn = *pSrc++;
     imagIn = *pSrc++;
     /* store the result in the destination buffer. */
-    arm_sqrt_f32((realIn * realIn) + (imagIn * imagIn), pDst++);
-
+    //arm_sqrt_f32( middleVar, pDst++);
+    middleVar= (realIn * realIn) + (imagIn * imagIn);
+    //asm volatile( "LDR       r3, =middleVar" ); 
+    asm volatile( "vldr.32   s13,=middleVar      ");    
+    //asm volatile( "ldr       r3, =resVar" ); 
+    asm volatile( "VSQRT.F32 s14,s13" );    
+    asm volatile( "vstr.32   s14,=resVar" );    
+    pDst++;
+    *pDst=resVar;
+    
     realIn = *pSrc++;
     imagIn = *pSrc++;
-    arm_sqrt_f32((realIn * realIn) + (imagIn * imagIn), pDst++);
-
+//  arm_sqrt_f32((realIn * realIn) + (imagIn * imagIn), pDst++);
+    middleVar= (realIn * realIn) + (imagIn * imagIn);
+    //asm volatile( "LDR       r3, =middleVar" ); 
+    asm volatile( "vldr.32   s13,=middleVar      ");    
+    //asm volatile( "ldr       r3, =resVar" ); 
+    asm volatile( "VSQRT.F32 s14,s13" );    
+    asm volatile( "vstr.32   s14,=resVar" );    
+    pDst++;
+    *pDst=resVar;
+    
     realIn = *pSrc++;
     imagIn = *pSrc++;
-    arm_sqrt_f32((realIn * realIn) + (imagIn * imagIn), pDst++);
-
+//  arm_sqrt_f32((realIn * realIn) + (imagIn * imagIn), pDst++);
+    middleVar= (realIn * realIn) + (imagIn * imagIn);
+    //asm volatile( "LDR       r3, =middleVar" ); 
+    asm volatile( "vldr.32   s13,=middleVar      ");    
+    //asm volatile( "ldr       r3, =resVar" ); 
+    asm volatile( "VSQRT.F32 s14,s13" );    
+    asm volatile( "vstr.32   s14,=resVar" );    
+    pDst++;
+    *pDst=resVar;
+    
     realIn = *pSrc++;
     imagIn = *pSrc++;
-    arm_sqrt_f32((realIn * realIn) + (imagIn * imagIn), pDst++);
-
+//  arm_sqrt_f32((realIn * realIn) + (imagIn * imagIn), pDst++);
+    middleVar= (realIn * realIn) + (imagIn * imagIn);
+    //asm volatile( "LDR       r3, =middleVar" ); 
+    asm volatile( "vldr.32   s13,=middleVar      ");    
+    //asm volatile( "ldr       r3, =resVar" ); 
+    asm volatile( "VSQRT.F32 s14,s13" );    
+    asm volatile( "vstr.32   s14,=resVar" );    
+    pDst++;
+    *pDst=resVar;
+    
 
     /* Decrement the loop counter */
     blkCnt--;
@@ -134,8 +167,16 @@ void arm_cmplx_mag_f32(
     realIn = *pSrc++;
     imagIn = *pSrc++;
     /* store the result in the destination buffer. */
-    arm_sqrt_f32((realIn * realIn) + (imagIn * imagIn), pDst++);
-
+//  arm_sqrt_f32((realIn * realIn) + (imagIn * imagIn), pDst++);
+    middleVar= (realIn * realIn) + (imagIn * imagIn);
+    //asm volatile( "LDR       r3, =middleVar" ); 
+    asm volatile( "vldr.32   s13,=middleVar      ");    
+    //asm volatile( "ldr       r3, =resVar" ); 
+    asm volatile( "VSQRT.F32 s14,s13" );    
+    asm volatile( "vstr.32   s14,=resVar" );    
+    pDst++;
+    *pDst=resVar;
+    
     /* Decrement the loop counter */
     blkCnt--;
   }
@@ -150,8 +191,16 @@ void arm_cmplx_mag_f32(
     realIn = *pSrc++;
     imagIn = *pSrc++;
     /* store the result in the destination buffer. */
-    arm_sqrt_f32((realIn * realIn) + (imagIn * imagIn), pDst++);
-
+//  arm_sqrt_f32((realIn * realIn) + (imagIn * imagIn), pDst++);
+    middleVar= (realIn * realIn) + (imagIn * imagIn);
+    //asm volatile( "LDR       r3, =middleVar" ); 
+    asm volatile( "vldr.32   s13,=middleVar      ");    
+    //asm volatile( "ldr       r3, =resVar" ); 
+    asm volatile( "VSQRT.F32 s14,s13" );    
+    asm volatile( "vstr.32   s14,=resVar" );    
+    pDst++;
+    *pDst=resVar;
+    
     /* Decrement the loop counter */
     numSamples--;
   }
