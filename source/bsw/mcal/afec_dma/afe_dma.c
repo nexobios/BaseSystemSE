@@ -59,7 +59,15 @@
 
 /*  DMA driver instance */
 static uint32_t afeDmaRxChannel;
+/*  DMA driver instance */
+static uint32_t afeDmaRxChannel;
+AfeDma _AfeDma;       /*AfeDma Instance*/
+AfeCmd _AfeCommand;
+sXdmad _sXdmad;       /*DMA driver Instance*/
 
+uint16_t BuffSize = 1;
+uint16_t BfrCnt = 0;
+uint32_t *BuffAddr;
 /*----------------------------------------------------------------------------
  *        Local functions
  *----------------------------------------------------------------------------*/
@@ -179,6 +187,43 @@ static uint8_t _Afe_configureLinkList(Afec *pAfeHw, void *pXdmad, AfeCmd *pComma
  *----------------------------------------------------------------------------*/
 
 
+/*----------------------------------------------------------------------------
+ *        Exported functions
+ *----------------------------------------------------------------------------*/
+
+void Afe_Dma_Init( uint32_t *pu32Buff, uint16_t u16BuffSize )
+{
+	BuffAddr = pu32Buff;
+  
+	Afe_ConfigureDma(&_AfeDma, AFEC0, ID_AFEC0, &_sXdmad);
+  
+  /*Initialization of AfeCmd structure*/
+	_AfeCommand.pRxBuff = pu32Buff;
+	_AfeCommand.RxSize = u16BuffSize;
+	_AfeCommand.callback = NULL;
+	_AfeCommand.pArgument = NULL;
+}
+
+void TASK_AFEC_DMA(void)
+{
+	Afe_SendData(&_AfeDma, &_AfeCommand);
+
+	BfrCnt++;
+
+	if(BfrCnt <= BuffSize)
+	{
+		_AfeCommand.pRxBuff ++;
+	}
+
+	else
+	{
+		BfrCnt = 0;
+		_AfeCommand.pRxBuff = BuffAddr;
+	}
+	AFEC_StartConversion(AFEC0);					
+	printf("\n\rAFEC_CDR = %x",AFEC0->AFEC_CDR);	//Read AFEC value
+}
+
 /**
  * \brief Initializes the AfeDma structure and the corresponding AFE & DMA .
  * hardware select value.
@@ -190,6 +235,8 @@ static uint8_t _Afe_configureLinkList(Afec *pAfeHw, void *pXdmad, AfeCmd *pComma
  * \param AfeId  Afe peripheral identifier.
  * \param pDmad  Pointer to a Dmad instance. 
  */
+
+
 uint32_t Afe_ConfigureDma( AfeDma *pAfed ,
 		Afec *pAfeHw ,
 		uint8_t AfeId,

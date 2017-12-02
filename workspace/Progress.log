@@ -1,3 +1,4 @@
+INITIALIZING	Emulator: EDBG CMSIS-DAP   Debugger: On-chip
 CONVERTING	C:\Users\DIMMU\Documents\BaseSystemSE_2\workspace\Debug\BaseProject.elf
 LOADING	C:\Users\DIMMU\Documents\BaseSystemSE_2\workspace\Debug\BaseProject.elf
 ANALYZING
@@ -5,5 +6,5 @@ ANALYZING
 EMULATION	POD: Cortex (JTAG,SWD)   CPU: Cortex-M7
 DEBUG	PROTOCOL: SWD; RESET: SoC
 CPU	CPUID=0x410FC271 (M7 variant 0, revision 1)
-LOADING 	281060 bytes
+LOADING 	290348 bytes
 PROGRAMMING	Atmel ATSAMV7 (2048 kB) (5 sectors)

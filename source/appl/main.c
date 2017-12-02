@@ -32,14 +32,19 @@ uint32_t    u32fft_maxPowerIndex;
 /** Auxiliary output variable that holds the maximum level of signal power */
 float       fft_maxPower;
 
-uint32_t *RxDMABuffer;
+#define RxBufferDMASize   8
+
+/* AFEC DMA Buffer Size */
+#define BUFF_SIZE 1
+/* AFEC DMA Buffer */
+uint32_t u32AfecBuff[BUFF_SIZE];
+
 extern Afec pAfe_ADC0;
 extern Pwm pPwm_0;                
 extern AfeDma pAfed;     
 extern sXdmad pXdmad;
 extern AfeCmd pAfeCmd;
-//#define AfeId   35
-//static const Pin pinsAFECs[] = {AFEC_PIN_CFG};
+
 /*@Yisus Adc struct*/
 
 
@@ -102,7 +107,7 @@ extern int main( void )
 	vfnScheduler_Start();
   
   
-  XDMAD_Initialize(&pXdmad, 0 );
+ /* XDMAD_Initialize(&pXdmad, 0 );
   XDMAD_AllocateChannel( &pXdmad,	ID_AFEC0, XDMAD_TRANSFER_MEMORY);
   XDMAD_PrepareChannel( &pXdmad, 1);
 /*
@@ -111,16 +116,17 @@ extern int main( void )
   XDMAD_Handler();
  */
   
-  Afe_ConfigureDma( &pAfed ,AFEC0, ID_AFEC0, &pXdmad );            //AFEC0         //pAfe_ADC0
+/*  Afe_ConfigureDma( &pAfed ,AFEC0, ID_AFEC0, &pXdmad );            //AFEC0         //pAfe_ADC0
   pAfeCmd.pRxBuff =RxDMABuffer;
 	pAfeCmd.RxSize =RxBufferDMASize;
-	//pAfeCmd.callback = (*AfeCallback)NULL;
+	pAfeCmd.callback = (*AfeCallback)NULL;
 	//void *pArgument;
- 
+  */
+  Afe_Dma_Init(&u32AfecBuff[0],BUFF_SIZE);
+
   Afe_SendData( &pAfed , &pAfeCmd);
-  /*PWM0_Init();*/
-  AFEC0_Init();  
-  /* Init ADC  @Yisus */
+  PWM0_Init();
+  AFEC0_Init();           
 	
   /*-- Loop through all the periodic tasks from Task Scheduler --*/
 	for(;;)
