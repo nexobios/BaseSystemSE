@@ -105,12 +105,7 @@ extern int main( void )
 	/* Configure Non-preemtive scheduler */
 	vfnScheduler_Init(&Tasks[0]);
 	/* Start scheduler */
-	vfnScheduler_Start();  
-  
-    #ifdef  OPTIMIZE
-        /* Variable Inits */
-        const uint32_t vvmul=0x00010000; 
-    #endif /* #ifdef  OPTIMIZE */
+	vfnScheduler_Start();
 
   while(1)       
   {
