@@ -27,7 +27,7 @@ void Mem_init(){
 	psMemoryHandler->memStart 	= (Mem_Uint8PtrType_t) 	_MEM_HEAP_START;
 	psMemoryHandler->memEnd 	= (Mem_Uint8PtrType_t) 	_MEM_HEAP_END;
 	psMemoryHandler->currAddr 	= (Mem_Uint8PtrType_t) 	_MEM_HEAP_END;
-	psMemoryHandler->freeBytes 	= *((Mem_SizeType_t *) 	HEAP_ALLOC_SIZE);
+	psMemoryHandler->freeBytes 	= HEAP_ALLOC_SIZE;
 
 }
 

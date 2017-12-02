@@ -16,7 +16,7 @@
  extern "C" {
 #endif
 
-extern void* HEAP_ALLOC_SIZE;
+extern uint32_t HEAP_ALLOC_SIZE;
 extern void* _MEM_HEAP_START;
 extern void* _MEM_HEAP_END;
 

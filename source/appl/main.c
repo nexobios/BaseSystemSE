@@ -7,10 +7,13 @@
 #include "Tasks.h"    
 #include <stdbool.h>
 #include <stdio.h>
+#include "Mem_Alloc.h"
 
 /*----------------------------------------------------------------------------
  *        Local definitions
  *----------------------------------------------------------------------------*/
+
+#define MEM_ALLOC_SIZE 100
 
 TaskType Tasks[]={
 /*  TaskPriority    TaskId   TaskFunctionPointer   */
@@ -22,6 +25,8 @@ TaskType Tasks[]={
   {      1,        TASK_100MS,     vfnTsk_100ms  }
 };
 
+
+Mem_ReturnType_t ptr_Mem_Return = NULL;
 /*----------------------------------------------------------------------------
  *        Local functions
  *----------------------------------------------------------------------------*/
@@ -63,16 +68,24 @@ extern int main( void )
 	printf( "Configure LED PIOs.\n\r" ) ;
 	_ConfigureLeds() ;
   
-  	/* Initialize Task Scheduler */
+  /* Initialize Task Scheduler */
 	vfnScheduler_Init(&Tasks[0]);
+  
+  /*Mem Alloc Initialization*/
+  Mem_init();
+  
 	/* Start execution of task scheduler */
 	vfnScheduler_Start();
-
+  
 	/*-- Loop through all the periodic tasks from Task Scheduler --*/
 	for(;;)
 	{
+    
+    ptr_Mem_Return = Mem_Alloc((Mem_SizeType_t)MEM_ALLOC_SIZE);
 		/* Perform all scheduled tasks */
 		vfnTask_Scheduler();
+    
+    
 	}
 
 }

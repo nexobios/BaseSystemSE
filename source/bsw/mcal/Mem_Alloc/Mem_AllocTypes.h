@@ -18,7 +18,7 @@
 
 typedef uint8_t* Mem_ReturnType_t;
 typedef uint8_t* Mem_Uint8PtrType_t;
-typedef uint16_t Mem_SizeType_t;
+typedef uint32_t Mem_SizeType_t;
 
 typedef struct _MemHandlerType{
 	Mem_Uint8PtrType_t memStart;
