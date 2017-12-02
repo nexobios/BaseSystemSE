@@ -561,6 +561,10 @@ void PWMC_ConfigureComparisonUnit( Pwm* pPwm, uint32_t x, uint32_t value, uint32
 	}
 }
 
+void PWMC_Initialice(Pwm* pPwm)
+{
+  pPwm->PWM_WPCR=PWM_WPCR_WPCMD_DISABLE_SW_PROT; 
+}
 /**
  * \brief Configure event line mode.
  *

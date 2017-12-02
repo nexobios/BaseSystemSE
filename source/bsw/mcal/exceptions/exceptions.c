@@ -52,17 +52,25 @@
  */
 void NMI_Handler( void )
 {
-	while ( 1 ) ;
+
 }
                        
 void PWM0_Handler(void)
-{                      
-  while ( 1 ) ;
-}
-                       
+{   
+   PWM0->PWM_WPCR=PWM_WPCR_WPCMD_DISABLE_SW_PROT; 
+   PWM0->PWM_DIS = 1 << 0;
+   PWM0->PWM_DIS = 1 << 1;
+   PWM0->PWM_CMP[0].PWM_CMPMUPD =0;
+   PWM0->PWM_CMP[1].PWM_CMPMUPD =0;
+ //  PWM0->PWM_ISR1 = 0;
+ //  PWM0->PWM_ISR2 = 0;
+ //  PWM0->PWM_SR = 0;
+   
+}                                
+
 void AFEC0_Handler(void)
 {
-  while ( 1 ) ;
+ 
 }
 
 /**
