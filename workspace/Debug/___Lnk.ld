@@ -45,7 +45,6 @@ C:\Users\DIMMU\Documents\BaseSystemSE_2\workspace\Debug\xdmad.o
 C:\Users\DIMMU\Documents\BaseSystemSE_2\workspace\Debug\afec.o 
 C:\Users\DIMMU\Documents\BaseSystemSE_2\workspace\Debug\afe_dma.o 
 C:\Users\DIMMU\Documents\BaseSystemSE_2\workspace\Debug\pwmc.o 
-C:\Users\DIMMU\Documents\BaseSystemSE_2\workspace\Debug\fpu.o 
 C:\Users\DIMMU\Documents\BaseSystemSE_2\workspace\Debug\ecg_data.o 
 C:\Users\DIMMU\Documents\BaseSystemSE_2\source\libraries\libm.a 
 C:\Users\DIMMU\Documents\BaseSystemSE_2\workspace\Debug\arm_bitreversal.o 
@@ -61,6 +60,7 @@ C:\Users\DIMMU\Documents\BaseSystemSE_2\workspace\Debug\arm_rfft_fast_f32.o
 C:\Users\DIMMU\Documents\BaseSystemSE_2\workspace\Debug\fft_float.o 
 C:\Users\DIMMU\Documents\BaseSystemSE_2\source\libraries\libarm_cortexM7lfdp_math.a 
 C:\Users\DIMMU\Documents\BaseSystemSE_2\source\libraries\libarm_cortexM7lfsp_math.a 
+C:\Users\DIMMU\Documents\BaseSystemSE_2\workspace\Debug\fpu.o 
 C:\Users\DIMMU\Documents\BaseSystemSE_2\workspace\Debug\syscalls.o 
 C:\Users\DIMMU\Documents\BaseSystemSE_2\workspace\Debug\system_sam.o 
 C:\Users\DIMMU\Documents\BaseSystemSE_2\workspace\Debug\timetick.o 
