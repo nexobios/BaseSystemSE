@@ -204,6 +204,12 @@ void Afe_Dma_Init( uint32_t *pu32Buff, uint16_t u16BuffSize )
 	_AfeCommand.pArgument = NULL;      
 }
 
+
+void XDMAC_Handler( void )
+{
+    XDMAD_Handler(&_sXdmad); 
+}
+
 void TASK_AFEC_DMA(void)
 {
 	Afe_SendData(&_AfeDma, &_AfeCommand);
