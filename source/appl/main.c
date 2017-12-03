@@ -94,8 +94,8 @@ extern int main( void )
 	printf( "-- Compiled: %s %s With %s--\n\r", __DATE__, __TIME__ , COMPILER_NAME);
 
 	/* Enable I and D cache */
-	//SCB_EnableICache();
-  //SCB_EnableDCache();
+	SCB_EnableICache();
+  SCB_EnableDCache();
     /* Enable Floating Point Unit */
   vfnFpu_enable();
 	printf( "Configure LED PIOs.\n\r" ) ;
@@ -149,6 +149,7 @@ extern int main( void )
 
 	}
 
+  
 }
 
    

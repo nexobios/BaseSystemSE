@@ -50,6 +50,12 @@
 /**
  * \brief Default NMI interrupt handler.
  */
+
+void XDMAC_Handler( void )
+{
+  
+} 
+
 void NMI_Handler( void )
 {
 
@@ -62,11 +68,12 @@ void PWM0_Handler(void)
    PWM0->PWM_DIS = 1 << 1;
    PWM0->PWM_CMP[0].PWM_CMPMUPD =0;
    PWM0->PWM_CMP[1].PWM_CMPMUPD =0;
+   PWMC_SetSyncChannelUpdatePeriod( PWM0, PWM_CPRD_CPRD(200));
  //  PWM0->PWM_ISR1 = 0;
  //  PWM0->PWM_ISR2 = 0;
  //  PWM0->PWM_SR = 0;
    
-}                                
+}                   
 
 void AFEC0_Handler(void)
 {

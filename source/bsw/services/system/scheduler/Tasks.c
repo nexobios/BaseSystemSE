@@ -10,7 +10,7 @@
 
 uint8_t u8100ms_Ctr=0;
 uint8_t u8100ms_Ctr2=0;
-
+uint16_t ADCGetValue=0;
 uint32_t u32AfecBuff[RxBufferDMASize];
 
 void AFEC0_Init()
@@ -18,7 +18,7 @@ void AFEC0_Init()
   PIO_Configure(&pinsAFECs[0], 1);
   AFEC_Initialize( AFEC0, ID_AFEC0);           
 
-  AFEC_SetClock(AFEC0, 500 ,BOARD_MCK);
+  AFEC_SetClock(AFEC0, 256 ,BOARD_MCK);
   AFEC_SetTiming(AFEC0, AFEC_MR_STARTUP_SUT640 , AFEC_MR_TRACKTIM(0),		0);
   AFEC_SetTrigger( AFEC0,AFEC_MR_FREERUN_ON ); 
   AFEC_SetNumberOfBits( AFEC0, AFEC_EMR_RES_OSR256);
@@ -37,12 +37,12 @@ void PWM0_Init(uint16_t Period)
   PWMC_Initialice(PWM0);
                                                                   
   PWMC_ConfigureClocks(PWM0, 14200, 0,  BOARD_MCK);
-  PWMC_DisableChannel(PWM0, PWM_ENA_CHID0);//PWM_ENA_CHID0
+  PWMC_DisableChannel(PWM0, PWM_DIS_CHID0);//PWM_ENA_CHID0
   
   PWMC_DisableIt(PWM0,PWM_IER1_CHID0 | PWM_IER1_FCHID0,PWM_IER2_CMPM0 | PWM_IER2_WRDY | PWM_IER2_UNRE |PWM_IER2_CMPU0);  
   
   PWMC_ConfigureChannel( PWM0,	0 , PWM_CMR_CPRE(PWM_CMR_CPRE_MCK_DIV_64),PWM_CMR_CALG ,PWM_CMR_CPOL);
-  PWMC_SetPeriod( PWM0, 0, 50);// PWM_CPRD_CPRD(Period));      
+  PWMC_SetPeriod( PWM0, 0, PWM_CPRD_CPRD(200));// );      
   PWMC_SetPeriod( PWM0, 0 , PWM_SCM_UPDM(PWM_SCM_UPDM_MODE2));
   PWMC_ConfigureSyncChannel( PWM0,0,PWM_SCM_SYNC0,PWM_SCM_UPDM(PWM_SCM_UPDM_MODE2),PWM_SCM_PTRCS(1));
   PWMC_ConfigureComparisonUnit( PWM0, 0,255 ,1);
@@ -50,20 +50,19 @@ void PWM0_Init(uint16_t Period)
   PWMC_EnableChannelIt( PWM0, PWM_ENA_CHID0);
   PWMC_EnableChannel( PWM0, PWM_ENA_CHID0);
   
-  PWMC_EnableIt(PWM0, PWM_IER1_CHID0 ,PWM_IER2_CMPM0 /*| PWM_IER2_WRDY *//*| PWM_IER2_UNRE*/);  
+  PWMC_EnableIt(PWM0, PWM_IER1_CHID0 ,PWM_IER2_CMPM0 | PWM_IER2_WRDY | PWM_IER2_UNRE);  
 
-  NVIC_DisableIRQ(PWM0_IRQn);
-	NVIC_ClearPendingIRQ(PWM0_IRQn);
-	NVIC_SetPriority(PWM0_IRQn, 0);
-	NVIC_EnableIRQ(PWM0_IRQn);
+  //NVIC_DisableIRQ(PWM0_IRQn);
+	//NVIC_ClearPendingIRQ(PWM0_IRQn);
+	//NVIC_SetPriority(PWM0_IRQn, 0);
+	//NVIC_EnableIRQ(PWM0_IRQn);
 }
 
 void SET_AFEC_SAMPLING(uint16_t SAMP_PER, uint16_t *RxDMABuffer, uint16_t SIZE)
-{                                    
-  Afe_SendData( &pAfed , &pAfeCmd);
-  Afe_Dma_Init(&u32AfecBuff[0],RxBufferDMASize);
-                                     
+{ 
   AFEC0_Init();
+  Afe_Dma_Init(&u32AfecBuff[0],RxBufferDMASize);
+  TASK_AFEC_DMA();               
   PWM0_Init(SAMP_PER);
 }
 void vfnTsk_1ms(void)
@@ -78,7 +77,7 @@ void vfnTsk_2msA(void)
 
 void vfnTsk_2msB(void)
 {
-	
+	ADCGetValue = AFEC_GetConvertedData(AFEC0,0);
 }
 
 void vfnTsk_10ms(void)

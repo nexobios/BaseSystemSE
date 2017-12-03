@@ -201,7 +201,7 @@ void Afe_Dma_Init( uint32_t *pu32Buff, uint16_t u16BuffSize )
 	_AfeCommand.pRxBuff = pu32Buff;
 	_AfeCommand.RxSize = u16BuffSize;
 	_AfeCommand.callback = NULL;
-	_AfeCommand.pArgument = NULL;
+	_AfeCommand.pArgument = NULL;      
 }
 
 void TASK_AFEC_DMA(void)
@@ -221,7 +221,6 @@ void TASK_AFEC_DMA(void)
 		_AfeCommand.pRxBuff = BuffAddr;
 	}
 	AFEC_StartConversion(AFEC0);					
-	printf("\n\rAFEC_CDR = %x",AFEC0->AFEC_CDR);	//Read AFEC value
 }
 
 /**
