@@ -50,7 +50,7 @@
 /**
  * \brief Default NMI interrupt handler.
  */    
-    
+uint32_t ReadISR=0;    
 
 void NMI_Handler( void )
 {
@@ -61,12 +61,16 @@ void PWM0_Handler(void)
 {   
   
    PWM0->PWM_WPCR=PWM_WPCR_WPCMD_DISABLE_SW_PROT; 
-   uint8_t ReadISR=PWM0->PWM_ISR1;
-   ReadISR=PWM0->PWM_ISR2;
-  
+   ReadISR=PWMC_GetStatus1(PWM0);
+   ReadISR++;
+   ReadISR=PWMC_GetStatus2(PWM0);
+   if(ReadISR!=0)
+   {
+     ReadISR=0;
+   }
+   //AFE_TransferData();
    // PWM0->PWM_CMP[0].PWM_CMPMUPD =0;
-  // PWM0->PWM_CMP[1].PWM_CMPMUPD =0;
-   PWMC_SetSyncChannelUpdatePeriod( PWM0, PWM_CPRD_CPRD(2000));
+   // PWM0->PWM_CMP[1].PWM_CMPMUPD =0;
  //  PWM0->PWM_ISR1 = 0;
  //  PWM0->PWM_ISR2 = 0;
  //  PWM0->PWM_SR = 0;

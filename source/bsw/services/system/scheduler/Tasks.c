@@ -39,20 +39,22 @@ void PWM0_Init(uint16_t Period)
   PWMC_ConfigureClocks(PWM0, 14200 , 14200,  BOARD_MCK);
   PWMC_DisableChannel(PWM0, PWM_DIS_CHID0);//PWM_ENA_CHID0
   
-  PWMC_DisableIt(PWM0,PWM_IER1_CHID0 | PWM_IER1_FCHID0,PWM_IER2_CMPM0 | PWM_IER2_WRDY | PWM_IER2_UNRE |PWM_IER2_CMPU0);  
+  PWMC_DisableIt(PWM0,PWM_IER1_CHID0 | PWM_IER1_FCHID1,PWM_IER2_CMPM0 | PWM_IER2_WRDY | PWM_IER2_UNRE |PWM_IER2_CMPU0);  
   
-  PWMC_ConfigureChannel( PWM0,	0 , PWM_CMR_CPRE(PWM_CMR_CPRE_MCK_DIV_64),PWM_CMR_CALG ,PWM_CMR_CPOL);
-  PWMC_SetPeriod( PWM0, 0, PWM_CPRD_CPRD(2000));// );      
-  PWMC_SetDutyCycle( PWM0, 0, 1000);
-  PWMC_SetDeadTime( PWM0, 0, 1000, 1000);
-  PWMC_ConfigureSyncChannel( PWM0,0,PWM_SCM_SYNC0,PWM_SCM_UPDM(PWM_SCM_UPDM_MODE2),PWM_SCM_PTRCS(1));
-  PWMC_ConfigureComparisonUnit( PWM0, 0,1000 ,1);
-                                             
+  PWMC_ConfigureChannel( PWM0, 1, PWM_CMR_CPRE(PWM_CMR_CPRE_MCK_DIV_64),PWM_CMR_CALG ,PWM_CMR_CPOL);
+  PWMC_SetPeriod( PWM0, 1, PWM_CPRD_CPRD(200));// );      
+  PWMC_SetDutyCycle( PWM0, 1, 200);
+  //PWMC_SetDeadTime( PWM0, 1, 200, 0);
+  //PWMC_ConfigureSyncChannel( PWM0,0,PWM_SCM_SYNC0|PWM_SCM_SYNC1,PWM_SCM_UPDM(PWM_SCM_UPDM_MODE0),PWM_SCM_PTRCS(1));
+  //PWMC_ConfigureComparisonUnit( PWM0, 1,200 ,1);
+  //PWMC_SetSyncChannelUpdatePeriod() 
+  PWMC_SetSyncChannelUpdateUnlock(PWM0);
+  PWMC_EnableChannel( PWM0, PWM_ENA_CHID0 | PWM_ENA_CHID1);
   PWMC_EnableIt(PWM0,          
-                PWM_IER1_CHID0 | PWM_IER1_FCHID0  ,
-                PWM_IER2_CMPM0 | PWM_IER2_WRDY | PWM_IER2_UNRE | PWM_IER2_CMPU0);  
-  PWMC_EnableChannelIt( PWM0, PWM_ENA_CHID0);
-  PWMC_EnableChannel( PWM0, PWM_ENA_CHID0);
+                PWM_IER1_CHID0 |PWM_IER1_CHID1 /*| PWM_IER1_FCHID0 */ ,
+                PWM_IER2_CMPM0 |PWM_IER2_CMPM1 | PWM_IER2_WRDY | PWM_IER2_UNRE | PWM_IER2_CMPU0 | PWM_IER2_CMPU1);  
+  PWMC_EnableChannelIt( PWM0, PWM_ENA_CHID0 | PWM_ENA_CHID1);
+  
   NVIC_DisableIRQ(PWM0_IRQn);
 	NVIC_ClearPendingIRQ(PWM0_IRQn);
 	NVIC_SetPriority(PWM0_IRQn, 0);

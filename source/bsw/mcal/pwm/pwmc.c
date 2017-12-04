@@ -412,6 +412,10 @@ uint32_t PWMC_GetStatus2( Pwm* pPwm)
 	return pPwm->PWM_ISR2;
 }
 
+uint32_t PWMC_GetStatus1( Pwm* pPwm)
+{
+	return pPwm->PWM_ISR1;
+}
 /**
  * \brief Disables the period interrupt for the given PWM channel.
  *
