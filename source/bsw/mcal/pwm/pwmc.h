@@ -127,6 +127,7 @@ extern void PWMC_ConfigureComparisonUnit( Pwm* pPwm, uint32_t x,
 	uint32_t value, uint32_t mode);
 extern void PWMC_ConfigureEventLineMode( Pwm* pPwm, uint32_t x, uint32_t mode);
 extern uint32_t PWMC_GetStatus2( Pwm* pPwm);
+extern uint32_t PWMC_GetStatus1( Pwm* pPwm);
 #ifdef __cplusplus
 }
 #endif

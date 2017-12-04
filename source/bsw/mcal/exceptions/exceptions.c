@@ -59,21 +59,22 @@ void NMI_Handler( void )
                        
 void PWM0_Handler(void)
 {   
-  
-   PWM0->PWM_WPCR=PWM_WPCR_WPCMD_DISABLE_SW_PROT; 
-   ReadISR=PWMC_GetStatus1(PWM0);
-   ReadISR++;
-   ReadISR=PWMC_GetStatus2(PWM0);
+  ReadISR=PWMC_GetStatus1(PWM0);
+  if(ReadISR!=0)
+   {
+     ReadISR=0;
+   }
+  ReadISR=PWMC_GetStatus2(PWM0);
+ //  ReadISR++;
+ //  
    if(ReadISR!=0)
    {
      ReadISR=0;
    }
-   //AFE_TransferData();
-   // PWM0->PWM_CMP[0].PWM_CMPMUPD =0;
-   // PWM0->PWM_CMP[1].PWM_CMPMUPD =0;
- //  PWM0->PWM_ISR1 = 0;
- //  PWM0->PWM_ISR2 = 0;
- //  PWM0->PWM_SR = 0;
+   TASK_AFEC_DMA();
+  // AFEC_TransferData();
+  //  PWM0->PWM_CMP[0].PWM_CMPMUPD =0;
+  //  PWM0->PWM_CMP[1].PWM_CMPMUPD =0;
    
 }                   
 
