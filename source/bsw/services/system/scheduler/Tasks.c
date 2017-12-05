@@ -12,19 +12,24 @@ uint8_t u8100ms_Ctr=0;
 uint8_t u8100ms_Ctr2=0;
 uint32_t u32AfecBuff[RxBufferDMASize];
 
+/** First AFE Channel used*/     
+/* AFE Clock Value */
+#define AFE_CLK         2200000
+#define CHANNEL_OFFSET    0x000
+
 void AFEC0_Init()
 { 
   PIO_Configure(&pinsAFECs[0], 1);
   AFEC_Initialize( AFEC0, ID_AFEC0);           
-
-  AFEC_SetClock(AFEC0, 256 ,BOARD_MCK);
-  AFEC_SetTiming(AFEC0, AFEC_MR_STARTUP(AFEC_MR_STARTUP_SUT8), AFEC_MR_TRACKTIM(0),		0);
-  AFEC_SetTrigger( AFEC0,(0x1u << 7)); 
-  AFEC_SetNumberOfBits( AFEC0, AFEC_EMR_RES(AFEC_EMR_RES_OSR256));
-  AFEC0->AFEC_MR=0x0f840c81;
-  AFEC_EnableChannel(AFEC0,0);
-  AFEC_StartConversion(AFEC0);
-  
+ 
+    AFEC_SetModeReg(AFEC0,AFEC_MR_FREERUN_ON|AFEC_MR_TRANSFER(1)| AFEC_MR_TRACKTIM(2)| AFEC_MR_ONE| AFEC_MR_STARTUP_SUT8);
+    AFEC_SetClock( AFEC0, AFE_CLK, BOARD_MCK );
+    AFEC_EnableChannel(AFEC0, 0);                
+    AFEC_StartConversion(AFEC0);
+    AFEC_SetAnalogOffset(AFEC0, 0, CHANNEL_OFFSET);
+    AFEC_SetAnalogControl(AFEC0, AFEC_ACR_IBCTL(1) | AFEC_ACR_PGA0_ON | AFEC_ACR_PGA1_ON     );
+    AFEC_SetExtModeReg(AFEC0,0| AFEC_EMR_RES(256)| AFEC_EMR_TAG |  AFEC_EMR_STM ); 
+  //AFEC0->AFEC_MR=0x0f840c81;
  
 }
  
@@ -78,7 +83,7 @@ void vfnTsk_2msA(void)
 
 void vfnTsk_2msB(void)
 {
-//	ADCGetValue = AFEC_GetConvertedData(AFEC0,0);
+
 }
 
 void vfnTsk_10ms(void)

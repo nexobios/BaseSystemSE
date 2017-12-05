@@ -96,7 +96,7 @@
 
 /**  Default pin configuration (no attribute). */
 #define PIO_DEFAULT                 (0 << 0)
-/**  The internal pin pull-up is active. */
+/**  The internal pin pull-up is active. */                   
 #define PIO_PULLUP                  (1 << 0)
 /**  The internal glitch filter is active. */
 #define PIO_DEGLITCH                (1 << 1)

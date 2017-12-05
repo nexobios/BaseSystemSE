@@ -226,7 +226,7 @@ void TASK_AFEC_DMA(void)
 		BfrCnt = 0;
 		_AfeCommand.pRxBuff = BuffAddr;
 	}
-	AFEC_StartConversion(AFEC0);					
+	//AFEC_StartConversion(AFEC0);					
 }
 
 /**

@@ -58,7 +58,8 @@
 /*------------------------------------------------------------------------------
  *         Definitions
  *------------------------------------------------------------------------------*/
-#define AFEC_PIN_CFG  {PIO_PD30, PIOD, ID_PIOD, PIO_INPUT, PIO_DEFAULT}  
+#define AFEC_PIN_CFG  {PIO_PD30X1_AFE0_AD0, PIOD, ID_PIOD, PIO_INPUT, PIO_DEFAULT}           //PIO_OPENDRAIN  PIO_DEFAULT 
+
 /* -------- AFEC_MR : (AFEC Offset: 0x04) AFEC Mode Register -------- */
 #define AFEC_MR_SETTLING_Pos 20
 #define AFEC_MR_SETTLING_Msk (0x3u << AFEC_MR_SETTLING_Pos) 

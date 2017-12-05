@@ -1,7 +1,8 @@
+CONVERTING	C:\Users\DIMMU\Documents\BaseSystemSE_2\workspace\Debug\BaseProject.elf
 LOADING	C:\Users\DIMMU\Documents\BaseSystemSE_2\workspace\Debug\BaseProject.elf
 ANALYZING
 ANALYZING
 EMULATION	POD: Cortex (JTAG,SWD)   CPU: Cortex-M7
 DEBUG	PROTOCOL: SWD; RESET: SoC
-LOADING 	291332 bytes
+LOADING 	291300 bytes
 PROGRAMMING	Atmel ATSAMV7 (2048 kB) (5 sectors)
