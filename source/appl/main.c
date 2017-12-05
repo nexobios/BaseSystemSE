@@ -33,19 +33,28 @@ uint32_t    u32fft_maxPowerIndex;
 /** Auxiliary output variable that holds the maximum level of signal power */
 float       fft_maxPower;
 
-
-/* AFEC DMA Buffer Size */
-#define BUFF_SIZE 1
-/* AFEC DMA Buffer */
-
-uint16_t *RxDMABuffer;
+/*Configuración 1:*/
+#ifdef CONF_1
+   uint32_t SampleTime=50; //50 us
+   uint32_t BufferSize=1024;
+   uint32_t RxDMABuffer[1024];
+#elif CONF_2
+   uint32_t SampleTime= 62; //62.5 us
+   uint32_t= BufferSize=2048;
+   uint32_t RxDMABuffer[2048];
+#else
+  uint32_t SampleTime= 50000;  //50000 us
+  uint32_t BufferSize=32;
+  uint32_t RxDMABuffer[32];
+#endif                            
+            
 extern Afec pAfe_ADC0;
 extern Pwm pPwm_0;                
 extern AfeDma pAfed;     
 extern sXdmad pXdmad;
 extern AfeCmd pAfeCmd;
+          
 
-/*@Yisus Adc struct*/
 
 
 TaskType Tasks[]={
@@ -105,24 +114,8 @@ extern int main( void )
 	vfnScheduler_Init(&Tasks[0]);
 	/* Start execution of task scheduler */
 	vfnScheduler_Start();
-  
-  
- /* XDMAD_Initialize(&pXdmad, 0 );
-  XDMAD_AllocateChannel( &pXdmad,	ID_AFEC0, XDMAD_TRANSFER_MEMORY);
-  XDMAD_PrepareChannel( &pXdmad, 1);
-/*
-  XDMAD_StartTransfer();
-  XDMAD_IsTransferDone();
-  XDMAD_Handler();
- */
-  
-/*  Afe_ConfigureDma( &pAfed ,AFEC0, ID_AFEC0, &pXdmad );            //AFEC0         //pAfe_ADC0
-  pAfeCmd.pRxBuff =RxDMABuffer;
-	pAfeCmd.RxSize =RxBufferDMASize;
-	pAfeCmd.callback = (*AfeCallback)NULL;
-	//void *pArgument;
-  */
-  SET_AFEC_SAMPLING((uint16_t)16, RxDMABuffer, RxBufferDMASize);
+          
+  SET_AFEC_SAMPLING(SampleTime, &RxDMABuffer[0], BufferSize);
   
                   
    
@@ -132,7 +125,7 @@ extern int main( void )
     {	
 		/*Prepare data for FFT operation */
         for (u16index = 0; u16index < (TEST_LENGTH_SAMPLES/2); u16index++)
-        {
+        {                
             fft_inputData[(2*u16index)] = ecg_resampled[u16index];
             fft_inputData[(2*u16index) + 1] = 0;
         }

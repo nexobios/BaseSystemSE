@@ -120,7 +120,7 @@ extern uint32_t AFEC_SetClock( Afec* pAFE, uint32_t dwClk, uint32_t dwMck )
 	   PRESCAL = peripheral clock/ fAFE Clock - 1 */
 
 	dwPres = (dwMck) / (dwClk ) - 1;
-	dwMr = AFEC_MR_PRESCAL(dwPres);
+	dwMr = AFEC_MR_PRESCAL(8/*dwPres*/);
 	if (dwMr == 0) return 0;
 
 	dwMr |= (pAFE->AFEC_MR & ~AFEC_MR_PRESCAL_Msk);

@@ -52,6 +52,8 @@
  */    
 uint32_t ReadISR=0;    
 
+uint16_t ADCGetValue=0;
+
 void NMI_Handler( void )
 {
 
@@ -71,7 +73,10 @@ void PWM0_Handler(void)
    {
      ReadISR=0;
    }
+   LED_Toggle( 0 );
    TASK_AFEC_DMA();
+   ADCGetValue = AFEC_GetConvertedData(AFEC0,0);
+  // TASK_AFEC_DMA();
   // AFEC_TransferData();
   //  PWM0->PWM_CMP[0].PWM_CMPMUPD =0;
   //  PWM0->PWM_CMP[1].PWM_CMPMUPD =0;

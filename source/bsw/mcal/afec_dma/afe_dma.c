@@ -216,7 +216,7 @@ void TASK_AFEC_DMA(void)
 
 	BfrCnt++;
 
-	if(BfrCnt <= BuffSize)
+	if(BfrCnt <= _AfeCommand.RxSize)
 	{
 		_AfeCommand.pRxBuff ++;
 	}

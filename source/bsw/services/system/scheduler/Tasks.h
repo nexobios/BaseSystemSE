@@ -41,7 +41,7 @@ extern void vfnTsk_10ms(void);
 extern void vfnTsk_50ms(void);
 extern void vfnTsk_100ms(void);
 void AFEC0_Init(void);  
-void PWM0_Init(uint16_t Period);
+void PWM0_Init(uint32_t Period);
 
 /*============================================================================*/
 #endif /*__APP_TASKS */
