@@ -75,11 +75,6 @@ void PWM0_Handler(void)
    }
    LED_Toggle( 0 );
    TASK_AFEC_DMA();
-  // ADCGetValue = AFEC_GetConvertedData(AFEC0,0);
-  // TASK_AFEC_DMA();
-  // AFEC_TransferData();
-  //  PWM0->PWM_CMP[0].PWM_CMPMUPD =0;
-  //  PWM0->PWM_CMP[1].PWM_CMPMUPD =0;
    
 }                   
 

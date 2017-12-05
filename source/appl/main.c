@@ -33,17 +33,18 @@ uint32_t    u32fft_maxPowerIndex;
 /** Auxiliary output variable that holds the maximum level of signal power */
 float       fft_maxPower;
 
+#define CONF_1
 /*Configuración 1:*/
 #ifdef CONF_1
-   uint32_t SampleTime=50; //50 us
+   uint32_t SampleTime=20000; //50 us
    uint32_t BufferSize=1024;
    uint32_t RxDMABuffer[1024];
 #elif CONF_2
-   uint32_t SampleTime= 62; //62.5 us
+   uint32_t SampleTime= 16000; //62.5 us
    uint32_t= BufferSize=2048;
    uint32_t RxDMABuffer[2048];
 #else
-  uint32_t SampleTime= 50000;  //50000 us
+  uint32_t SampleTime= 20;  //50000 us
   uint32_t BufferSize=32;
   uint32_t RxDMABuffer[32];
 #endif                            
