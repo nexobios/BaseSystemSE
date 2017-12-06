@@ -216,18 +216,16 @@ void TASK_AFEC_DMA(void)
 
 	BfrCnt++;
 
-	if(BfrCnt <= _AfeCommand.RxSize)
+	if(BfrCnt < _AfeCommand.RxSize)
 	{
 		_AfeCommand.pRxBuff ++;
-	}
-
+  }
 	else
 	{
-		BfrCnt = 0;
+    BfrCnt = 0;
 		_AfeCommand.pRxBuff = BuffAddr;
     BufferReady=TRUE;
-	}
-	//AFEC_StartConversion(AFEC0);					
+	}                             					
 }
 
 /**

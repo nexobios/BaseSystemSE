@@ -15,7 +15,7 @@ uint32_t u32AfecBuff[RxBufferDMASize];
 /** First AFE Channel used*/     
 /* AFE Clock Value */
 #define AFE_CLK         2200000
-#define CHANNEL_OFFSET    0x000
+#define CHANNEL_OFFSET    0x200
 
 void AFEC0_Init()
 { 
@@ -45,12 +45,8 @@ void PWM0_Init(uint32_t Period)
   PWMC_DisableIt(PWM0,PWM_IER1_CHID0 ,PWM_IER2_CMPM0 | PWM_IER2_WRDY | PWM_IER2_UNRE |PWM_IER2_CMPU0);  
   
   PWMC_ConfigureChannel( PWM0, 0, PWM_CMR_CPRE_CLKA,0,PWM_CMR_CPOL);
-  //PWMC_SetPeriod( PWM0, 0, 200);// );      
-  //PWMC_SetDutyCycle( PWM0, 0, 100);
- // PWMC_SetDeadTime( PWM0, 0, 200, 0);
   PWMC_ConfigureSyncChannel( PWM0,0,PWM_SCM_SYNC0,PWM_SCM_UPDM(PWM_SCM_UPDM_MODE2),PWM_SCM_PTRCS(0));
   PWMC_ConfigureComparisonUnit( PWM0, 0,200 ,1);
-  //PWMC_SetSyncChannelUpdatePeriod() 
   PWMC_SetSyncChannelUpdateUnlock(PWM0);
   PWMC_EnableChannel( PWM0, 0);
   PWMC_EnableIt(PWM0,          
