@@ -23,32 +23,33 @@
 #define TEST_LENGTH_SAMPLES 2048
 /*~~~~~~  Global variables ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-/** Auxiliary input buffer to accomodate data as FFT function expects it */
-float       fft_inputData[TEST_LENGTH_SAMPLES];
-/** Output magnitude data */
-float       fft_signalPower[TEST_LENGTH_SAMPLES/2];
-float       fFiltered_signal[TEST_LENGTH_SAMPLES/2];
-/** Auxiliary output variable that holds the frequency bin with the highest level of signal power */
-uint32_t    u32fft_maxPowerIndex;
-/** Auxiliary output variable that holds the maximum level of signal power */
-float       fft_maxPower;
 
 #define CONF_1
 /*Configuración 1:*/
 #ifdef CONF_1
    uint32_t SampleTime=20000; //50 us
-   uint32_t BufferSize=1024;
-   uint32_t RxDMABuffer[1024];
-#elif CONF_2
+   uint32_t BufferSize=512;
+   uint32_t RxDMABuffer[512];
+   float fft_signalPower[256];
+   float fFiltered_signal[256];
+   float fft_inputData[512];
+#else 
    uint32_t SampleTime= 16000; //62.5 us
-   uint32_t= BufferSize=2048;
+   uint32_t BufferSize=2048;
    uint32_t RxDMABuffer[2048];
-#else
-  uint32_t SampleTime= 20;  //50000 us
-  uint32_t BufferSize=32;
-  uint32_t RxDMABuffer[32];
+   float fft_signalPower[1024];
+   float fFiltered_signal[1024];
+   float fft_inputData[2048];
 #endif                            
-            
+
+/** Auxiliary input buffer to accomodate data as FFT function expects it */
+
+/** Output magnitude data */
+/** Auxiliary output variable that holds the frequency bin with the highest level of signal power */
+uint32_t    u32fft_maxPowerIndex;
+/** Auxiliary output variable that holds the maximum level of signal power */
+float       fft_maxPower;
+
 extern Afec pAfe_ADC0;
 extern Pwm pPwm_0;                
 extern AfeDma pAfed;     
@@ -124,18 +125,23 @@ extern int main( void )
   /*-- Loop through all the periodic tasks from Task Scheduler --*/
 	for(;;)
     {	
-		/*Prepare data for FFT operation */
-        for (u16index = 0; u16index < (TEST_LENGTH_SAMPLES/2); u16index++)
+      if(BufferReady==TRUE)
+      {
+        for (u16index = 0; u16index < (BufferSize/2); u16index++)
         {                
-            fft_inputData[(2*u16index)] = ecg_resampled[u16index];
+            fft_inputData[(2*u16index)] = RxDMABuffer[u16index];
             fft_inputData[(2*u16index) + 1] = 0;
         }
         /** Perform FFT on the input signal */
-        fft(fft_inputData, fft_signalPower, TEST_LENGTH_SAMPLES/2, &u32fft_maxPowerIndex, &fft_maxPower);
-        fir_filter((float *)fft_signalPower, (float *)fCoeffArray, (float *)fFiltered_signal, (uint32_t) (TEST_LENGTH_SAMPLES/2), (uint32_t) MAX_FILTER_SIZE);
+        fft(fft_inputData, fft_signalPower, BufferSize/2, &u32fft_maxPowerIndex, &fft_maxPower);
+        fir_filter((float *)fft_signalPower, (float *)fCoeffArray, (float *)fFiltered_signal, (uint32_t) (BufferSize/2), (uint32_t) MAX_FILTER_SIZE);
+        LED_Toggle( 0 );
+        BufferReady=FALSE;
+      }
+		/*Prepare data for FFT operation */
         
-        /* Publish through emulated Serial the byte that was previously sent through the regular Serial channel */
-		printf("%5d  %5.4f \r\n", u32fft_maxPowerIndex, fft_maxPower);
+     /* Publish through emulated Serial the byte that was previously sent through the regular Serial channel */
+		//printf("%5d  %5.4f \r\n", u32fft_maxPowerIndex, fft_maxPower);
 		
         /** Perform periodically activated tasks */
 		vfnTask_Scheduler();

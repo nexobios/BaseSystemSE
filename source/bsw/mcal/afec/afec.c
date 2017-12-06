@@ -120,7 +120,7 @@ extern uint32_t AFEC_SetClock( Afec* pAFE, uint32_t dwClk, uint32_t dwMck )
 	   PRESCAL = peripheral clock/ fAFE Clock - 1 */
 
 	dwPres = (dwMck) / (dwClk ) - 1;
-	dwMr = AFEC_MR_PRESCAL(8/*dwPres*/);
+	dwMr = AFEC_MR_PRESCAL(dwPres);
 	if (dwMr == 0) return 0;
 
 	dwMr |= (pAFE->AFEC_MR & ~AFEC_MR_PRESCAL_Msk);
@@ -278,6 +278,15 @@ extern void AFEC_SetAnalogChange( Afec* pAFE, uint8_t bEnDis )
 	}
 }
 
+
+extern void AFEC_SetTriggerEnable( Afec* pAFE, uint8_t bEnDis )
+{
+	if ( bEnDis ) {
+		pAFE->AFEC_MR |=  AFEC_MR_TRGEN;
+	} else {
+		pAFE->AFEC_MR &= ~AFEC_MR_TRGEN;
+	}
+}
 /**
  * \brief Set "TAG" mode, show channel number in last data or not.
  *
@@ -330,6 +339,17 @@ extern void AFEC_SetCompareMode( Afec* pAFE, uint32_t dwMode )
 	pAFE->AFEC_EMR |= (dwMode & AFEC_EMR_CMPMODE_Msk);
 }
 
+
+extern void AFEC_SetResolution( Afec* pAFE, uint32_t dwMode )
+{
+	pAFE->AFEC_EMR &= ~(AFEC_EMR_RES_Msk);
+	pAFE->AFEC_EMR |= (dwMode & AFEC_EMR_RES_Msk);
+}
+extern void AFEC_SetSignMode( Afec* pAFE, uint32_t dwMode )
+{
+	pAFE->AFEC_EMR &= ~(AFEC_EMR_SIGNMODE_Msk);
+	pAFE->AFEC_EMR |= (dwMode & AFEC_EMR_SIGNMODE_Msk);
+}
 /**
  * \brief Set comparison window.
  *

@@ -62,7 +62,9 @@
 
 /** AFE transfer complete callback. */
 typedef void (*AfeCallback)( uint8_t, void* ) ;
-
+#define TRUE 1
+#define FALSE 0
+uint8_t BufferReady;
 /** \brief Spi Transfer Request prepared by the application upper layer.
  *
  * This structure is sent to the AFE_SendCommand function to start the transfer.

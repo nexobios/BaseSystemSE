@@ -73,9 +73,7 @@ void PWM0_Handler(void)
    {
      ReadISR=0;
    }
-   LED_Toggle( 0 );
-   TASK_AFEC_DMA();
-   
+   TASK_AFEC_DMA();   
 }                   
 
 void AFEC0_Handler(void)
